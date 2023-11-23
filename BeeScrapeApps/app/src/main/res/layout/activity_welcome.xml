@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.WelcomeActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_marginTop="70dp"
+            android:layout_width="211dp"
+            android:layout_height="157dp"
+            android:src="@drawable/bs_logo"
+            app:layout_constraintBottom_toTopOf="@+id/boldTitleTextWelcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.897" />
+
+        <TextView
+            android:id="@+id/boldTitleTextWelcome"
+            android:layout_width="312dp"
+            android:layout_height="69dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/boldTitleWelcome"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/descWelcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <Button
+            android:id="@+id/signUpEmail"
+            android:layout_width="364dp"
+            android:layout_height="54dp"
+            android:layout_marginBottom="8dp"
+            android:drawableLeft="@drawable/baseline_email_24"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="85dp"
+            android:text="@string/signUpEmail"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/sosmedTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginBottom="76dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/signUpFb"
+            android:layout_width="364dp"
+            android:layout_height="54dp"
+            android:layout_marginBottom="8dp"
+            android:drawableLeft="@drawable/logo_fb"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="85dp"
+            android:text="@string/signUpFb"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <View
+            android:layout_width="110dp"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/signUpGoogle"
+            app:layout_constraintEnd_toStartOf="@+id/sosmedTv"
+            app:layout_constraintHorizontal_bias="0.696"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signUpEmail"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/sosmedTv"
+            android:layout_width="125dp"
+            android:layout_height="17dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/or_use_social_media"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/signUpGoogle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:layout_width="110dp"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="21dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/signUpGoogle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.303"
+            app:layout_constraintStart_toEndOf="@+id/sosmedTv"
+            app:layout_constraintTop_toBottomOf="@+id/signUpEmail"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@id/signUpGoogle"
+            android:layout_width="364dp"
+            android:layout_height="54dp"
+            android:drawableLeft="@drawable/logo_google"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="85dp"
+            android:text="@string/signUpGoogle"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/signUpFb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/descWelcome"
+            android:layout_width="370dp"
+            android:layout_height="42dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/descWelcome"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/signUpEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

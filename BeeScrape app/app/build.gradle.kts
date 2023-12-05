@@ -97,4 +97,6 @@ dependencies {
     implementation("androidx.datastore:datastore-core:1.0.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("androidx.navigation:navigation-runtime-ktx:2.7.5")
+    implementation ("androidx.navigation:navigation-compose:2.7.5")
 }

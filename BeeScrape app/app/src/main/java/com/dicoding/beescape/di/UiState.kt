@@ -1,4 +1,4 @@
-package com.dicoding.beescape
+package com.dicoding.beescape.di
 
 sealed class UiState<out T: Any?> {
 

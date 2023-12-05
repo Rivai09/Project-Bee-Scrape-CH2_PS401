@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Bee Scape</string>
+    <string name="signUpEmail">Sign up with email</string>
+    <string name="signUpGoogle">Sign up with google</string>
+    <string name="signUpFb">Sign up with Facebook</string>
+    <string name="or_use_social_media">Or use</string>
+    <string name="login">Already have an account ? klik me</string>
+    <string name="boldTitleWelcome">Get the Information You Need in a Snap</string>
+    <string name="descWelcome">Now you can easily dig and collect whatever important information you need</string>
+    <string name="TvSignUpEmail">Create Your Account</string>
+    <string name="tvDescSignUpEmail">Create your account to start find information</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="pw">Password</string>
+    <string name="usernameHint">Enter your username</string>
+    <string name="emailHint">Enter your email</string>
+    <string name="pwHint">Enter your password</string>
+    <string name="submitSignUp">Create Account</string>
+    <string name="help">help</string>
+    <string name="loginPage">Login</string>
+    <string name="loginTitle">Welcome Back</string>
+    <string name="loginDesc">Login to start looking for the information you want</string>
+    <string name="splashWord">"By: CH2-PS401 "</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
+    <string name="privacy_policy"><![CDATA[By signing up you agree to BeeScrape Terms & Conditions and Privacy Policy]]></string>
 </resources>

@@ -27,4 +27,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
     <string name="privacy_policy"><![CDATA[By signing up you agree to BeeScrape Terms & Conditions and Privacy Policy]]></string>
+    <string name="search">Search anything you want\'s</string>
 </resources>

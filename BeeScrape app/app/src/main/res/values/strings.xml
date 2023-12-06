@@ -37,4 +37,8 @@
     <string name="categoryPants">Pants</string>
     <string name="categoryJacket">Jacket</string>
     <string name="popular">Popular for you</string>
+
+<!--    marketselect-->
+    <string name="marketTittle">Where will the data be taken from?</string>
+    <string name="marketSubtitle">You can choose the data source you want</string>
 </resources>

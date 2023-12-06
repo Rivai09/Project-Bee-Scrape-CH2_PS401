@@ -26,7 +26,8 @@ import androidx.navigation.compose.rememberNavController
 import com.dicoding.beescape.screen.page.HomeScreen
 import com.dicoding.beescape.screen.page.MarkedScreen
 import com.dicoding.beescape.screen.page.NotificationScreen
-import com.dicoding.beescape.screen.page.Profilescreen
+import com.dicoding.beescape.screen.page.ProfileScreen
+import com.dicoding.beescape.screen.page.ProfileScreen
 import com.dicoding.beescape.screen.page.SelectMarketplace
 
 @Composable
@@ -58,7 +59,7 @@ fun BeeScrapeApp(
                 NotificationScreen()
             }
             composable(Screen.Profile.route) {
-                Profilescreen()
+                ProfileScreen()
             }
         }
     }

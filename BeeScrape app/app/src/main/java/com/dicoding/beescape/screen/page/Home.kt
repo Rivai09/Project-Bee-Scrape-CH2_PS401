@@ -162,7 +162,7 @@ fun ItemRow( modifier: Modifier) {
                        .padding(8.dp)
                        .size(60.dp)
                )
-               Text(text = "hahaa")
+               Text(text = "")
            }
         }
     }

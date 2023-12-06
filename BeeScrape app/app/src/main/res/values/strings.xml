@@ -41,4 +41,14 @@
 <!--    marketselect-->
     <string name="marketTittle">Where will the data be taken from?</string>
     <string name="marketSubtitle">You can choose the data source you want</string>
+
+<!--    setting-->
+    <string name="profile_title">Your Profile</string>
+    <string name="terms">Terms and condition</string>
+    <string name="cs">Contact support</string>
+    <string name="guide">Guide</string>
+    <string name="moreInfo">More info and support</string>
+    <string name="accountSettings">Account settings</string>
+    <string name="logOut">Logout</string>
+
 </resources>

@@ -62,7 +62,7 @@ fun HomeScreen() {
             ) {
                 Search()
                 CategoryRow()
-                ItemRow(name = "", photo = "", modifier = Modifier)
+                ItemRow(modifier = Modifier)
             }
         }
     )
@@ -141,7 +141,7 @@ fun CategoryRow(
 }
 
 @Composable
-fun ItemRow(name: String, photo: String, modifier: Modifier) {
+fun ItemRow( modifier: Modifier) {
     Column(modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)) {
         Text(
             text = stringResource(R.string.popular),
@@ -153,14 +153,16 @@ fun ItemRow(name: String, photo: String, modifier: Modifier) {
             contentPadding = PaddingValues(horizontal = 16.dp),
             modifier = modifier
         ) {
+//            ganti parameter item dari data api
+//            misal model=it.photo
            items(suggestCategory){
                AsyncImage(
-                   model = photo, contentDescription = "photo", contentScale = ContentScale.Crop,
+                   model = "", contentDescription = "photo", contentScale = ContentScale.Crop,
                    modifier = Modifier
                        .padding(8.dp)
                        .size(60.dp)
                )
-               Text(text = name)
+               Text(text = "hahaa")
            }
         }
     }

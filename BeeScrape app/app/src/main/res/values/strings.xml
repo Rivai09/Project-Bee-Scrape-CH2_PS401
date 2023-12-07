@@ -51,4 +51,8 @@
     <string name="accountSettings">Account settings</string>
     <string name="logOut">Logout</string>
 
+    <string name="welcome">Hi, Welcome back</string>
+    <string name="tokopedia">Tokopedia</string>
+    <string name="blibli">Blibli siplah</string>
+
 </resources>

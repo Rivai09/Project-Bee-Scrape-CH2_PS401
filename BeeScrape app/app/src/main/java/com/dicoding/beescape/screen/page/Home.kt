@@ -11,7 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -26,20 +27,23 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.dicoding.beescape.R
+import com.dicoding.beescape.screen.Screen
 import com.dicoding.component.suggestCategory
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -47,9 +51,10 @@ fun HomeScreen() {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .verticalScroll(rememberScrollState())
                     ) {
-                        Text(text = "Selamat datang")
-                        Text(text = "User123")
+                        Text(text = stringResource(R.string.welcome ), fontWeight = FontWeight.Light, fontSize = 12.sp)
+                        Text(text = stringResource(R.string.username ), fontWeight = FontWeight.Medium, fontSize = 16.sp)
                     }
                 }
             )
@@ -61,7 +66,7 @@ fun HomeScreen() {
                     .padding(top = 30.dp, start = 10.dp, end = 10.dp)
             ) {
                 Search()
-                CategoryRow()
+                CategoryRow(navController = navController)
                 ItemRow(modifier = Modifier)
             }
         }
@@ -103,13 +108,14 @@ fun Search(modifier: Modifier = Modifier) {
 fun CategoryItem(
     category: String,
     modifier: Modifier = Modifier,
+    navController: NavHostController
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Button(onClick = {}) {
+        Button(onClick = {navController.navigate(Screen.SelectMarketplace.route)}) {
             Text(text = stringResource(category.toInt()))
         }
     }
@@ -117,7 +123,8 @@ fun CategoryItem(
 
 @Composable
 fun CategoryRow(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController
 ) {
     Column(modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)) {
         Text(
@@ -134,7 +141,7 @@ fun CategoryRow(
             modifier = modifier
         ) {
             items(suggestCategory) { category ->
-                CategoryItem(category.toString())
+                CategoryItem(category.toString(), navController = navController)
             }
         }
     }

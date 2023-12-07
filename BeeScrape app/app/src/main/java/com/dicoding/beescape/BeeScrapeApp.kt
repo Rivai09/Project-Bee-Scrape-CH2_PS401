@@ -47,7 +47,7 @@ fun BeeScrapeApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(navController)
             }
             composable(Screen.SelectMarketplace.route){
                 SelectMarketplace()

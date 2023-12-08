@@ -13,9 +13,9 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_marginTop="70dp"
             android:layout_width="211dp"
             android:layout_height="157dp"
+            android:layout_marginTop="70dp"
             android:src="@drawable/bs_logo"
             app:layout_constraintBottom_toTopOf="@+id/boldTitleTextWelcome"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,23 +40,21 @@
 
 
         <Button
-            android:background="@drawable/rounded_shape"
-            android:id="@+id/signUpEmail"
+            android:id="@+id/loginEmail"
             android:layout_width="364dp"
             android:layout_height="60dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_shape"
             android:fontFamily="@font/poppins_bold"
             android:paddingHorizontal="85dp"
-            android:text="@string/signUpEmail"
+            android:text="@string/login"
+            android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="normal"
-            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/sosmedTv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.489"
             app:layout_constraintStart_toStartOf="parent" />
-
-
 
 
         <View
@@ -69,7 +67,7 @@
             app:layout_constraintEnd_toStartOf="@+id/sosmedTv"
             app:layout_constraintHorizontal_bias="0.696"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signUpEmail"
+            app:layout_constraintTop_toBottomOf="@+id/loginEmail"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -80,7 +78,7 @@
             android:fontFamily="@font/poppins_light"
             android:text="@string/or_use_social_media"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/signUpEmail"
+            app:layout_constraintBottom_toBottomOf="@+id/loginEmail"
             app:layout_constraintBottom_toTopOf="@+id/signUpGoogle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -95,18 +93,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.342"
             app:layout_constraintStart_toEndOf="@+id/sosmedTv"
-            app:layout_constraintTop_toBottomOf="@+id/signUpEmail"
+            app:layout_constraintTop_toBottomOf="@+id/loginEmail"
             app:layout_constraintVertical_bias="0.117" />
 
         <Button
-            android:background="@drawable/rounded_shape"
             android:id="@id/signUpGoogle"
             android:layout_width="364dp"
             android:layout_height="60dp"
+            android:background="@drawable/rounded_shape"
             android:fontFamily="@font/poppins_bold"
-            android:textAlignment="center"
             android:paddingHorizontal="85dp"
             android:text="@string/signUpGoogle"
+            android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/sosmedTv"
@@ -124,23 +122,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signUpEmail" />
-
-        <TextView
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/login"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/privacyPolicy"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.473"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/loginEmail" />
 
 
         <TextView
@@ -153,13 +135,10 @@
             android:text="@string/descWelcome"
             android:textAlignment="center"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/signUpEmail"
+            app:layout_constraintBottom_toTopOf="@+id/loginEmail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.39"
             app:layout_constraintStart_toStartOf="parent" />
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

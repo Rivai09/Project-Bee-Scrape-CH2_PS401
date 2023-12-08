@@ -13,11 +13,11 @@ class WelcomeActivity : AppCompatActivity() {
         binding= ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.signUpEmail.setOnClickListener {
-            startActivity(Intent(this@WelcomeActivity,SignUpActivity::class.java))
-        }
-        binding.login.setOnClickListener {
+        binding.loginEmail.setOnClickListener {
             startActivity(Intent(this@WelcomeActivity,SignInActivity::class.java))
+        }
+        binding.signUpGoogle.setOnClickListener {
+            startActivity(Intent(this@WelcomeActivity,SignUpActivity::class.java))
         }
 
     }

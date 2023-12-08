@@ -1,5 +1,6 @@
 package com.dicoding.beescape
 
+import android.content.Intent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -14,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -23,6 +25,7 @@ import com.dicoding.beescape.navigation.NavigationItem
 import com.dicoding.beescape.screen.Screen
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.dicoding.beescape.before_login.WelcomeActivity
 import com.dicoding.beescape.screen.page.HomeScreen
 import com.dicoding.beescape.screen.page.MarkedScreen
 import com.dicoding.beescape.screen.page.NotificationScreen
@@ -59,7 +62,11 @@ fun BeeScrapeApp(
                 NotificationScreen()
             }
             composable(Screen.Profile.route) {
-                ProfileScreen()
+                ProfileScreen(navController)
+            }
+            composable(Screen.LOGOUT_ROUTE){
+                val intent = Intent(LocalContext.current, WelcomeActivity::class.java)
+                LocalContext.current.startActivity(intent)
             }
         }
     }

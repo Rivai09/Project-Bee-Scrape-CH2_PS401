@@ -167,7 +167,7 @@ fun CategoryRow(
 
 @Composable
 fun ItemRow(modifier: Modifier, sendSelectmarket: () -> Unit, navController: NavHostController) {
-    Column(modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)) {
+    Column(modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp)) {
 
         val listState = rememberLazyListState()
 

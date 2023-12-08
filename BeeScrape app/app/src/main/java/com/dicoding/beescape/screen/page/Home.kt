@@ -53,8 +53,16 @@ fun HomeScreen(navController: NavHostController) {
                             .fillMaxWidth()
                             .verticalScroll(rememberScrollState())
                     ) {
-                        Text(text = stringResource(R.string.welcome ), fontWeight = FontWeight.Light, fontSize = 12.sp)
-                        Text(text = stringResource(R.string.username ), fontWeight = FontWeight.Medium, fontSize = 16.sp)
+                        Text(
+                            text = stringResource(R.string.welcome),
+                            fontWeight = FontWeight.Light,
+                            fontSize = 12.sp
+                        )
+                        Text(
+                            text = stringResource(R.string.username),
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 16.sp
+                        )
                     }
                 }
             )
@@ -115,7 +123,7 @@ fun CategoryItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Button(onClick = {navController.navigate(Screen.SelectMarketplace.route)}) {
+        Button(onClick = { navController.navigate(Screen.SelectMarketplace.route) }) {
             Text(text = stringResource(category.toInt()))
         }
     }
@@ -148,7 +156,7 @@ fun CategoryRow(
 }
 
 @Composable
-fun ItemRow( modifier: Modifier) {
+fun ItemRow(modifier: Modifier) {
     Column(modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)) {
         Text(
             text = stringResource(R.string.popular),
@@ -162,15 +170,15 @@ fun ItemRow( modifier: Modifier) {
         ) {
 //            ganti parameter item dari data api
 //            misal model=it.photo
-           items(suggestCategory){
-               AsyncImage(
-                   model = "", contentDescription = "photo", contentScale = ContentScale.Crop,
-                   modifier = Modifier
-                       .padding(8.dp)
-                       .size(60.dp)
-               )
-               Text(text = "")
-           }
+            items(suggestCategory) {
+                AsyncImage(
+                    model = "", contentDescription = "photo", contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .size(60.dp)
+                )
+                Text(text = "")
+            }
         }
     }
 }

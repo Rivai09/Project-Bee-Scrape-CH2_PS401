@@ -8,7 +8,9 @@ sealed class Screen(val route: String) {
     object SelectMarketplace : Screen("selectMarketplace")
     object DetailCharacter : Screen("home/{id}") {
         fun createRoute(id: Long) = "home/$id"
+
     }
+    object TermsCondition:Screen("terms")
 
     companion object {
         const val LOGOUT_ROUTE = "logout"

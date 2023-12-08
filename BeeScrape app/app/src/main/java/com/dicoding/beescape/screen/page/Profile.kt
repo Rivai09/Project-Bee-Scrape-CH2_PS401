@@ -87,7 +87,7 @@ fun ProfileScreen(navController:NavHostController) {
                             fontWeight = FontWeight.Medium,
                             modifier = Modifier
                                 .padding(top = 10.dp, start = 10.dp)
-                                .clickable { }
+                                .clickable { navController.navigate(Screen.TermsCondition.route)}
                         )
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {

@@ -32,6 +32,7 @@ import com.dicoding.beescape.screen.page.NotificationScreen
 import com.dicoding.beescape.screen.page.ProfileScreen
 import com.dicoding.beescape.screen.page.ProfileScreen
 import com.dicoding.beescape.screen.page.SelectMarketplace
+import com.dicoding.beescape.screen.page.TermsScreen
 
 @Composable
 fun BeeScrapeApp(
@@ -63,6 +64,9 @@ fun BeeScrapeApp(
             }
             composable(Screen.Profile.route) {
                 ProfileScreen(navController)
+            }
+            composable(Screen.TermsCondition.route){
+                TermsScreen()
             }
             composable(Screen.LOGOUT_ROUTE){
                 val intent = Intent(LocalContext.current, WelcomeActivity::class.java)

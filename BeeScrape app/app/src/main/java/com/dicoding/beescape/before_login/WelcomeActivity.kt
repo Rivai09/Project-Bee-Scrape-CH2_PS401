@@ -19,6 +19,5 @@ class WelcomeActivity : AppCompatActivity() {
         binding.signUpGoogle.setOnClickListener {
             startActivity(Intent(this@WelcomeActivity,SignUpActivity::class.java))
         }
-
     }
 }

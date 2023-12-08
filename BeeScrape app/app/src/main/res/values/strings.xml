@@ -55,4 +55,12 @@
     <string name="tokopedia">Tokopedia</string>
     <string name="blibli">Blibli siplah</string>
 
+    <string name="termJudul">BeeScrape Term and Condition use</string>
+    <string name="termsParagraft1">PLEASE CAREFULLY READ THESE TERMS AND CONDITIONS, INCLUDING OUR PRIVACY POLICY, BEFORE USING THIS WEBSITE (the “Site”). BY ACCESSING OR USING THE SITE, YOU (“USER”) AGREE TO BE LEGALLY BOUND BY THESE TERMS AND CONDITIONS. IF YOU DISAGREE WITH ANY OF THE FOLLOWING TERMS OR CONDITIONS, PLEASE DO NOT USE THIS SITE.
+</string>
+    <string name="termsParagraf2">DAMY HEALTH OWNS AND OPERATES THE SITE. DAMY HEALTH RESERVES THE RIGHT TO CHANGE ANY TERMS OR CONDITIONS WITHOUT NOTICE, EFFECTIVE UPON THEIR POSTING. DAMY HEALTH OR ITS SERVICE PROVIDERS, PARENTS, AFFILIATES AND BUSINESS ASSOCIATES MAY IMPOSE LIMITS ON CERTAIN FEATURES AND SERVICES OR RESTRICT YOUR ACCESS TO PARTS OR ALL OF THE SITE WITHOUT NOTICE OR LIABILITY; DAMY HEALTH MAY ALSO TERMINATE YOUR USE OF THE SITE AT ANY TIME IN ITS SOLE DISCRETION.
+</string>
+    <string name="termsPart2">Additional User Conduct Guidelines</string>
+    <string name="termsPart2text">BeeCrape requests that the User not impede or inhibit any other User from using and enjoying the Site. Therefore, in using this Site, you agree not to: disrupt or interfere with the security of, or otherwise abuse, the Site or any services, system resources, accounts, servers or networks connected to or accessible through the Site or affiliate linked sites; upload, post, or otherwise transmit through or on this Site any viruses or other harmful, disruptive or destructive files; use or attempt to use another’s account, service or system, or link to another site, without authorization from DAMY HEALTH, or create or use a false identity on the Site; or transmit through or on the Site spam, chain letters, junk mail or other types of unsolicited mass e-mail to people or entities who have not agreed to be part of such mailings. Further, any unauthorized or prohibited use may additionally subject the offender to civil liability and criminal prosecution under applicable federal and state laws.</string>
+
 </resources>

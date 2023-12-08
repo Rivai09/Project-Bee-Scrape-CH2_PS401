@@ -205,6 +205,5 @@ fun ProfileScreen(navController:NavHostController) {
                 )
             }
         }
-
     })
 }

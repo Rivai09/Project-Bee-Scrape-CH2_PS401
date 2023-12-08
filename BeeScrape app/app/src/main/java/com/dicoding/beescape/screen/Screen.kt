@@ -9,4 +9,8 @@ sealed class Screen(val route: String) {
     object DetailCharacter : Screen("home/{id}") {
         fun createRoute(id: Long) = "home/$id"
     }
+
+    companion object {
+        const val LOGOUT_ROUTE = "logout"
+    }
 }

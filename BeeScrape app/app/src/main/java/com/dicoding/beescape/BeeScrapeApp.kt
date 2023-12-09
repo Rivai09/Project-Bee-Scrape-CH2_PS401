@@ -56,7 +56,7 @@ fun BeeScrapeApp(
             composable(Screen.SelectMarketplace.route){
                 SelectMarketplace()
             }
-            composable(Screen.Marked.route) {
+            composable(Screen.Market.route) {
                 MarkedScreen()
             }
             composable(Screen.Notification.route){
@@ -93,9 +93,9 @@ private fun BottomBar(
                 screen = Screen.Home
             ),
             NavigationItem(
-                title = stringResource(R.string.title_marked),
+                title = stringResource(R.string.title_market),
                 icon = Icons.Default.List,
-                screen = Screen.Marked
+                screen = Screen.Market
             ),
             NavigationItem(
                 stringResource(R.string.title_notifications),

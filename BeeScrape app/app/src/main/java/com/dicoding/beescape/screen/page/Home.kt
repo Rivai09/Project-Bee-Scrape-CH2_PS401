@@ -1,16 +1,22 @@
 package com.dicoding.beescape.screen.page
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -74,8 +80,12 @@ fun HomeScreen(navController: NavHostController) {
                     .padding(top = 30.dp, start = 10.dp, end = 10.dp)
             ) {
                 Search()
-                CategoryRow(navController = navController)
-                ItemRow(modifier = Modifier)
+//                CategoryRow(navController = navController)
+                ItemRow(
+                    modifier = Modifier,
+                    { navController.navigate(Screen.SelectMarketplace.route) },
+                    navController = navController
+                )
             }
         }
     )
@@ -156,29 +166,41 @@ fun CategoryRow(
 }
 
 @Composable
-fun ItemRow(modifier: Modifier) {
-    Column(modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)) {
-        Text(
-            text = stringResource(R.string.popular),
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
-        )
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp),
-            modifier = modifier
-        ) {
+fun ItemRow(modifier: Modifier, sendSelectmarket: () -> Unit, navController: NavHostController) {
+    Column(modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp)) {
+
+        val listState = rememberLazyListState()
+
+        Box(modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)) {
+            Text(
+                text = stringResource(R.string.popular),
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
+            LazyColumn(
+                state = listState,
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                modifier = modifier.padding(top = 30.dp)
+            ) {
 //            ganti parameter item dari data api
 //            misal model=it.photo
-            items(suggestCategory) {
-                AsyncImage(
-                    model = "", contentDescription = "photo", contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .size(60.dp)
-                )
-                Text(text = "")
+                items(suggestCategory) {
+                    AsyncImage(
+                        model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZlenrvKQMmh4Z4b935QSM-7n-4MzN4mDXQ&usqp=CAU",
+                        contentDescription = "photo",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth()
+                            .height(150.dp)
+                            .clickable {
+                                sendSelectmarket()
+                            }
+                    )
+                    Text(text = "Amount of data: 1000")
+                }
             }
         }
+
     }
 }

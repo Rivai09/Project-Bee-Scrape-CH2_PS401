@@ -30,13 +30,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavGraph
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 
 import com.dicoding.beescape.R
+import com.dicoding.beescape.screen.Screen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navController:NavHostController) {
     Scaffold(topBar = { stringResource(R.string.title_profile) }, content = {
         Column(
             modifier = Modifier
@@ -84,7 +87,7 @@ fun ProfileScreen() {
                             fontWeight = FontWeight.Medium,
                             modifier = Modifier
                                 .padding(top = 10.dp, start = 10.dp)
-                                .clickable { }
+                                .clickable { navController.navigate(Screen.TermsCondition.route)}
                         )
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -196,7 +199,9 @@ fun ProfileScreen() {
                     fontWeight = FontWeight.Medium,
                     modifier = Modifier
                         .padding(top = 10.dp, start = 10.dp)
-                        .clickable { }
+                        .clickable {
+                            navController.navigate(Screen.LOGOUT_ROUTE)
+                        }
                 )
             }
         }

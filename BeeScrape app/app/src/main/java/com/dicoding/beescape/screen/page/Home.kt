@@ -44,6 +44,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
+import com.dicoding.beescape.ui.theme.poppinsFamily
 import com.dicoding.component.suggestCategory
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -61,12 +62,13 @@ fun HomeScreen(navController: NavHostController) {
                     ) {
                         Text(
                             text = stringResource(R.string.welcome),
-                            fontWeight = FontWeight.Light,
-                            fontSize = 12.sp
+                            fontFamily = poppinsFamily,
+                            fontWeight = FontWeight.Normal,
+                            fontSize = 12.sp,
                         )
                         Text(
                             text = stringResource(R.string.username),
-                            fontWeight = FontWeight.Medium,
+                            fontWeight = FontWeight.SemiBold,
                             fontSize = 16.sp
                         )
                     }

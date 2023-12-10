@@ -62,5 +62,7 @@
 </string>
     <string name="termsPart2">Additional User Conduct Guidelines</string>
     <string name="termsPart2text">BeeCrape requests that the User not impede or inhibit any other User from using and enjoying the Site. Therefore, in using this Site, you agree not to: disrupt or interfere with the security of, or otherwise abuse, the Site or any services, system resources, accounts, servers or networks connected to or accessible through the Site or affiliate linked sites; upload, post, or otherwise transmit through or on this Site any viruses or other harmful, disruptive or destructive files; use or attempt to use another’s account, service or system, or link to another site, without authorization from DAMY HEALTH, or create or use a false identity on the Site; or transmit through or on the Site spam, chain letters, junk mail or other types of unsolicited mass e-mail to people or entities who have not agreed to be part of such mailings. Further, any unauthorized or prohibited use may additionally subject the offender to civil liability and criminal prosecution under applicable federal and state laws.</string>
-
+    <string name="trend">Top product</string>
+    <string name="suggestedProduct">Suggestion for you to sell</string>
+    <string name="priceRec">Price Recomendation:</string>
 </resources>

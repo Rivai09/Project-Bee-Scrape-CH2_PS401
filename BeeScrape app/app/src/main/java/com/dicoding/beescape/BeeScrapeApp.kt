@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
@@ -17,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -30,9 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.dicoding.beescape.before_login.WelcomeActivity
 import com.dicoding.beescape.screen.page.AnalysisScreen
 import com.dicoding.beescape.screen.page.HomeScreen
-import com.dicoding.beescape.screen.page.AnalysisScreen
 import com.dicoding.beescape.screen.page.NotificationScreen
-import com.dicoding.beescape.screen.page.ProfileScreen
 import com.dicoding.beescape.screen.page.ProfileScreen
 import com.dicoding.beescape.screen.page.SelectMarketplace
 import com.dicoding.beescape.screen.page.TermsScreen
@@ -60,7 +56,7 @@ fun BeeScrapeApp(
                 SelectMarketplace()
             }
             composable(Screen.Market.route) {
-                AnalysisScreen()
+                AnalysisScreen(navController)
             }
             composable(Screen.Notification.route){
                 NotificationScreen()

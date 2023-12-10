@@ -36,15 +36,32 @@ import coil.compose.AsyncImage
 
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
+import com.dicoding.beescape.ui.theme.poppinsFamily
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ProfileScreen(navController:NavHostController) {
-    Scaffold(topBar = { stringResource(R.string.title_profile) }, content = {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = (stringResource(R.string.profile_title)),
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 24.sp,
+                        modifier = Modifier
+                            .padding(top = 12.dp)
+                    )
+                }
+            )
+        },
+        content = {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 30.dp, start = 10.dp, end = 10.dp)
+                .padding(top = 72.dp, start = 10.dp, end = 10.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             AsyncImage(

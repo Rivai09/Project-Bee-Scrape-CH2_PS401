@@ -28,7 +28,7 @@
     <string name="title_profile">Profile</string>
     <string name="privacy_policy"><![CDATA[By signing up you agree to BeeScrape Terms & Conditions and Privacy Policy]]></string>
     <string name="search">Search anything you want\'s</string>
-<!--    kategory-->
+    <!--    kategory-->
     <string name="category">Category</string>
     <string name="categoryHp">Hp</string>
     <string name="categoryTablet">Tablet</string>
@@ -38,11 +38,11 @@
     <string name="categoryJacket">Jacket</string>
     <string name="popular">Popular for you</string>
 
-<!--    marketselect-->
+    <!--    marketselect-->
     <string name="marketTittle">Where will the data be taken from?</string>
     <string name="marketSubtitle">You can choose the data source you want</string>
 
-<!--    setting-->
+    <!--    setting-->
     <string name="profile_title">Your Profile</string>
     <string name="terms">Terms and condition</string>
     <string name="cs">Contact support</string>
@@ -54,6 +54,10 @@
     <string name="welcome">Hi, Welcome back</string>
     <string name="tokopedia">Tokopedia</string>
     <string name="blibli">Blibli siplah</string>
+    <string name="notification_title">Notification</string>
+    <string name="title_ampty_notif">No Notifications Yet</string>
+    <string name="description_ampy_notif">When you get notifications, they’ll \nshow up here</string>
+    <string name="account_setting_profile">Account Setting</string>
 
     <string name="termJudul">BeeScrape Term and Condition use</string>
     <string name="termsParagraft1">PLEASE CAREFULLY READ THESE TERMS AND CONDITIONS, INCLUDING OUR PRIVACY POLICY, BEFORE USING THIS WEBSITE (the “Site”). BY ACCESSING OR USING THE SITE, YOU (“USER”) AGREE TO BE LEGALLY BOUND BY THESE TERMS AND CONDITIONS. IF YOU DISAGREE WITH ANY OF THE FOLLOWING TERMS OR CONDITIONS, PLEASE DO NOT USE THIS SITE.

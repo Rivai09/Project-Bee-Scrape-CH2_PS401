@@ -142,32 +142,6 @@ fun CategoryItem(
 }
 
 @Composable
-fun CategoryRow(
-    modifier: Modifier = Modifier,
-    navController: NavHostController
-) {
-    Column(modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)) {
-        Text(
-            text = stringResource(R.string.category),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
-        )
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp),
-            modifier = modifier
-        ) {
-            items(suggestCategory) { category ->
-                CategoryItem(category.toString(), navController = navController)
-            }
-        }
-    }
-}
-
-@Composable
 fun ItemRow(modifier: Modifier, sendSelectmarket: () -> Unit, navController: NavHostController) {
     Column(modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp)) {
 

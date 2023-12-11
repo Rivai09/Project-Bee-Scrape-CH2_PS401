@@ -26,11 +26,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
 
 @Composable
-fun SelectMarketplace() {
+fun SelectMarketplace(sendToDetail: () -> Unit, navController: NavHostController) {
     Box(
         modifier = Modifier
             .padding(top = 20.dp, start = 10.dp, end = 10.dp)
@@ -55,26 +56,15 @@ fun SelectMarketplace() {
             )
 
             Box {
-                Row {
-                    Button(colors = ButtonDefaults.buttonColors(Color.Green), onClick = {}) {
-//                Column {
+                Row() {
+                    Button(colors = ButtonDefaults.buttonColors(Color.Green), onClick = {
+                        sendToDetail
+                        navController.navigate(Screen.Detail.route)
+                    }) {
                         Text(text = stringResource(R.string.tokopedia))
-//                    Spacer(modifier = Modifier.width(5.dp))
-//                    Image(painter = painterResource(R.drawable.bs_logo), contentDescription ="tokped", modifier = Modifier.clip(
-//                        CircleShape).size(50.dp))
-//                }
                     }
 
-                    Spacer(modifier = Modifier.width(5.dp))
 
-                    Button(colors = ButtonDefaults.buttonColors(Color.Blue), onClick = {}) {
-//                Column {
-                        Text(text = stringResource(R.string.blibli))
-//                    Spacer(modifier = Modifier.width(5.dp))
-//                    Image(painter = painterResource(R.drawable.bs_logo), contentDescription ="tokped", modifier = Modifier.clip(
-//                        CircleShape).size(50.dp))
-//                }
-                    }
                 }
             }
         }

@@ -27,6 +27,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.dicoding.beescape.before_login.WelcomeActivity
 import com.dicoding.beescape.screen.page.AnalysisScreen
+import com.dicoding.beescape.screen.page.Detail
 import com.dicoding.beescape.screen.page.HomeScreen
 import com.dicoding.beescape.screen.page.NotificationScreen
 import com.dicoding.beescape.screen.page.ProfileScreen
@@ -53,7 +54,10 @@ fun BeeScrapeApp(
                 HomeScreen(navController)
             }
             composable(Screen.SelectMarketplace.route){
-                SelectMarketplace()
+                SelectMarketplace ({navController.navigate(Screen.Detail.route)},navController)
+            }
+            composable(Screen.Detail.route){
+                Detail()
             }
             composable(Screen.Market.route) {
                 AnalysisScreen(navController)

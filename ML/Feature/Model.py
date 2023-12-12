@@ -3,7 +3,6 @@ from tensorflow import keras
 from keras import Sequential
 from keras.layers import Dense
 import  csv
-from sklearn.metrics import mean_squared_error
 
 #Preprocessing Data
 filename = 'Dataset.csv'
@@ -32,6 +31,8 @@ X_test = [item for item in xtest_data]
 y_train = [item for item in ytrain_data]
 y_test = [item for item in ytest_data]
 
+
+
 #Train Data to make a prediction about total sold based on price
 def predictionmodel(X,Y,XTest,YTest):
     X_train = X
@@ -40,15 +41,21 @@ def predictionmodel(X,Y,XTest,YTest):
     xtest = XTest
 
     # build model
-    model = Sequential([Dense(units=8,input_shape=[1]),
-                        Dense(6),
-                        Dense(4),
-                        Dense(2),
+    model = Sequential([Dense(10,input_shape=[1],input_dim=1, activation='relu'),
+                        Dense(10,activation='relu'),
                         Dense(1)])
 
     # compile the model
-    model.compile(optimizer=keras.optimizers.SGD(learning_rate=1e-4), loss='mean_squared_error')
+    model.compile(optimizer=keras.optimizers.SGD(learning_rate=1e-4), loss='mean_squared_error',metrics=['accuracy'])
 
     # train the model
     model.fit(X_train, Y_train, epochs=500,validation_data=(xtest,ytest))
     return model
+
+
+
+model = predictionmodel(X_train,y_train,X_test,y_test)
+inpt = int(input('Masukkan Harga Untuk Prediksi jumlah yang akan terjual : '))
+new_x = inpt
+prediction = model.predict([new_x])[0][0]
+print('Prediksi Jumlah Terjual :',round(prediction) * 100,'unit')

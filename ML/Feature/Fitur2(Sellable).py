@@ -15,41 +15,55 @@ for row in reader:
     sold.append(row[2])
     rating.append(row[3])
 
-TotalSellAsus    = 0
-TotalSellAcer    = 0
-TotalSellHp      = 0
-TotalSellLenovo  = 0
-TotalSellMacbook = 0
-TotalSellAdvan   = 0
-ListSell = []
+totalasus    = 0
+totalacer    = 0
+totalhp      = 0
+totallenovo  = 0
+totalmacbook = 0
+totaladvan   = 0
+TotalSell    = {'Asus':0,
+                'Acer':0,
+                'HP':0,
+                'Lenovo':0,
+                'Macbook':0,
+                'Advan':0}
+
 for NAME,PRICE,SOLD,RATING in zip(name,price,sold,rating):
     if NAME =='asus':
         intsoldasus = int(SOLD)
-        TotalSellAsus += intsoldasus
+        totalasus += intsoldasus
+        TotalSell['Asus']= totalasus
     if NAME =='acer':
         intsoldacer = int(SOLD)
-        TotalSellAcer += intsoldacer
+        totalacer += intsoldacer
+        TotalSell['Acer']= totalacer
     if NAME =='hp' :
         intsoldhp = int(SOLD)
-        TotalSellHp += intsoldhp
+        totalhp += intsoldhp
+        TotalSell['HP']= totalhp
     if NAME == 'lenovo':
         intsoldlenovo = int(SOLD)
-        TotalSellLenovo += intsoldlenovo
+        totallenovo += intsoldlenovo
+        TotalSell['Lenovo']= totallenovo
     if NAME =='macbook':
         intsoldmacbook = int(SOLD)
-        TotalSellMacbook += intsoldmacbook
+        totalmacbook += intsoldmacbook
+        TotalSell['Macbook']= totalmacbook
     if NAME == 'advan':
         intsoldadvan = int(SOLD)
-        TotalSellAdvan += intsoldadvan
-SellableProduct = max(TotalSellAsus, TotalSellAcer, TotalSellHp, TotalSellLenovo, TotalSellMacbook, TotalSellAdvan)
+        totaladvan += intsoldadvan
+        TotalSell['Advan']= totaladvan
 
-print('Total Penjualan Keseluruhan Laptop Asus       :',TotalSellAsus)
-print('Total Penjualan Keseluruhan Laptop Acer       :',TotalSellAcer)
-print('Total Penjualan Keseluruhan Laptop HP         :',TotalSellHp)
-print('Total Penjualan Keseluruhan Laptop Lenovo     :',TotalSellLenovo)
-print('Total Penjualan Keseluruhan Laptop Macbook    :',TotalSellMacbook)
-print('Total Penjualan Keseluruhan Laptop Advan      :',TotalSellAdvan)
-print('Rekomendasi Produk Dengan Penjualan Terbanyak :', SellableProduct)
+sellable = max(zip(TotalSell.values(), TotalSell.keys()))[1]
+sellablevalues = max(zip(TotalSell.values(), TotalSell.keys()))[0]
+
+print('Total Penjualan Keseluruhan Laptop Asus       :',TotalSell['Asus'])
+print('Total Penjualan Keseluruhan Laptop Acer       :',TotalSell['Acer'])
+print('Total Penjualan Keseluruhan Laptop HP         :',TotalSell['HP'])
+print('Total Penjualan Keseluruhan Laptop Lenovo     :',TotalSell['Lenovo'])
+print('Total Penjualan Keseluruhan Laptop Macbook    :',TotalSell['Macbook'])
+print('Total Penjualan Keseluruhan Laptop Advan      :',TotalSell['Advan'])
+print('Rekomendasi Produk Dengan Penjualan Terbanyak :',sellable,'Dengan jumlah terjual :',sellablevalues)
 
 
 

@@ -63,7 +63,8 @@ print('Total Penjualan Keseluruhan Laptop HP         :',TotalSell['HP'])
 print('Total Penjualan Keseluruhan Laptop Lenovo     :',TotalSell['Lenovo'])
 print('Total Penjualan Keseluruhan Laptop Macbook    :',TotalSell['Macbook'])
 print('Total Penjualan Keseluruhan Laptop Advan      :',TotalSell['Advan'])
-print('Rekomendasi Produk Dengan Penjualan Terbanyak :',sellable,'Dengan jumlah terjual :',sellablevalues)
+print('Rekomendasi Produk Dengan Penjualan Terbanyak :',sellable)
+print('Dengan jumlah terjual :',sellablevalues)
 
 
 

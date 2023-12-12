@@ -2,7 +2,7 @@ import numpy as np
 import csv
 import math
 
-filename = 'Dummy.csv'
+filename = 'Dataset.csv'
 reader = csv.reader(open(filename, "rt"), delimiter=",")
 header = next(reader)
 name =[]

@@ -1,0 +1,15 @@
+a. Head title : Informasi Penjualan Laptop
+b. Source : Tokopedia
+c. Lokasi : Indonesia
+d. Jumlah Data : 346
+e. Jumlah merk laptop  : 6(asus,acer,lenovo,hp,macbook,advan)
+f. (Image Data Total Laptop Yang Terjual)
+    - ket : Total laptop yang terjual dari variasi laptop yang tersedia
+g. (Image persebaran data)
+     - ket : Range harga : 1jt-15jt
+     - ket:  Range Jumlah Terjual : 10 - 500
+h. Prediksi Jumlah Laptop yang terjual based on Harga
+
+
+
+

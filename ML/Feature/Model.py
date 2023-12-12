@@ -41,21 +41,21 @@ def predictionmodel(X,Y,XTest,YTest):
     xtest = XTest
 
     # build model
-    model = Sequential([Dense(10,input_shape=[1],input_dim=1, activation='relu'),
-                        Dense(10,activation='relu'),
+    model = Sequential([Dense(10,input_shape=[1],input_dim=1),
+                        Dense(10),
                         Dense(1)])
 
     # compile the model
-    model.compile(optimizer=keras.optimizers.SGD(learning_rate=1e-4), loss='mean_squared_error',metrics=['accuracy'])
+    model.compile(optimizer=keras.optimizers.SGD(learning_rate=1e-4), loss='mean_squared_error')
 
     # train the model
-    model.fit(X_train, Y_train, epochs=500,validation_data=(xtest,ytest))
+    model.fit(X_train, Y_train, epochs=100,validation_data=(xtest,ytest))
     return model
 
 
 
 model = predictionmodel(X_train,y_train,X_test,y_test)
-inpt = int(input('Masukkan Harga Untuk Prediksi jumlah yang akan terjual : '))
+inpt = int(input('Masukkan Harga Untuk Prediksi jumlah yang akan terjual(jt) : '))
 new_x = inpt
 prediction = model.predict([new_x])[0][0]
-print('Prediksi Jumlah Terjual :',round(prediction) * 100,'unit')
+print('Prediksi Jumlah Rata-Rata yang akan Terjual :',int(prediction * 100),'unit' )

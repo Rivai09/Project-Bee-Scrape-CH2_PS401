@@ -67,11 +67,6 @@ print('Rekomendasi Produk Dengan Penjualan Terbanyak :',sellable)
 print('Dengan jumlah terjual :',sellablevalues)
 
 
-df = pd.DataFrame(TotalSell,index=[1])
-df.to_excel('DataTotalPenjualanLaptop.xlsx',index=False)
-print('data disimpan!')
-
-
 
 
 

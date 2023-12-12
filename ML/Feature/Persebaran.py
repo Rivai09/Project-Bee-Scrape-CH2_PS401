@@ -13,8 +13,8 @@ for row in reader:
 
 price = np.array(price, dtype=float)
 sold = np.array(sold, dtype=float)
-PRICE = price / 1000000
-SOLD = sold / 10
+PRICE = price / 10000000
+SOLD = sold / 1000
 mean_X = np.mean(PRICE)
 mean_Y = np.mean(SOLD)
 
@@ -35,7 +35,6 @@ min_X = np.min(sold) - 100
 X = np.linspace(min_X, max_X, 500)
 Y = c + m * X
 
-plt.plot(X, Y, color="#0000FF", label="line")
 plt.scatter(price, sold, color="#00FF00", label="data")
 plt.title('Persebaran Data')
 plt.xlabel("Harga")

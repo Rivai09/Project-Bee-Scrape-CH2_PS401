@@ -58,4 +58,4 @@ model = predictionmodel(X_train,y_train,X_test,y_test)
 inpt = int(input('Masukkan Harga Untuk Prediksi jumlah yang akan terjual(jt) : '))
 new_x = inpt
 prediction = model.predict([new_x])[0][0]
-print('Prediksi Jumlah Rata-Rata yang akan Terjual :',int(prediction * 100),'unit' )
+print('Prediksi Jumlah Rata-Rata yang akan Terjual :',int(prediction * 100) ,'unit' )

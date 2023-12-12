@@ -1,7 +1,7 @@
 import numpy as np
 import csv
 import math
-
+import pandas as pd
 filename = 'Dataset.csv'
 reader = csv.reader(open(filename, "rt"), delimiter=",")
 header = next(reader)
@@ -66,6 +66,10 @@ print('Total Penjualan Keseluruhan Laptop Advan      :',TotalSell['Advan'])
 print('Rekomendasi Produk Dengan Penjualan Terbanyak :',sellable)
 print('Dengan jumlah terjual :',sellablevalues)
 
+
+df = pd.DataFrame(TotalSell,index=[1])
+df.to_excel('DataTotalPenjualanLaptop.xlsx',index=False)
+print('data disimpan!')
 
 
 

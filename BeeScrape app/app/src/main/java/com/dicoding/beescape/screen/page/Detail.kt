@@ -1,7 +1,6 @@
 package com.dicoding.beescape.screen.page
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +15,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,7 +37,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -188,7 +187,7 @@ fun MyTextInput() {
             value = text,
             onValueChange = {
                 text = it.filter { char -> char.isDigit() }
-                result = text.toIntOrNull()?.times(2) ?: 0
+//                result = text.toIntOrNull()?.times(2) ?: 0
             },
             label = { Text(stringResource(R.string.predictSalesHint)) },
             keyboardOptions = KeyboardOptions(
@@ -204,10 +203,14 @@ fun MyTextInput() {
                 .fillMaxWidth()
                 .padding(5.dp)
         )
+        
+        Button(onClick = { /*TODO*/ }) {
+            Text(text = "Predict")
+        }
 
         Spacer(modifier = Modifier.height(14.dp))
 
         Text(stringResource(R.string.enterNumber)+"$text")
-        Text(stringResource(R.string.predictSales)+"$result")
+//        Text(stringResource(R.string.predictSales)+"$result")
     }
 }

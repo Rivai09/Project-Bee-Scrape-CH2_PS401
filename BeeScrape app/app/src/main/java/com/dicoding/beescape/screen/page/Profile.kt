@@ -42,6 +42,7 @@ import com.dicoding.beescape.screen.Screen
 import com.dicoding.beescape.view_model.MainViewModel
 import com.dicoding.beescape.view_model.ViewModelFactory
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ProfileScreen(navController: NavHostController) {
@@ -53,7 +54,7 @@ fun ProfileScreen(navController: NavHostController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 30.dp, start = 10.dp, end = 10.dp)
+                .padding(top = 72.dp, start = 10.dp, end = 10.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             AsyncImage(

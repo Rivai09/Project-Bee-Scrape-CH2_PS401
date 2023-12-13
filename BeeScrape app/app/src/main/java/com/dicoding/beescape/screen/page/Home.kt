@@ -99,7 +99,7 @@ fun HomeScreen(navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 30.dp, start = 10.dp, end = 10.dp)
+                    .padding(top = 30.dp, start = 16.dp, end = 16.dp)
             ) {
                 Search()
 //                CategoryRow(navController = navController)
@@ -143,7 +143,7 @@ fun Search(modifier: Modifier = Modifier) {
             containerColor = MaterialTheme.colorScheme.background
         ),
         modifier = modifier
-            .padding(top = 30.dp, start = 0.dp, end = 0.dp)
+            .padding(top = 32.dp, start = 0.dp, end = 0.dp)
             .fillMaxWidth()
             .heightIn(min = 48.dp)
     ) {
@@ -169,11 +169,11 @@ fun CategoryItem(
 
 @Composable
 fun ItemRow(modifier: Modifier, sendSelectmarket: () -> Unit, navController: NavHostController) {
-    Column(modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp)) {
+    Column(modifier.padding(top = 10.dp, start = 0.dp, end = 0.dp)) {
 
         val listState = rememberLazyListState()
 
-        Box(modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)) {
+        Box(modifier.padding(top = 20.dp, start = 0.dp, end = 0.dp)) {
             Text(
                 text = stringResource(R.string.popular),
                 fontWeight = FontWeight.Bold,
@@ -203,7 +203,6 @@ fun ItemRow(modifier: Modifier, sendSelectmarket: () -> Unit, navController: Nav
                 }
             }
         }
-
     }
 }
 

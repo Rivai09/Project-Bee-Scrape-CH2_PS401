@@ -28,7 +28,7 @@
     <string name="title_profile">Profile</string>
     <string name="privacy_policy"><![CDATA[By signing up you agree to BeeScrape Terms & Conditions and Privacy Policy]]></string>
     <string name="search">Search anything you want\'s</string>
-<!--    kategory-->
+    <!--    kategory-->
     <string name="category">Category</string>
     <string name="categoryHp">Hp</string>
     <string name="categoryTablet">Tablet</string>
@@ -38,11 +38,11 @@
     <string name="categoryJacket">Jacket</string>
     <string name="popular">Popular for you</string>
 
-<!--    marketselect-->
+    <!--    marketselect-->
     <string name="marketTittle">Where will the data be taken from?</string>
     <string name="marketSubtitle">You can choose the data source you want</string>
 
-<!--    setting-->
+    <!--    setting-->
     <string name="profile_title">Your Profile</string>
     <string name="terms">Terms and condition</string>
     <string name="cs">Contact support</string>

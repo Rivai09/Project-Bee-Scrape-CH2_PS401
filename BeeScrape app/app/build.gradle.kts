@@ -82,6 +82,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2") //liveData
     implementation ("androidx.room:room-ktx:2.6.1")
 
+    implementation("androidx.paging:paging-runtime-ktx:3.1.1")
+
     //compose
     implementation (platform("androidx.compose:compose-bom:2023.05.01"))
     implementation ("androidx.compose.ui:ui")

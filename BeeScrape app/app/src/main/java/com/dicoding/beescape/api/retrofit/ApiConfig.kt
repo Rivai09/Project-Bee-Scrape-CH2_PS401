@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
 
-    var BASE_URL = "https://newsapi.org/v2/"
+    private val BASE_URL = "https://ch2-ps401.et.r.appspot.com/api/v1/users/"
 
     fun getApiService(): ApiService {
         val loggingInterceptor = HttpLoggingInterceptor()

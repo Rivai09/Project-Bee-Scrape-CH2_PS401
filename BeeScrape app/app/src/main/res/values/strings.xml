@@ -67,6 +67,20 @@
     <string name="termsPart2">Additional User Conduct Guidelines</string>
     <string name="termsPart2text">BeeCrape requests that the User not impede or inhibit any other User from using and enjoying the Site. Therefore, in using this Site, you agree not to: disrupt or interfere with the security of, or otherwise abuse, the Site or any services, system resources, accounts, servers or networks connected to or accessible through the Site or affiliate linked sites; upload, post, or otherwise transmit through or on this Site any viruses or other harmful, disruptive or destructive files; use or attempt to use another’s account, service or system, or link to another site, without authorization from DAMY HEALTH, or create or use a false identity on the Site; or transmit through or on the Site spam, chain letters, junk mail or other types of unsolicited mass e-mail to people or entities who have not agreed to be part of such mailings. Further, any unauthorized or prohibited use may additionally subject the offender to civil liability and criminal prosecution under applicable federal and state laws.</string>
     <string name="trend">Top product</string>
-    <string name="suggestedProduct">Suggestion for you to sell</string>
+    <string name="suggestedProduct">Product suggestions for sale</string>
     <string name="priceRec">Price Recomendation:</string>
+
+    <string name="predictSalesHint">Enter the price, the price automatically converts to Rp</string>
+    <string name="salesDetail">Sales information from</string>
+    <string name="enterNumber">Entered price:</string>
+    <string name="predictSales">Predict sales result:</string>
+    <string name="sourceDetail">Source:</string>
+    <string name="locationDetail">Location:</string>
+    <string name="totalSearch">Total data:</string>
+    <string name="merk">Total merk:</string>
+    <string name="ketTotalProduct">Total product description:</string>
+    <string name="topProduct">Top product: </string>
+    <string name="rangeHarga">Price Range: </string>
+    <string name="rangeJumlahTerjual">range of sales amounts:</string>
+    <string name="tryAi">Now you can predict of the number of laptops sold based on price</string>
 </resources>

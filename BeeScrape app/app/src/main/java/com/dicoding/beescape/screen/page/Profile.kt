@@ -1,6 +1,7 @@
 package com.dicoding.beescape.screen.page
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -24,40 +25,32 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
-import com.dicoding.beescape.ui.theme.poppinsFamily
+import com.dicoding.beescape.view_model.MainViewModel
+import com.dicoding.beescape.view_model.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ProfileScreen(navController:NavHostController) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = (stringResource(R.string.profile_title)),
-                        fontFamily = poppinsFamily,
-                        fontWeight = FontWeight.Medium,
-                        fontSize = 24.sp,
-                        modifier = Modifier
-                            .padding(top = 12.dp)
-                    )
-                }
-            )
-        },
-        content = {
+fun ProfileScreen(navController: NavHostController) {
+
+    val context = LocalContext.current
+    val viewModel: MainViewModel = viewModel(factory = ViewModelFactory.getInstance(context))
+
+    Scaffold(topBar = { stringResource(R.string.title_profile) }, content = {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -104,7 +97,7 @@ fun ProfileScreen(navController:NavHostController) {
                             fontWeight = FontWeight.Medium,
                             modifier = Modifier
                                 .padding(top = 10.dp, start = 10.dp)
-                                .clickable { navController.navigate(Screen.TermsCondition.route)}
+                                .clickable { navController.navigate(Screen.TermsCondition.route) }
                         )
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -217,6 +210,7 @@ fun ProfileScreen(navController:NavHostController) {
                     modifier = Modifier
                         .padding(top = 10.dp, start = 10.dp)
                         .clickable {
+                            viewModel.logout()
                             navController.navigate(Screen.LOGOUT_ROUTE)
                         }
                 )

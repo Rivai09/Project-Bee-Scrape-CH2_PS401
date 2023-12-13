@@ -1,5 +1,5 @@
+#import library
 import pathlib
-
 import numpy as np
 from tensorflow import keras
 from keras import Sequential
@@ -51,12 +51,14 @@ def predictionmodel():
     return model
 
 
-
+#make a simple case
 model = predictionmodel()
 inpt = int(input('Masukkan Harga Untuk Prediksi jumlah yang akan terjual(jt) : '))
 new_x = inpt
 prediction = model.predict([new_x])[0][0]
 print('Prediksi Jumlah Rata-Rata yang akan Terjual :',int(prediction * 100) ,'unit' )
+
+#save the model
 export_dir ='model/1'
 if '__main__':
     tf.saved_model.save(model,export_dir=export_dir)

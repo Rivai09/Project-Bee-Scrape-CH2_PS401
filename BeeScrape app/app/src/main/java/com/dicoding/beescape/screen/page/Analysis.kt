@@ -42,13 +42,13 @@ fun AnalysisContent(sendSelectmarket: () -> Unit, navController: NavHostControll
 
     Box(
         modifier = Modifier
-            .padding(top = 20.dp, start = 10.dp, end = 10.dp)
+            .padding(top = 20.dp, start = 16.dp, end = 16.dp)
     ) {
         Column {
             Text(
                 text = stringResource(R.string.trend),
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
+                fontSize = 24.sp
             )
             LazyRow(
                 state = listState,

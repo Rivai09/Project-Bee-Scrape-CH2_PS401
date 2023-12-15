@@ -1,8 +1,11 @@
 package com.dicoding.beescape.before_login
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.core.content.ContextCompat
 import com.dicoding.beescape.R
 import com.dicoding.beescape.databinding.ActivityWelcomeBinding
 

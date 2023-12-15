@@ -1,6 +1,7 @@
 package com.dicoding.beescape.screen.page
 
 import android.annotation.SuppressLint
+import android.provider.CalendarContract.Colors
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +19,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -37,10 +41,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,6 +62,7 @@ import com.dicoding.beescape.view_model.MainViewModel
 import com.dicoding.beescape.view_model.ViewModelFactory
 import com.dicoding.component.suggestCategory
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.dicoding.beescape.ui.theme.lgray
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -72,12 +81,14 @@ fun HomeScreen(navController: NavHostController) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .verticalScroll(rememberScrollState())
+                            .padding(top = 40.dp, bottom = 27.dp)
                     ) {
                         Text(
                             text = stringResource(R.string.welcome),
                             fontFamily = poppinsFamily,
                             fontWeight = FontWeight.Normal,
-                            fontSize = 12.sp,
+                            color = Color.Gray,
+                            fontSize = 14.sp,
                         )
                         Text(
                             text = userState!!.email,
@@ -99,7 +110,7 @@ fun HomeScreen(navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 30.dp, start = 16.dp, end = 16.dp)
+                    .padding(top = 72.dp, start = 18.dp, end = 18.dp)
             ) {
                 Search()
 //                CategoryRow(navController = navController)
@@ -108,8 +119,6 @@ fun HomeScreen(navController: NavHostController) {
                     { navController.navigate(Screen.SelectMarketplace.route) },
                     navController = navController
                 )
-
-
             }
         }
     )
@@ -140,10 +149,10 @@ fun Search(modifier: Modifier = Modifier) {
         },
         shape = MaterialTheme.shapes.large,
         colors = SearchBarDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.background
+            containerColor = lgray
         ),
         modifier = modifier
-            .padding(top = 32.dp, start = 0.dp, end = 0.dp)
+            .padding(top = 4.dp, start = 0.dp, end = 0.dp)
             .fillMaxWidth()
             .heightIn(min = 48.dp)
     ) {
@@ -169,37 +178,54 @@ fun CategoryItem(
 
 @Composable
 fun ItemRow(modifier: Modifier, sendSelectmarket: () -> Unit, navController: NavHostController) {
-    Column(modifier.padding(top = 10.dp, start = 0.dp, end = 0.dp)) {
+    Column(modifier.padding(top = 12.dp, start = 0.dp, end = 0.dp)) {
 
         val listState = rememberLazyListState()
 
-        Box(modifier.padding(top = 20.dp, start = 0.dp, end = 0.dp)) {
+        Box(modifier.padding(top = 10.dp, start = 0.dp, end = 0.dp)) {
             Text(
                 text = stringResource(R.string.popular),
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
+                fontSize = 20.sp,
             )
             LazyColumn(
                 state = listState,
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                modifier = modifier.padding(top = 30.dp)
+                contentPadding = PaddingValues(horizontal = 0.dp),
+                modifier = modifier
+                    .padding(top = 40.dp)
             ) {
 //            ganti parameter item dari data api
 //            misal model=it.photo
                 items(suggestCategory) {
-                    AsyncImage(
-                        model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZlenrvKQMmh4Z4b935QSM-7n-4MzN4mDXQ&usqp=CAU",
-                        contentDescription = "photo",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth()
-                            .height(150.dp)
-                            .clickable {
-                                sendSelectmarket()
-                            }
-                    )
-                    Text(text = "Amount of data: 1000")
+                    Card (
+                        modifier = modifier
+                            .padding(bottom = 20.dp)
+                            .shadow(3.dp),
+                        shape = MaterialTheme.shapes.medium,
+                        colors = CardDefaults.cardColors(containerColor = Color.White),
+                    ){
+                        Column {
+                            AsyncImage(
+                                model = "https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                                contentDescription = "photo",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .padding(bottom = 0.dp, top = 0.dp)
+                                    .fillMaxWidth()
+                                    .height(200.dp)
+                                    .clickable {
+                                        sendSelectmarket()
+                                    }
+                            )
+                            Text(
+                                text = "Amount of data: 1000",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Medium,
+                                fontFamily = poppinsFamily,
+                                modifier = modifier
+                                    .padding(vertical = 20.dp, horizontal = 15.dp))
+                        }
+                    }
                 }
             }
         }

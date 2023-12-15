@@ -72,7 +72,7 @@ fun Detail () {
        Column(
            modifier = Modifier
                .fillMaxSize()
-               .padding(start = 16.dp, end = 16.dp)
+               .padding(start = 16.dp, end = 16.dp, top = 16.dp)
                .verticalScroll(rememberScrollState()),
        ) {
            Box(
@@ -83,7 +83,7 @@ fun Detail () {
                Column {
                    Text(
                        text = stringResource(R.string.salesDetail)+"",
-                       fontSize = 14.sp,
+                       fontSize = 17.sp,
                        fontFamily = poppinsFamily,
                        fontWeight = FontWeight.SemiBold,
                    )
@@ -181,7 +181,7 @@ fun MyTextInput() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp)
+            .padding(top = 10.dp, bottom = 10.dp)
     ) {
         TextField(
             value = text,
@@ -203,7 +203,7 @@ fun MyTextInput() {
                 .fillMaxWidth()
                 .padding(5.dp)
         )
-        
+        Spacer(modifier = Modifier.height(8.dp))
         Button(onClick = { /*TODO*/ }) {
             Text(text = "Predict")
         }

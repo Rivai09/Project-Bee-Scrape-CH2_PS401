@@ -162,11 +162,13 @@ fun ItemRow(
 
 
             val lazyPagingItems = userState?.let {
-                val dataPaging = viewModel.getDataPaging(it.token).collectAsLazyPagingItems()
-                Log.d("ItemRow", "Data Paging Snapshot: ${dataPaging.snapshot()}")
-                dataPaging
+                 viewModel.getDataPaging(it.token).collectAsLazyPagingItems()
             }
 
+//            val lazyPagingItems=viewModel.getDataPaging(userState!!.token)
+//            lazyPagingItems.collectAsLazyPagingItems()
+            Log.d("ItemRow", "Data Paging Snapshot: ${lazyPagingItems?.snapshot()}")
+            Log.d("ItemRow", "User State: $userState")
             if (lazyPagingItems != null) {
                 LazyColumn(
                     state = listState,

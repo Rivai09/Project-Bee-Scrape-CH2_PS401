@@ -103,6 +103,11 @@ dependencies {
     implementation ("androidx.navigation:navigation-compose:2.7.5")
     implementation("androidx.test.ext:junit-ktx:1.1.5")
 
+    implementation ("androidx.paging:paging-compose:1.0.0-alpha12")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0-rc02")
+
+
+
 //    implementation ("org.tensorflow:tensorflow-lite:2.4.0")
 //    implementation ("org.tensorflow:tensorflow-lite-gpu:2.3.0")
 //    implementation ("org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2")

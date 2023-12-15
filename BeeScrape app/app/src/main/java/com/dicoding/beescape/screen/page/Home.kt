@@ -1,7 +1,7 @@
 package com.dicoding.beescape.screen.page
 
 import android.annotation.SuppressLint
-import android.provider.CalendarContract.Colors
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,14 +12,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -32,37 +30,32 @@ import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.dicoding.beescape.R
-import com.dicoding.beescape.data_user.DataUser
 import com.dicoding.beescape.screen.Screen
+import com.dicoding.beescape.ui.theme.lgray
 import com.dicoding.beescape.ui.theme.poppinsFamily
 import com.dicoding.beescape.view_model.MainViewModel
 import com.dicoding.beescape.view_model.ViewModelFactory
-import com.dicoding.component.suggestCategory
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.dicoding.beescape.ui.theme.lgray
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -100,33 +93,21 @@ fun HomeScreen(navController: NavHostController) {
             )
         },
         content = {
-//            LaunchedEffect(showDialog) {
-//                if (showDialog) {
-//                    showDialog = false // Set to false to avoid showing the dialog repeatedly
-//                    // Show the alert dialog
-//                    FullScreenAlertDialog(function = { showDialog = true })
-//                }
-//            }
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = 72.dp, start = 18.dp, end = 18.dp)
             ) {
                 Search()
-//                CategoryRow(navController = navController)
                 ItemRow(
                     modifier = Modifier,
                     { navController.navigate(Screen.SelectMarketplace.route) },
-                    navController = navController
+                    navController = navController, viewModel = mainViewModel
                 )
             }
         }
     )
 }
-//private fun getUser(){
-//    val dataUser=DataUser()
-//    dataUser.email
-//}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -159,27 +140,17 @@ fun Search(modifier: Modifier = Modifier) {
     }
 }
 
+
 @Composable
-fun CategoryItem(
-    category: String,
-    modifier: Modifier = Modifier,
-    navController: NavHostController
+fun ItemRow(
+    modifier: Modifier,
+    sendSelectmarket: () -> Unit,
+    navController: NavHostController,
+    viewModel: MainViewModel
 ) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        Button(onClick = { navController.navigate(Screen.SelectMarketplace.route) }) {
-            Text(text = stringResource(category.toInt()))
-        }
-    }
-}
-
-@Composable
-fun ItemRow(modifier: Modifier, sendSelectmarket: () -> Unit, navController: NavHostController) {
     Column(modifier.padding(top = 12.dp, start = 0.dp, end = 0.dp)) {
 
+        val userState by viewModel.getSession().observeAsState(initial = null)
         val listState = rememberLazyListState()
 
         Box(modifier.padding(top = 10.dp, start = 0.dp, end = 0.dp)) {
@@ -188,42 +159,58 @@ fun ItemRow(modifier: Modifier, sendSelectmarket: () -> Unit, navController: Nav
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
             )
-            LazyColumn(
-                state = listState,
-                contentPadding = PaddingValues(horizontal = 0.dp),
-                modifier = modifier
-                    .padding(top = 40.dp)
-            ) {
-//            ganti parameter item dari data api
-//            misal model=it.photo
-                items(suggestCategory) {
-                    Card (
-                        modifier = modifier
-                            .padding(bottom = 20.dp)
-                            .shadow(3.dp),
-                        shape = MaterialTheme.shapes.medium,
-                        colors = CardDefaults.cardColors(containerColor = Color.White),
-                    ){
-                        Column {
-                            AsyncImage(
-                                model = "https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                                contentDescription = "photo",
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(bottom = 0.dp, top = 0.dp)
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                                    .clickable {
-                                        sendSelectmarket()
-                                    }
-                            )
-                            Text(
-                                text = "Amount of data: 1000",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Medium,
-                                fontFamily = poppinsFamily,
-                                modifier = modifier
-                                    .padding(vertical = 20.dp, horizontal = 15.dp))
+
+
+            val lazyPagingItems = userState?.let {
+                 viewModel.getDataPaging(it.token).collectAsLazyPagingItems()
+            }
+
+//            val lazyPagingItems=viewModel.getDataPaging(userState!!.token)
+//            lazyPagingItems.collectAsLazyPagingItems()
+            Log.d("ItemRow", "Data Paging Snapshot: ${lazyPagingItems?.snapshot()}")
+            Log.d("ItemRow", "User State: $userState")
+            if (lazyPagingItems != null) {
+                LazyColumn(
+                    state = listState,
+                    contentPadding = PaddingValues(horizontal = 0.dp),
+                    modifier = modifier.padding(top = 40.dp)
+                ) {
+                    items(lazyPagingItems) { item ->
+                        Log.d("ItemRow", "Item: $item")
+                        Card(
+                            modifier = modifier
+                                .padding(bottom = 20.dp)
+                                .shadow(3.dp),
+                            shape = MaterialTheme.shapes.medium,
+                            colors = CardDefaults.cardColors(containerColor = Color.White),
+                        ) {
+                            Column {
+                                AsyncImage(
+                                    model = ImageRequest.Builder(context = LocalContext.current)
+                                        .data(item!!.persebaranData)
+                                        .crossfade(true)
+                                        .build(),
+                                    contentDescription = "photo",
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .padding(bottom = 0.dp, top = 0.dp)
+                                        .fillMaxWidth()
+                                        .height(200.dp)
+                                        .clickable {
+                                            sendSelectmarket()
+                                        }
+                                )
+                                item.productName?.let { productName ->
+                                    Text(
+                                        text = productName,
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Medium,
+                                        fontFamily = poppinsFamily,
+                                        modifier = modifier
+                                            .padding(vertical = 20.dp, horizontal = 15.dp)
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -231,6 +218,7 @@ fun ItemRow(modifier: Modifier, sendSelectmarket: () -> Unit, navController: Nav
         }
     }
 }
+
 
 @Composable
 fun FullScreenAlertDialog(showDialog: Boolean, onDismiss: () -> Unit) {

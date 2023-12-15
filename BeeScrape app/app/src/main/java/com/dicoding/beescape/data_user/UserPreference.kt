@@ -1,6 +1,7 @@
 package com.dicoding.beescape.data_user
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -9,6 +10,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
 
@@ -40,6 +42,21 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             preferences.clear()
         }
     }
+
+    fun saveToken(token: String?) {
+        runBlocking {
+            if (token != null) {
+                dataStore.edit { preferences ->
+                    preferences[TOKEN_KEY] = token
+                    preferences[IS_LOGIN_KEY] = true
+                }
+            } else {
+
+                Log.e("UserPreference", "Token is null")
+            }
+        }
+    }
+
 
 
     companion object {

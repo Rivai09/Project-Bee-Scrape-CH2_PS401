@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.dicoding.beescape.data_user.DataUser
 import com.dicoding.beescape.repository.UserRepository
-import com.google.gson.Gson
 import retrofit2.HttpException
 
 class LoginViewModel(private val repository: UserRepository) : ViewModel() {
@@ -22,8 +21,9 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
             successMessage = response.message
 
             if (successMessage != null) {
-                val user = DataUser(email,response.token ?: "", isLogin = true)
+                val user = DataUser(email,response.token ?: "kosong", isLogin = true)
                 repository.saveSession(user)
+                Log.d("user token","${user.token}")
             }
 
         } catch (e: HttpException) {

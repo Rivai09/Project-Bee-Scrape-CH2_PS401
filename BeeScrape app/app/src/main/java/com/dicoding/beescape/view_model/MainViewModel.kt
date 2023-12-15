@@ -18,19 +18,6 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
         return repository.getSession().asLiveData()
     }
 
-//    private val storyDetailData = MutableLiveData<Helper<DetailResponse>>()
-//    val getStoryDetailData: LiveData<Helper<DetailResponse>> = storyDetailData
-//
-//    fun getStoryPaging(token: String): LiveData<PagingData<ListStoryItem>> = repository.getStoryPaging(token).cachedIn(viewModelScope)
-//
-//    fun getDetail(token: String, id: String) {
-//        viewModelScope.launch {
-//            repository.getDetailUser(token, id).asFlow().collect {
-//                storyDetailData.value = it
-//            }
-//        }
-//    }
-
     fun getDataPaging(token: String): Flow<PagingData<ItemsItem>> = repository.getDataPaging(token).cachedIn(viewModelScope)
 
     fun logout() {

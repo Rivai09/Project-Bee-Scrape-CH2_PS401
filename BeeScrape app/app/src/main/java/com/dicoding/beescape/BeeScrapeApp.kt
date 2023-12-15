@@ -43,7 +43,7 @@ fun BeeScrapeApp(
 ) {
     Scaffold(
         bottomBar = {
-            BottomBar(navController,selectedColor = Color.Black)
+            BottomBar(navController,selectedColor = Color.Yellow)
         },
         modifier = modifier
     ) { innerPadding ->

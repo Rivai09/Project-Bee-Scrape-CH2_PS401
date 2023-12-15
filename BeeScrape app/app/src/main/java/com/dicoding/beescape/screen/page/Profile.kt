@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,6 +43,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
@@ -49,11 +51,16 @@ import coil.compose.AsyncImage
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
 import com.dicoding.beescape.ui.theme.poppinsFamily
+import com.dicoding.beescape.view_model.MainViewModel
+import com.dicoding.beescape.view_model.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ProfileScreen(navController:NavHostController) {
+
+    val viewModel:MainViewModel= viewModel(factory = ViewModelFactory.getInstance(context = LocalContext.current))
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -265,6 +272,7 @@ fun ProfileScreen(navController:NavHostController) {
                                 Button(
                                     onClick = {
                                         // Handle logout logic
+                                        viewModel.logout()
                                         navController.navigate(Screen.LOGOUT_ROUTE)
                                         dismissAlertDialog()
                                     }

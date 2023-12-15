@@ -160,8 +160,11 @@ fun ItemRow(
                 fontSize = 20.sp,
             )
 
+
             val lazyPagingItems = userState?.let {
-                viewModel.getDataPaging(it.token).collectAsLazyPagingItems()
+                val dataPaging = viewModel.getDataPaging(it.token).collectAsLazyPagingItems()
+                Log.d("ItemRow", "Data Paging Snapshot: ${dataPaging.snapshot()}")
+                dataPaging
             }
 
             if (lazyPagingItems != null) {

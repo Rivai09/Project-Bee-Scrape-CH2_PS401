@@ -22,7 +22,7 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
             successMessage = response.message
 
             if (successMessage != null) {
-                val user = DataUser(email, response.token ?: "", isLogin = true)
+                val user = DataUser(email,response.token ?: "", isLogin = true)
                 repository.saveSession(user)
             }
 

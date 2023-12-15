@@ -102,4 +102,10 @@ dependencies {
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.5")
     implementation ("androidx.navigation:navigation-compose:2.7.5")
     implementation("androidx.test.ext:junit-ktx:1.1.5")
+
+//    implementation ("org.tensorflow:tensorflow-lite:2.4.0")
+//    implementation ("org.tensorflow:tensorflow-lite-gpu:2.3.0")
+//    implementation ("org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2")
+//    implementation ("com.google.android.gms:play-services-tflite-gpu:16.1.0")
+
 }

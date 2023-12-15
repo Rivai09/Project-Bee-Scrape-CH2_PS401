@@ -3,6 +3,7 @@ package com.dicoding.beescape.before_login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -29,12 +30,12 @@ class SignUpActivity : AppCompatActivity() {
             val email = binding.edEmail.text.toString()
             val name = binding.edUsername.text.toString()
             val pw = binding.edPw.text.toString()
-//            showLoading(true)
+            showLoading(true)
 
             lifecycleScope.launch {
                 registerViewModel.registerUser(name, email, pw)
                 try {
-//                    showLoading(false)
+                    showLoading(false)
                     val message = registerViewModel.successMessage
                     if (message != null) {
                         AlertDialog.Builder(this@SignUpActivity).apply {
@@ -50,7 +51,7 @@ class SignUpActivity : AppCompatActivity() {
                         }
 
                     } else {
-//                        showLoading(false)
+                        showLoading(false)
                         AlertDialog.Builder(this@SignUpActivity).apply {
                             setTitle("Gagal!")
                             setMessage("Pendaftaran gagal. Pastikan email, nama, dan password valid atau akun sudah terdaftar")
@@ -60,7 +61,7 @@ class SignUpActivity : AppCompatActivity() {
                             show()
                         }
                     }
-//                    showLoading(false)
+                    showLoading(false)
                 } catch (e: Exception) {
                     AlertDialog.Builder(this@SignUpActivity).apply {
                         setTitle("Gagal!")
@@ -73,5 +74,9 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

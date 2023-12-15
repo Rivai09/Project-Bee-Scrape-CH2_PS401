@@ -3,6 +3,7 @@ package com.dicoding.beescape.before_login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -30,14 +31,14 @@ class SignInActivity : AppCompatActivity() {
             val email = binding.edEmail.text.toString()
             val pw = binding.edPw.text.toString()
 
-//            showLoading(true)
+            showLoading(true)
 
             lifecycleScope.launch {
                 viewModel.login(email, pw)
                 try {
                     val message = viewModel.successMessage
                     if (message != null) {
-//                        showLoading(false)
+                        showLoading(false)
                         AlertDialog.Builder(this@SignInActivity).apply {
                             setTitle("Yeah!")
                             setMessage("validasi akun berhasil, anda akan ke halaman utama")
@@ -50,7 +51,7 @@ class SignInActivity : AppCompatActivity() {
                         }
 
                     } else {
-//                        showLoading(false)
+                        showLoading(false)
                         AlertDialog.Builder(this@SignInActivity).apply {
                             setTitle("Gagal!")
                             setMessage("Pastikan email, nama, dan password valid atau akun belum terdaftar")
@@ -61,7 +62,7 @@ class SignInActivity : AppCompatActivity() {
                         }
                     }
                 } catch (e: Exception) {
-//                    showLoading(false)
+                    showLoading(false)
                     AlertDialog.Builder(this@SignInActivity).apply {
                         setTitle("Gagal!")
                         setMessage("Pendaftaran gagal. Pastikan email, nama, dan password valid atau cek koneksi anda")
@@ -73,5 +74,9 @@ class SignInActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -15,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -41,7 +43,7 @@ fun BeeScrapeApp(
 ) {
     Scaffold(
         bottomBar = {
-            BottomBar(navController)
+            BottomBar(navController,selectedColor = Color.Black)
         },
         modifier = modifier
     ) { innerPadding ->
@@ -82,6 +84,7 @@ fun BeeScrapeApp(
 @Composable
 private fun BottomBar(
     navController: NavHostController,
+    selectedColor: Color = Color.Yellow,
     modifier: Modifier = Modifier
 ) {
     NavigationBar(
@@ -97,7 +100,7 @@ private fun BottomBar(
             ),
             NavigationItem(
                 title = stringResource(R.string.analisis_market),
-                icon =Icons.Default.ShoppingCart,
+                icon = Icons.Default.ShoppingCart,
                 screen = Screen.Market
             ),
             NavigationItem(
@@ -111,15 +114,21 @@ private fun BottomBar(
                 Screen.Profile
             )
         )
-        navigationItems.map { item ->
+        navigationItems.forEach { item ->
             NavigationBarItem(
                 icon = {
                     Icon(
                         imageVector = item.icon,
-                        contentDescription = item.title
+                        contentDescription = item.title,
+                        tint = if (currentRoute == item.screen.route) selectedColor else LocalContentColor.current
                     )
                 },
-                label = { Text(item.title) },
+                label = {
+                    Text(
+                        text = item.title,
+                        color = if (currentRoute == item.screen.route) selectedColor else LocalContentColor.current
+                    )
+                },
                 selected = currentRoute == item.screen.route,
                 onClick = {
                     navController.navigate(item.screen.route) {

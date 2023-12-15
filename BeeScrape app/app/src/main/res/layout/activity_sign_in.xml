@@ -126,20 +126,21 @@
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_marginTop="40dp"
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/poppins_semibold"
             android:text="@string/loginPage"
             android:textSize="14sp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:textAllCaps="false"
             app:layout_constraintHorizontal_bias="0.489"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pwEditTextLayout"
             app:layout_constraintVertical_bias="1.0"
-            android:background="@drawable/rounded_shape"/>
+            android:background="@drawable/btn_primary"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

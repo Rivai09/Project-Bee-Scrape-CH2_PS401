@@ -14,9 +14,9 @@
         <ImageView
             android:id="@+id/logo"
             android:layout_width="211dp"
-            android:layout_height="157dp"
+            android:layout_height="124dp"
             android:layout_marginTop="70dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="140dp"
             android:src="@drawable/bs_logo"
             app:layout_constraintBottom_toTopOf="@+id/boldTitleTextWelcome"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,17 +39,20 @@
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent" />
 
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loginEmail"
             android:layout_width="364dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_shape"
+            android:layout_height="54dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/btn_primary"
             android:fontFamily="@font/poppins_semibold"
             android:paddingHorizontal="85dp"
-            android:text="@string/login"
+            android:text="@string/loginText"
             android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/sosmedTv"
@@ -57,13 +60,13 @@
             app:layout_constraintHorizontal_bias="0.489"
             app:layout_constraintStart_toStartOf="parent" />
 
-
         <View
             android:layout_width="110dp"
             android:layout_height="0.5dp"
             android:layout_marginTop="17dp"
             android:layout_marginBottom="20dp"
             android:background="@color/black"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/signUpGoogle"
             app:layout_constraintEnd_toStartOf="@+id/sosmedTv"
             app:layout_constraintHorizontal_bias="0.696"
@@ -79,6 +82,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/or_use_social_media"
             android:textSize="12sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/loginEmail"
             app:layout_constraintBottom_toTopOf="@+id/signUpGoogle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,6 +92,7 @@
             android:layout_width="110dp"
             android:layout_height="0.5dp"
             android:layout_marginTop="16dp"
+            android:visibility="gone"
             android:layout_marginBottom="21dp"
             android:background="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/signUpGoogle"
@@ -97,14 +102,17 @@
             app:layout_constraintTop_toBottomOf="@+id/loginEmail"
             app:layout_constraintVertical_bias="0.117" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@id/signUpGoogle"
             android:layout_width="364dp"
-            android:layout_height="60dp"
-            android:background="@drawable/rounded_shape"
+            android:layout_height="54dp"
+            android:background="@drawable/btn_secondary"
             android:fontFamily="@font/poppins_semibold"
             android:paddingHorizontal="85dp"
-            android:text="@string/signUpGoogle"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/signUpText"
+            android:textAllCaps="false"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="normal"
@@ -112,19 +120,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-
         <TextView
             android:id="@+id/privacyPolicy"
             android:layout_width="300sp"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"
-            android:layout_marginTop="128dp"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
             android:text="@string/privacy_policy"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginEmail" />
-
+            app:layout_constraintTop_toBottomOf="@+id/signUpGoogle" />
 
         <TextView
             android:id="@+id/descWelcome"
@@ -134,12 +142,11 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/descWelcome"
             android:textAlignment="center"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/loginEmail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.39"
             app:layout_constraintStart_toStartOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

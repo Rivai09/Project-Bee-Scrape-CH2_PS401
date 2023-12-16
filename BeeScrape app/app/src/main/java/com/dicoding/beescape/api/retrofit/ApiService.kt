@@ -1,7 +1,7 @@
 package com.dicoding.beescape.api.retrofit
 
 import com.dicoding.beescape.api.response.LoginResponse
-import com.dicoding.beescape.api.response.MainResponse
+import com.dicoding.beescape.api.response.ProductItem
 import com.dicoding.beescape.api.response.ResetResponse
 import com.dicoding.beescape.api.response.SignUpResponse
 import retrofit2.http.Field
@@ -41,5 +41,5 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("page") page: Int? = 1,
         @Query("size") size: Int? = 20,
-    ): MainResponse
+    ): ProductItem
 }

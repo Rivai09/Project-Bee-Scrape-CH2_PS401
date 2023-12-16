@@ -14,11 +14,17 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: UserRepository) : ViewModel() {
 
+
     fun getSession(): LiveData<DataUser> {
         return repository.getSession().asLiveData()
     }
 
     fun getDataPaging(token: String): Flow<PagingData<ItemsItem>> = repository.getDataPaging(token).cachedIn(viewModelScope)
+
+//    fun getData(token: String): Flow<PagingData<ItemsItem>> {
+//        return repository.getDataPaging(token)
+//            .cachedIn(viewModelScope)
+//    }
 
     fun logout() {
         viewModelScope.launch {

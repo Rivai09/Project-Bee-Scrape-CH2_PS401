@@ -162,21 +162,29 @@ fun ItemRow(
             val getToken = viewModel.getDataPaging(userState?.token ?: "")
             val data = getToken.collectAsLazyPagingItems()
 
-//            Log.d("cek isi","$cek")
+
+            Log.d("cek isi","${data.itemCount}")
 
             LazyColumn(
                 state = listState,
                 contentPadding = PaddingValues(horizontal = 0.dp),
                 modifier = modifier.padding(top = 40.dp)
             ) {
-                items(data) { item ->
-                    Log.d("data", "Item: $item")
-                    dataItem(img = item?.persebaranData ?: "", teks = item?.topProduct.toString()) {
-                        navController.navigate(
-                            Screen.SelectMarketplace.route
-                        )
+
+                if(data!=null){
+                    items(data) {
+                        Log.d("data", "Item: $it")
+                        dataItem(img = it?.persebaranData ?: "", teks = it?.topProduct.toString()) {
+                            navController.navigate(
+                                Screen.SelectMarketplace.route
+                            )
+                        }
                     }
                 }
+                else{
+                    Log.d("data:","data kosong bro")
+                }
+
             }
         }
     }

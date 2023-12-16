@@ -19,7 +19,7 @@ class PagingSource (private val apiService: ApiService, private val token: Strin
         return try {
             val position = params.key ?: INITIAL_PAGE_INDEX
             val responseData = apiService.getDataPaging(token, position, params.loadSize)
-            val data= responseData.product?.map { it as ItemsItem } ?: emptyList()
+            val data= responseData.items!!.map { it as ItemsItem }
 
             LoadResult.Page(
                 data = data,

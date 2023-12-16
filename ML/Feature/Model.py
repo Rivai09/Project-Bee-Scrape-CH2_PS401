@@ -57,22 +57,23 @@ inpt = int(input('Masukkan Harga Untuk Prediksi jumlah yang akan terjual(jt) : '
 new_x = inpt
 prediction = model.predict([new_x])[0][0]
 print('Prediksi Jumlah Rata-Rata yang akan Terjual :',int(prediction * 100) ,'unit' )
+model.save("model.h5")
 
 #save the model
-export_dir ='model/1'
-if '__main__':
-    tf.saved_model.save(model,export_dir=export_dir)
-    mode = 'Speed'
-    if mode =='Storage':
-        optimization=tf.lite.Optimize.OPTIMIZE_FOR_SIZE
-    elif mode =='Speed':
-        optimization =tf.lite.Optimize.OPTIMIZE_FOR_LATENCY
-    else:
-        optimization = tf.lite.Optimize.DEFAULT
-    converter = tf.lite.TFLiteConverter.from_saved_model(export_dir)
-    converter.optimizations=[optimization]
-    tflite_model = converter.convert();
-    tflite_model_file = pathlib.Path('./model.tflite')
-    tflite_model_file.write_bytes(tflite_model)
+# export_dir ='model/1'
+# if '__main__':
+#     tf.saved_model.save(model,export_dir=export_dir)
+#     mode = 'Speed'
+#     if mode =='Storage':
+#         optimization=tf.lite.Optimize.OPTIMIZE_FOR_SIZE
+#     elif mode =='Speed':
+#         optimization =tf.lite.Optimize.OPTIMIZE_FOR_LATENCY
+#     else:
+#         optimization = tf.lite.Optimize.DEFAULT
+#     converter = tf.lite.TFLiteConverter.from_keras_model(export_dir)
+#     converter.optimizations=[optimization]
+#     tflite_model = converter.convert();
+#     tflite_model_file = pathlib.Path('./model.tflite')
+#     tflite_model_file.write_bytes(tflite_model)
 
 

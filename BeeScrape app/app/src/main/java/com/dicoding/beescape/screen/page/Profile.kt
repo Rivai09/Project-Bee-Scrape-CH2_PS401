@@ -34,7 +34,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -47,9 +49,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
+import com.dicoding.beescape.ui.theme.gray
+import com.dicoding.beescape.ui.theme.lgray
 import com.dicoding.beescape.ui.theme.poppinsFamily
 import com.dicoding.beescape.view_model.MainViewModel
 import com.dicoding.beescape.view_model.ViewModelFactory
@@ -83,44 +86,91 @@ fun ProfileScreen(navController:NavHostController) {
                     .padding(top = 72.dp, start = 10.dp, end = 10.dp)
                     .verticalScroll(rememberScrollState())
             ) {
-                AsyncImage(
-                    model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZlenrvKQMmh4Z4b935QSM-7n-4MzN4mDXQ&usqp=CAU",
-                    contentDescription = "photoProfil",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .size(100.dp)
-                        .clip(CircleShape)
-                        .align(Alignment.CenterHorizontally)
-                )
-                Text(
-                    text = stringResource(R.string.username),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
-
                 Box(
                     modifier = Modifier
-                        .padding(top = 24.dp, start = 16.dp, end = 16.dp)
+                        .padding(top = 16.dp)
                 ) {
+
+                    // username
                     Column {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { }
+                                .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
+                        ){
+                            // username
+                            AsyncImage(
+                                model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZlenrvKQMmh4Z4b935QSM-7n-4MzN4mDXQ&usqp=CAU",
+                                contentDescription = stringResource(R.string.desc_profile),
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .padding(8.dp)
+                                    .size(54.dp)
+                                    .clip(CircleShape)
+                            )
+                            Text(
+                                text = stringResource(R.string.username),
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                    .padding(start = 14.dp)
+                                    .weight(1f)
+                            )
+                            Image(
+                                painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
+                                contentDescription = ""
+                            )
+                        }
+                        Divider(
+                            color = gray,
+                            thickness = 1.dp,
+                            modifier = Modifier
+                                .padding(start = 16.dp, end = 16.dp)
+                        )
+
+                        // more info and support
+                        Spacer(modifier = Modifier.height(24.dp))
                         Text(
                             text = stringResource(R.string.moreInfo),
                             fontSize = 12.sp,
+                            lineHeight = 10.sp,
                             color = Color.Gray,
+                            fontFamily = poppinsFamily,
                             fontWeight = FontWeight.Medium,
-
                             modifier = Modifier
-                                .padding(top = 0.dp)
-                                .clickable { })
+                                .padding(
+                                    top = 0.dp,
+                                    start = 16.dp,
+                                    end = 16.dp
+                                )
+                        )
 
+                        // terms and condition
                         Spacer(modifier = Modifier.height(14.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Image(
-                                painter = painterResource(R.drawable.baseline_lock_24),
-                                contentDescription = ""
-                            )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { navController.navigate(Screen.TermsCondition.route) }
+                                .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
+                        ) {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.size(42.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .background(gray, shape = CircleShape)
+                                )
+                                Image(
+                                    painter = painterResource(id = R.drawable.baseline_lock_24),
+                                    contentDescription = null,
+                                    colorFilter = ColorFilter.tint(Color.Gray)
+                                )
+                            }
                             Text(
                                 text = stringResource(R.string.terms),
                                 fontSize = 16.sp,
@@ -128,45 +178,111 @@ fun ProfileScreen(navController:NavHostController) {
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Medium,
                                 modifier = Modifier
-                                    .padding(top = 0.dp, start = 10.dp)
-                                    .clickable { navController.navigate(Screen.TermsCondition.route) }
+                                    .padding(start = 14.dp)
+                                    .weight(1f)
                             )
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Image(
-                                painter = painterResource(R.drawable.baseline_article_24),
+                                painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
                                 contentDescription = ""
                             )
+                        }
+                        Divider(
+                            color = gray,
+                            thickness = 1.dp,
+                            modifier = Modifier
+                                .padding(start = 16.dp, end = 16.dp)
+                        )
+
+                        // guide
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { }
+                                .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
+                        ) {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.size(42.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .background(gray, shape = CircleShape)
+                                )
+                                Image(
+                                    painter = painterResource(id = R.drawable.baseline_article_24),
+                                    contentDescription = null,
+                                    colorFilter = ColorFilter.tint(Color.Gray)
+                                )
+                            }
                             Text(
                                 text = stringResource(R.string.guide),
                                 fontSize = 16.sp,
+                                lineHeight = 10.sp,
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Medium,
                                 modifier = Modifier
-                                    .padding(top = 0.dp, start = 10.dp)
-                                    .clickable { }
+                                    .padding(start = 14.dp)
+                                    .weight(1f)
                             )
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Image(
-                                painter = painterResource(R.drawable.baseline_contact_support_24),
+                                painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
                                 contentDescription = ""
                             )
+                        }
+                        Divider(
+                            color = gray,
+                            thickness = 1.dp,
+                            modifier = Modifier
+                                .padding(start = 16.dp, end = 16.dp)
+                        )
+
+                        //contact support
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { }
+                                .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
+                        ) {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.size(42.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .background(gray, shape = CircleShape)
+                                )
+                                Image(
+                                    painter = painterResource(id = R.drawable.baseline_contact_support_24),
+                                    contentDescription = null,
+                                    colorFilter = ColorFilter.tint(Color.Gray)
+                                )
+                            }
                             Text(
                                 text = stringResource(R.string.cs),
                                 fontSize = 16.sp,
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Medium,
                                 modifier = Modifier
-                                    .padding(top = 0.dp, start = 10.dp)
-                                    .clickable { }
+                                    .padding(top = 0.dp, start = 14.dp)
+                                    .weight(1f)
+                            )
+                            Image(
+                                painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
+                                contentDescription = ""
                             )
                         }
+                        Divider(
+                            color = gray,
+                            thickness = 1.dp,
+                            modifier = Modifier
+                                .padding(start = 16.dp, end = 16.dp)
+                        )
 
-                        Spacer(modifier = Modifier.height(18.dp))
-                        //accountsetting
+                        //account setting
                         Text(
                             text = stringResource(R.string.accountSettings),
                             fontSize = 12.sp,
@@ -175,56 +291,145 @@ fun ProfileScreen(navController:NavHostController) {
                             fontFamily = poppinsFamily,
                             fontWeight = FontWeight.Medium,
                             modifier = Modifier
-                                .padding(top = 10.dp)
-                                .clickable { })
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Image(
-                                painter = painterResource(R.drawable.baseline_help_24),
-                                contentDescription = null
-                            )
+                                .padding(
+                                    top = 24.dp,
+                                    start = 16.dp,
+                                    end = 16.dp
+                                )
+                        )
+
+                        // help
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { }
+                                .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
+                        ){
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.size(42.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .background(gray, shape = CircleShape)
+                                )
+                                Image(
+                                    painter = painterResource(id = R.drawable.baseline_contact_support_24),
+                                    contentDescription = null,
+                                    colorFilter = ColorFilter.tint(Color.Gray)
+                                )
+                            }
                             Text(
-                                text = ("Help"),
+                                text = (stringResource(R.string.help_text)),
                                 fontSize = 16.sp,
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Medium,
                                 modifier = Modifier
-                                    .padding(top = 0.dp, start = 10.dp)
-                                    .clickable { }
+                                    .padding(top = 0.dp, start = 14.dp)
+                                    .weight(1f)
                             )
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Image(
-                                painter = painterResource(R.drawable.baseline_notifications_24),
-                                contentDescription = null
-                            )
-                            Text(
-                                text = ("Notifications"),
-                                fontSize = 16.sp,
-                                fontFamily = poppinsFamily,
-                                fontWeight = FontWeight.Medium,
-                                modifier = Modifier
-                                    .padding(top = 0.dp, start = 10.dp)
-                                    .clickable { }
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Image(
-                                painter = painterResource(R.drawable.baseline_lock_24),
+                                painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
                                 contentDescription = ""
                             )
+                        }
+                        Divider(
+                            color = gray,
+                            thickness = 1.dp,
+                            modifier = Modifier
+                                .padding(start = 16.dp, end = 16.dp)
+                        )
+
+                        // notification
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { }
+                                .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
+                        ) {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.size(42.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .background(gray, shape = CircleShape)
+                                )
+                                Image(
+                                    painter = painterResource(id = R.drawable.baseline_notifications_24),
+                                    contentDescription = "",
+                                    colorFilter = ColorFilter.tint(Color.Gray)
+                                )
+                            }
                             Text(
-                                text = ("Privacy Policy"),
+                                text = (stringResource(R.string.notif_text)),
                                 fontSize = 16.sp,
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Medium,
                                 modifier = Modifier
-                                    .padding(top = 0.dp, start = 10.dp)
-                                    .clickable { }
+                                    .padding(top = 0.dp, start = 14.dp)
+                                    .weight(1f)
+                            )
+                            Image(
+                                painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
+                                contentDescription = ""
                             )
                         }
+                        Divider(
+                            color = gray,
+                            thickness = 1.dp,
+                            modifier = Modifier
+                                .padding(start = 16.dp, end = 16.dp)
+                        )
+
+                        // privacy policy
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { navController.navigate(Screen.PrivacyPolicy.route) }
+                                .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
+                        ) {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.size(42.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .background(gray, shape = CircleShape)
+                                )
+                                Image(
+                                    painter = painterResource(id = R.drawable.baseline_lock_24),
+                                    contentDescription = "",
+                                    colorFilter = ColorFilter.tint(Color.Gray)
+                                )
+                            }
+                            Text(
+                                text = (stringResource(R.string.privacy_policy_text)),
+                                fontSize = 16.sp,
+                                fontFamily = poppinsFamily,
+                                fontWeight = FontWeight.Medium,
+                                modifier = Modifier
+                                    .padding(top = 0.dp, start = 14.dp)
+                                    .weight(1f)
+                            )
+                            Image(
+                                painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
+                                contentDescription = null
+                            )
+                        }
+                        Divider(
+                            color = gray,
+                            thickness = 1.dp,
+                            modifier = Modifier
+                                .padding(start = 16.dp, end = 16.dp)
+                        )
                     }
                 }
 
@@ -277,17 +482,17 @@ fun ProfileScreen(navController:NavHostController) {
                                         dismissAlertDialog()
                                     }
                                 ) {
-                                    Text("Keluar")
+                                    Text(stringResource(R.string.exit_text))
                                 }
 
-                                Spacer(modifier = Modifier.width(8.dp)) // Spacer untuk memberikan jarak antar tombol
+                                Spacer(modifier = Modifier.width(8.dp))
 
                                 Button(
                                     onClick = {
                                         dismissAlertDialog()
-                                    }
+                                    },
                                 ) {
-                                    Text("Batal")
+                                    Text(stringResource(R.string.cencel_text))
                                 }
                             }
                         },
@@ -296,30 +501,42 @@ fun ProfileScreen(navController:NavHostController) {
                 }
                 // Alert logout
 
-                Spacer(modifier = Modifier.height(20.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
+                        .fillMaxWidth()
                         .clickable {
                             showAlertDialog()
                         }
+                        .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
                 ) {
-                    Image(
-                        painter = painterResource(R.drawable.baseline_logout_24),
-                        contentDescription = null
-                    )
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.size(42.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(48.dp)
+                                .background(gray, shape = CircleShape)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.baseline_logout_24),
+                            contentDescription = "",
+                            colorFilter = ColorFilter.tint(Color.Gray)
+                        )
+                    }
                     Text(
                         text = stringResource(R.string.logOut),
                         fontSize = 16.sp,
-                        color = Color.Red,
                         fontFamily = poppinsFamily,
                         fontWeight = FontWeight.Medium,
                         modifier = Modifier
-                            .padding(top = 0.dp, start = 10.dp)
-                            .clickable {
-                                showAlertDialog()
-                            }
+                            .padding(top = 0.dp, start = 14.dp)
+                            .weight(1f)
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
+                        contentDescription = null
                     )
                 }
             }

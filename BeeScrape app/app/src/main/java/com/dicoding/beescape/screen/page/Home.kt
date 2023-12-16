@@ -162,6 +162,7 @@ fun ItemRow(
             val getToken = viewModel.getDataPaging(userState?.token ?: "")
             val data = getToken.collectAsLazyPagingItems()
 
+
             Log.d("cek isi","${data.itemCount}")
 
             LazyColumn(
@@ -169,6 +170,7 @@ fun ItemRow(
                 contentPadding = PaddingValues(horizontal = 0.dp),
                 modifier = modifier.padding(top = 40.dp)
             ) {
+
                 if(data!=null){
                     items(data) {
                         Log.d("data", "Item: $it")

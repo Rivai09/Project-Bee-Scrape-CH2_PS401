@@ -86,4 +86,12 @@
     <string name="logout_Desc">We\'ll meet another time, okay!</string>
     <string name="big_title_home">What data do you \nwant today?</string>
     <string name="help_setting">Help</string>
+    <string name="privacy_policy_text">Privacy Policy</string>
+    <string name="notif_text">Notifications</string>
+    <string name="help_text">Help</string>
+    <string name="exit_text">Keluar</string>
+    <string name="desc_profile">photoProfil</string>
+    <string name="cencel_text">Batal</string>
+    <string name="policy_text">Privacy Policy</string>
+    <string name="privacy_title">Privacy Policy</string>
 </resources>

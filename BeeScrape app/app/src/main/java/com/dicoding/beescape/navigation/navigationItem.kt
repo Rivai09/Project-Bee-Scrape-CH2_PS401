@@ -6,5 +6,6 @@ import com.dicoding.beescape.screen.Screen
 data class NavigationItem(
     val title: String,
     val icon: ImageVector,
-    val screen: Screen
+    val screen: Screen,
+    val selected: Boolean = false
 )

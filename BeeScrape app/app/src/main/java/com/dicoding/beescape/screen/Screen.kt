@@ -12,7 +12,11 @@ sealed class Screen(val route: String) {
     }
     object TermsCondition:Screen("terms")
 
+    object PrivacyPolicy:Screen("privacy")
+
     companion object {
         const val LOGOUT_ROUTE = "logout"
     }
+
+
 }

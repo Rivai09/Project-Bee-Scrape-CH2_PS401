@@ -101,7 +101,6 @@ fun HomeScreen(navController: NavHostController) {
                 Search()
                 ItemRow(
                     modifier = Modifier,
-                    { navController.navigate(Screen.SelectMarketplace.route) },
                     navController = navController, viewModel = mainViewModel
                 )
             }
@@ -144,9 +143,9 @@ fun Search(modifier: Modifier = Modifier) {
 @Composable
 fun ItemRow(
     modifier: Modifier,
-    sendSelectmarket: () -> Unit,
     navController: NavHostController,
     viewModel: MainViewModel
+
 ) {
     Column(modifier.padding(top = 12.dp, start = 0.dp, end = 0.dp)) {
 
@@ -160,58 +159,22 @@ fun ItemRow(
                 fontSize = 20.sp,
             )
 
+            val getToken = viewModel.getDataPaging(userState?.token ?: "")
+            val data = getToken.collectAsLazyPagingItems()
 
-            val lazyPagingItems = userState?.let {
-                 viewModel.getDataPaging(it.token).collectAsLazyPagingItems()
-            }
+//            Log.d("cek isi","$cek")
 
-//            val lazyPagingItems=viewModel.getDataPaging(userState!!.token)
-//            lazyPagingItems.collectAsLazyPagingItems()
-            Log.d("ItemRow", "Data Paging Snapshot: ${lazyPagingItems?.snapshot()}")
-            Log.d("ItemRow", "User State: $userState")
-            if (lazyPagingItems != null) {
-                LazyColumn(
-                    state = listState,
-                    contentPadding = PaddingValues(horizontal = 0.dp),
-                    modifier = modifier.padding(top = 40.dp)
-                ) {
-                    items(lazyPagingItems) { item ->
-                        Log.d("ItemRow", "Item: $item")
-                        Card(
-                            modifier = modifier
-                                .padding(bottom = 20.dp)
-                                .shadow(3.dp),
-                            shape = MaterialTheme.shapes.medium,
-                            colors = CardDefaults.cardColors(containerColor = Color.White),
-                        ) {
-                            Column {
-                                AsyncImage(
-                                    model = ImageRequest.Builder(context = LocalContext.current)
-                                        .data(item!!.persebaranData)
-                                        .crossfade(true)
-                                        .build(),
-                                    contentDescription = "photo",
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier
-                                        .padding(bottom = 0.dp, top = 0.dp)
-                                        .fillMaxWidth()
-                                        .height(200.dp)
-                                        .clickable {
-                                            sendSelectmarket()
-                                        }
-                                )
-                                item.productName?.let { productName ->
-                                    Text(
-                                        text = productName,
-                                        fontSize = 16.sp,
-                                        fontWeight = FontWeight.Medium,
-                                        fontFamily = poppinsFamily,
-                                        modifier = modifier
-                                            .padding(vertical = 20.dp, horizontal = 15.dp)
-                                    )
-                                }
-                            }
-                        }
+            LazyColumn(
+                state = listState,
+                contentPadding = PaddingValues(horizontal = 0.dp),
+                modifier = modifier.padding(top = 40.dp)
+            ) {
+                items(data) { item ->
+                    Log.d("data", "Item: $item")
+                    dataItem(img = item?.persebaranData ?: "", teks = item?.topProduct.toString()) {
+                        navController.navigate(
+                            Screen.SelectMarketplace.route
+                        )
                     }
                 }
             }
@@ -219,23 +182,62 @@ fun ItemRow(
     }
 }
 
-
 @Composable
-fun FullScreenAlertDialog(showDialog: Boolean, onDismiss: () -> Unit) {
-    if (showDialog) {
-        AlertDialog(
-            onDismissRequest = {
-                onDismiss()
-            },
-            title = { Text("Attention") },
-            text = { Text("blabalblaba") },
-            confirmButton = {
-                Button(onClick = {
+fun dataItem(
+    img: String, teks: String, sendSelectmarket: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .padding(bottom = 20.dp)
+            .shadow(3.dp),
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+    ) {
+        Column {
+            AsyncImage(
+                model = ImageRequest.Builder(context = LocalContext.current)
+                    .data(img)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = "photo",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .padding(bottom = 0.dp, top = 0.dp)
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .clickable {
+                        sendSelectmarket()
+                    }
+            )
+            Text(
+                text = teks,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                fontFamily = poppinsFamily,
+                modifier = Modifier
+                    .padding(vertical = 20.dp, horizontal = 15.dp)
+            )
+        }
+    }
+
+
+    @Composable
+    fun FullScreenAlertDialog(showDialog: Boolean, onDismiss: () -> Unit) {
+        if (showDialog) {
+            AlertDialog(
+                onDismissRequest = {
                     onDismiss()
-                }) {
-                    Text(text = "Confirm")
+                },
+                title = { Text("Attention") },
+                text = { Text("blabalblaba") },
+                confirmButton = {
+                    Button(onClick = {
+                        onDismiss()
+                    }) {
+                        Text(text = "Confirm")
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 }

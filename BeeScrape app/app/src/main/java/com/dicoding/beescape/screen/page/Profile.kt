@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -36,23 +37,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavGraph
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
 import com.dicoding.beescape.ui.theme.gray
-import com.dicoding.beescape.ui.theme.lgray
 import com.dicoding.beescape.ui.theme.poppinsFamily
 import com.dicoding.beescape.view_model.MainViewModel
 import com.dicoding.beescape.view_model.ViewModelFactory
@@ -63,6 +60,7 @@ import com.dicoding.beescape.view_model.ViewModelFactory
 fun ProfileScreen(navController:NavHostController) {
 
     val viewModel:MainViewModel= viewModel(factory = ViewModelFactory.getInstance(context = LocalContext.current))
+    val userState by viewModel.getSession().observeAsState(initial = null)
 
     Scaffold(
         topBar = {
@@ -111,7 +109,7 @@ fun ProfileScreen(navController:NavHostController) {
                                     .clip(CircleShape)
                             )
                             Text(
-                                text = stringResource(R.string.username),
+                                text = userState?.email ?: "no name",
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier

@@ -1,12 +1,10 @@
 package com.dicoding.beescape.repository
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.dicoding.beescape.PagingSource
+import com.dicoding.beescape.api.response.ItemsItem
 import com.dicoding.beescape.api.response.LoginResponse
 import com.dicoding.beescape.api.response.SignUpResponse
 import com.dicoding.beescape.api.retrofit.ApiService
@@ -26,6 +24,18 @@ class UserRepository private constructor(
     fun getSession(): Flow<DataUser> {
         return userPreference.getSession()
     }
+
+    fun getDataPaging(token:String): Flow<PagingData<ItemsItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                PagingSource(apiService, "Bearer $token")
+            }
+        ).flow
+    }
+
 
 
     suspend fun logout() {

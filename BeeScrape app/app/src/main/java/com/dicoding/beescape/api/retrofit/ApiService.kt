@@ -1,7 +1,8 @@
 package com.dicoding.beescape.api.retrofit
 
+import com.dicoding.beescape.api.response.ItemsItem
 import com.dicoding.beescape.api.response.LoginResponse
-import com.dicoding.beescape.api.response.ProductItem
+import com.dicoding.beescape.api.response.MainResponse
 import com.dicoding.beescape.api.response.ResetResponse
 import com.dicoding.beescape.api.response.SignUpResponse
 import retrofit2.http.Field
@@ -9,6 +10,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -41,5 +43,15 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("page") page: Int? = 1,
         @Query("size") size: Int? = 20,
-    ): ProductItem
+    ): MainResponse
+
+
+    @GET("productList")
+    suspend fun getData(@Header("Authorization") token: String): MainResponse
+
+    @GET("productList/{id}")
+    suspend fun getDetail(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): ItemsItem
 }

@@ -105,6 +105,8 @@ dependencies {
 
     implementation ("androidx.paging:paging-compose:1.0.0-alpha12")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0-rc02")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+
 
 
 

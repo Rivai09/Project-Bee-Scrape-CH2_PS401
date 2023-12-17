@@ -6,7 +6,7 @@ sealed class UiState<out T: Any?> {
 
     object Loading : UiState<Nothing>()
 
-    data class Success<out T: Any>(val data: ItemsItem) : UiState<T>()
+    data class Success<out T: Any>(val data: List<ItemsItem?>) : UiState<T>()
 
     data class Error(val errorMessage: String) : UiState<Nothing>()
 }

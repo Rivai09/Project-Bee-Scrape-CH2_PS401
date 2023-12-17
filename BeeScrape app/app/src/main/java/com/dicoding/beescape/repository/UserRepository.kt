@@ -1,11 +1,8 @@
 package com.dicoding.beescape.repository
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import com.dicoding.beescape.PagingSource
 import com.dicoding.beescape.api.response.ItemsItem
 import com.dicoding.beescape.api.response.LoginResponse
+import com.dicoding.beescape.api.response.MainResponse
 import com.dicoding.beescape.api.response.SignUpResponse
 import com.dicoding.beescape.api.retrofit.ApiService
 import com.dicoding.beescape.data_user.DataUser
@@ -25,17 +22,37 @@ class UserRepository private constructor(
         return userPreference.getSession()
     }
 
-    fun getDataPaging(token:String): Flow<PagingData<ItemsItem>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 5
-            ),
-            pagingSourceFactory = {
-                PagingSource(apiService, "Bearer $token")
-            }
-        ).flow
+//    fun getDataPaging(token: String): Flow<PagingData<ItemsItem>> {
+//        return Pager(
+//            config = PagingConfig(
+//                pageSize = 5
+//            ),
+//            pagingSourceFactory = {
+//                PagingSource(apiService, "Bearer $token")
+//            }
+//        ).flow
+//    }
+
+    //    suspend fun getDataState(token: String) = liveData {
+//        emit(UiState.Loading)
+//
+//        try {
+//            val response = apiService.getDataPaging("Bearer $token")
+//            emit(response.items?.let { UiState.Success(it) })
+//            Log.d("user repo","berhasil get data")
+//        } catch (e: Exception) {
+//            Log.e("User repository", "Failed to load data", e)
+//            emit(UiState.Error("Failed to load data"))
+//        }
+//    }
+
+    suspend fun fetchData(token: String):MainResponse {
+        return apiService.getData("Bearer $token")
     }
 
+    suspend fun getDetail(token:String, id: String): ItemsItem? {
+        return apiService.getDetail("Bearer $token",id)
+    }
 
 
     suspend fun logout() {

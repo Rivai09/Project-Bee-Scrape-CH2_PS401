@@ -2,7 +2,7 @@ import numpy as np
 import csv
 import math
 import pandas as pd
-filename = 'Dataset.csv'
+filename = 'Train_Tablet.csv'
 reader = csv.reader(open(filename, "rt"), delimiter=",")
 header = next(reader)
 name =[]
@@ -15,57 +15,46 @@ for row in reader:
     sold.append(row[2])
     rating.append(row[3])
 
-totalasus    = 0
-totalacer    = 0
-totalhp      = 0
-totallenovo  = 0
-totalmacbook = 0
-totaladvan   = 0
-TotalSell    = {'Asus':0,
-                'Acer':0,
-                'HP':0,
-                'Lenovo':0,
-                'Macbook':0,
-                'Advan':0}
+totalapple    = 0
+totalsamsung    = 0
+totaladvan     = 0
+totalhuawei  = 0
+TotalSell    = {'apple':0,
+                'samsung':0,
+                'advan':0,
+                'huawei':0,}
 
 for NAME,PRICE,SOLD,RATING in zip(name,price,sold,rating):
-    if NAME =='asus':
-        intsoldasus = int(SOLD)
-        totalasus += intsoldasus
-        TotalSell['Asus']= totalasus
-    if NAME =='acer':
-        intsoldacer = int(SOLD)
-        totalacer += intsoldacer
-        TotalSell['Acer']= totalacer
-    if NAME =='hp' :
-        intsoldhp = int(SOLD)
-        totalhp += intsoldhp
-        TotalSell['HP']= totalhp
-    if NAME == 'lenovo':
-        intsoldlenovo = int(SOLD)
-        totallenovo += intsoldlenovo
-        TotalSell['Lenovo']= totallenovo
-    if NAME =='macbook':
-        intsoldmacbook = int(SOLD)
-        totalmacbook += intsoldmacbook
-        TotalSell['Macbook']= totalmacbook
+    if NAME =='apple':
+        intsoldapple = int(SOLD)
+        totalapple += intsoldapple
+        TotalSell['apple']= totalapple
+    if NAME =='samsung':
+        intsoldsamsung = int(SOLD)
+        totalsamsung += intsoldsamsung
+        TotalSell['samsung']= totalsamsung
+    if NAME == 'huawei':
+        intsoldhuawei = int(SOLD)
+        totalhuawei += intsoldhuawei
+        TotalSell['huawei']= totalhuawei
     if NAME == 'advan':
         intsoldadvan = int(SOLD)
         totaladvan += intsoldadvan
-        TotalSell['Advan']= totaladvan
+        TotalSell['advan']= totaladvan
 
-sellable = max(zip(TotalSell.values(), TotalSell.keys()))[1]
-sellablevalues = max(zip(TotalSell.values(), TotalSell.keys()))[0]
 
-print('Total Penjualan Keseluruhan Laptop Asus       :',TotalSell['Asus'])
-print('Total Penjualan Keseluruhan Laptop Acer       :',TotalSell['Acer'])
-print('Total Penjualan Keseluruhan Laptop HP         :',TotalSell['HP'])
-print('Total Penjualan Keseluruhan Laptop Lenovo     :',TotalSell['Lenovo'])
-print('Total Penjualan Keseluruhan Laptop Macbook    :',TotalSell['Macbook'])
-print('Total Penjualan Keseluruhan Laptop Advan      :',TotalSell['Advan'])
-print('Rekomendasi Produk Dengan Penjualan Terbanyak :',sellable)
-print('Dengan jumlah terjual :',sellablevalues)
+print(TotalSell)
+newname = []
+totalprice = []
 
+for key, value in TotalSell.items() :
+    print (key, value)
+    newname.append(key)
+    totalprice.append(value)
+df = pd.DataFrame(newname,columns=["Nama"])
+df["Total"] = totalprice
+df.to_csv('Total handhone.csv',index=False)
+print("data berhasil disimpan")
 
 
 

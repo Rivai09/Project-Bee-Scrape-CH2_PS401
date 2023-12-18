@@ -91,13 +91,13 @@ fun Detail (id:String?) {
            ) {
                Column {
                    Text(
-                       text = stringResource(R.string.salesDetail)+" ${data?.category}",
+                       text = stringResource(R.string.salesDetail),
                        fontSize = 17.sp,
                        fontFamily = poppinsFamily,
                        fontWeight = FontWeight.SemiBold,
                    )
                    Text(
-                       text = stringResource(R.string.sourceDetail)+" ${data?.category}",
+                       text = stringResource(R.string.sourceDetail),
                        fontSize = 14.sp,
                        fontFamily = poppinsFamily,
                        fontWeight = FontWeight.Normal,

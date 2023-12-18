@@ -1,9 +1,9 @@
 package com.dicoding.beescape.repository
 
 import android.util.Log
-import com.dicoding.beescape.api.response.ItemsItem
+import com.dicoding.beescape.api.response.ItemsDetailItem
 import com.dicoding.beescape.api.response.LoginResponse
-import com.dicoding.beescape.api.response.MainResponse
+import com.dicoding.beescape.api.response.Product
 import com.dicoding.beescape.api.response.ResetResponse
 import com.dicoding.beescape.api.response.SignUpResponse
 import com.dicoding.beescape.api.retrofit.ApiService
@@ -48,11 +48,15 @@ class UserRepository private constructor(
 //        }
 //    }
 
-    suspend fun fetchData(token: String):MainResponse {
+//    suspend fun fetchData(token: String): MainResponse {
+//        return apiService.getData("Bearer $token")
+//    }
+
+    suspend fun fetchData(token: String): Product {
         return apiService.getData("Bearer $token")
     }
 
-    suspend fun getDetail(token:String, id: String): ItemsItem? {
+    suspend fun getDetail(token:String, id: String): ItemsDetailItem? {
         try {
             return apiService.getDetail("Bearer $token",id)
         }catch (e:Exception){

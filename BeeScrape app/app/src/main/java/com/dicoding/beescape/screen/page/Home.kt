@@ -65,7 +65,7 @@ fun HomeScreen(navController: NavHostController) {
         viewModel(factory = ViewModelFactory.getInstance(LocalContext.current))
     val userState by mainViewModel.getSession().observeAsState(initial = null)
 
-    Log.d("token","${userState?.token}")
+    Log.d("token", "${userState?.token}")
 
     Scaffold(topBar = {
         TopAppBar(title = {
@@ -129,15 +129,16 @@ fun ItemRow(
             contentPadding = PaddingValues(horizontal = 0.dp),
             modifier = modifier.padding(top = 40.dp)
         ) {
-            val data = viewModel.data.value?.product?.flatMap { it?.items.orEmpty() }
+//            val data = viewModel.data.value?.product?.flatMap { it?.items.orEmpty() }
+            val data = viewModel.data.value?.items
 
-            items(data ?: emptyList()) { item ->
+            items(data?: emptyList()) { item ->
                 dataItem(
-                    id=item?.id.toString(),
+                    id = item?.id.toString(),
                     img = item?.persebaranData ?: "",
                     teks = item?.category ?: "",
                     modifier.clickable {
-                        Log.d("home kirim id",item?.id.toString())
+                        Log.d("home kirim id", item?.id.toString())
                         sendSelectmarket(item?.id.toString())
                     },
                     navController
@@ -150,8 +151,9 @@ fun ItemRow(
 
 
 @Composable
-fun dataItem(id:String,
-    img: String, teks: String, modifier: Modifier ,navController: NavHostController
+fun dataItem(
+    id: String,
+    img: String, teks: String, modifier: Modifier, navController: NavHostController
 ) {
     Card(
         modifier = Modifier
@@ -197,7 +199,8 @@ fun dataItem(id:String,
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Search(modifier: Modifier = Modifier) {
-    SearchBar(query = "",
+    SearchBar(
+        query = "",
         onQueryChange = {},
         onSearch = {},
         active = false,
@@ -222,9 +225,6 @@ fun Search(modifier: Modifier = Modifier) {
             .heightIn(min = 48.dp)
     ) {}
 }
-
-
-
 
 
 //@Composable

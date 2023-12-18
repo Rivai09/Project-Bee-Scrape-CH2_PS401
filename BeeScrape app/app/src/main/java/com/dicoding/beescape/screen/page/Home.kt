@@ -30,6 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -112,6 +113,8 @@ fun ItemRow(
     val listState = rememberLazyListState()
 
     val userState by viewModel.getSession().observeAsState(initial = null)
+
+
     LaunchedEffect(true) {
         viewModel.fetchData(userState?.token ?: "")
         Log.d("isi token launch", "${userState?.token}")
@@ -124,15 +127,16 @@ fun ItemRow(
             fontSize = 20.sp,
         )
 
+        val dataResponse by viewModel.getData.collectAsState()
+
         LazyColumn(
             state = listState,
             contentPadding = PaddingValues(horizontal = 0.dp),
             modifier = modifier.padding(top = 40.dp)
         ) {
-//            val data = viewModel.data.value?.product?.flatMap { it?.items.orEmpty() }
-            val data = viewModel.data.value?.items
-
-            items(data?: emptyList()) { item ->
+//            val dataItems = dataResponse?.product?.items.orEmpty().flatMap { it?.itemsDetail.orEmpty() }
+            val dataItems=dataResponse?.product?.flatMap { it?.items.orEmpty() }
+            items(dataItems?: emptyList()) { item ->
                 dataItem(
                     id = item?.id.toString(),
                     img = item?.persebaranData ?: "",
@@ -148,6 +152,7 @@ fun ItemRow(
         }
     }
 }
+
 
 
 @Composable

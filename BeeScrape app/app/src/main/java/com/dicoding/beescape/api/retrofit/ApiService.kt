@@ -1,8 +1,8 @@
 package com.dicoding.beescape.api.retrofit
 
+import com.dicoding.beescape.api.response.DataResponse
 import com.dicoding.beescape.api.response.ItemsDetailItem
 import com.dicoding.beescape.api.response.LoginResponse
-import com.dicoding.beescape.api.response.Product
 import com.dicoding.beescape.api.response.ResetResponse
 import com.dicoding.beescape.api.response.SignUpResponse
 import retrofit2.http.Field
@@ -33,9 +33,9 @@ interface ApiService {
     @POST("password-reset")
     suspend fun resetPassword(
         @Header("Authorization") token: String,
-        @Field("passowrdLama") name: String,
-        @Field("passwordBaru") email: String,
-        @Field("passwordKonfirmasi") password: String,
+        @Field("passowrdLama") passwordLama: String,
+        @Field("passwordBaru") passwordBarul: String,
+        @Field("passwordKonfirmasi") passwordKonfirmasi: String,
     ): ResetResponse
 
 //    @GET("productList")
@@ -50,9 +50,9 @@ interface ApiService {
 //    suspend fun getData(@Header("Authorization") token: String): MainResponse
 
     @GET("productList")
-    suspend fun getData(@Header("Authorization") token: String): Product
+    suspend fun getData(@Header("Authorization") token: String): DataResponse
 
-    @GET("product/{id}")
+    @GET("productList/{id}")
     suspend fun getDetail(
         @Header("Authorization") token: String,
         @Path("id") id: String,

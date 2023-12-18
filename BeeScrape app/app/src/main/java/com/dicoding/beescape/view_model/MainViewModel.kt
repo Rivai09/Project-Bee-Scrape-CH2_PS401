@@ -7,10 +7,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.dicoding.beescape.api.response.DataResponse
 import com.dicoding.beescape.api.response.ItemsDetailItem
-import com.dicoding.beescape.api.response.Product
 import com.dicoding.beescape.data_user.DataUser
 import com.dicoding.beescape.repository.UserRepository
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: UserRepository) : ViewModel() {
@@ -61,18 +62,25 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
 //        }
 //    }
 
-    private val _data = mutableStateOf<Product?>(null)
-    val data: State<Product?> = _data
 
-    fun fetchData(token : String) {
+
+    private val _data = MutableStateFlow<DataResponse?>(null)
+    val getData: MutableStateFlow<DataResponse?> = _data
+
+    fun fetchData(token: String) {
         viewModelScope.launch {
             try {
                 _data.value = repository.fetchData(token)
             } catch (e: Exception) {
-                Log.d("view model","$token")
+                Log.d("view model", token)
             }
         }
     }
+
+
+
+
+
 
     private val _dataDetail = mutableStateOf<ItemsDetailItem?>(null)
     val getDataDetail: State<ItemsDetailItem?> = _dataDetail

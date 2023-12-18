@@ -49,9 +49,12 @@ interface ApiService {
     @GET("productList")
     suspend fun getData(@Header("Authorization") token: String): MainResponse
 
-    @GET("productList/{id}")
+    @GET("product/{id}")
     suspend fun getDetail(
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): ItemsItem
+
+//    @GET("productList")
+//    suspend fun searchData(@Query("query") query: String): Response<List<ItemsItem>>
 }

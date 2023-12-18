@@ -80,8 +80,30 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
         return repository.getSession().asLiveData()
     }
 
-
-
+//    private val _searchResults = MutableLiveData<List<ItemsItem>>()
+//    val searchResults: LiveData<List<ItemsItem>>
+//        get() = _searchResults
+//
+//    private val _isLoading = MutableLiveData<Boolean>()
+//    val isLoading: LiveData<Boolean>
+//        get() = _isLoading
+//
+//    private val _error = MutableLiveData<String>()
+//    val error: LiveData<String>
+//        get() = _error
+//
+//    fun search(query: String) {
+//        viewModelScope.launch {
+//            try {
+//                _isLoading.value = true
+//                _searchResults.value = repository.searching(query)
+//            } catch (e: Exception) {
+//                _error.value = "Search failed: ${e.message}"
+//            } finally {
+//                _isLoading.value = false
+//            }
+//        }
+//    }
 
     fun logout() {
         viewModelScope.launch {

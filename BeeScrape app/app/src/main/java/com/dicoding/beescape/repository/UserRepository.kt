@@ -1,8 +1,10 @@
 package com.dicoding.beescape.repository
 
-import com.dicoding.beescape.api.response.ItemsItem
+import android.util.Log
+import com.dicoding.beescape.api.response.ItemsDetailItem
 import com.dicoding.beescape.api.response.LoginResponse
-import com.dicoding.beescape.api.response.MainResponse
+import com.dicoding.beescape.api.response.Product
+import com.dicoding.beescape.api.response.ResetResponse
 import com.dicoding.beescape.api.response.SignUpResponse
 import com.dicoding.beescape.api.retrofit.ApiService
 import com.dicoding.beescape.data_user.DataUser
@@ -46,13 +48,45 @@ class UserRepository private constructor(
 //        }
 //    }
 
-    suspend fun fetchData(token: String):MainResponse {
+//    suspend fun fetchData(token: String): MainResponse {
+//        return apiService.getData("Bearer $token")
+//    }
+
+    suspend fun fetchData(token: String): Product {
         return apiService.getData("Bearer $token")
     }
 
-    suspend fun getDetail(token:String, id: String): ItemsItem? {
-        return apiService.getDetail("Bearer $token",id)
+    suspend fun getDetail(token:String, id: String): ItemsDetailItem? {
+        try {
+            return apiService.getDetail("Bearer $token",id)
+        }catch (e:Exception){
+            if (id.isEmpty()){
+                Log.d("repository","$id kosong")
+                Log.e("user repo kosong", e.toString())
+            }else{
+                Log.d("repository","$token kosong/unvalid")
+                Log.e("user repo aman tapi", e.toString())
+            }
+        }
+        return null
     }
+
+//    suspend fun searching(query: String): List<ItemsItem> {
+//        try {
+//            val response = apiService.searchData(query)
+//
+//            if (response.isSuccessful) {
+//                return response.body() ?: emptyList()
+//            } else {
+//                Log.e("ApiService", "API call failed with code: ${response.code()}")
+//            }
+//        } catch (e: Exception) {
+//            Log.e("ApiService", "Exception during API call", e)
+//        }
+//
+//        return emptyList()
+//    }
+
 
 
     suspend fun logout() {
@@ -66,6 +100,10 @@ class UserRepository private constructor(
 
     suspend fun login(email: String, password: String): LoginResponse {
         return apiService.login(email, password)
+    }
+
+    suspend fun resetPassword(oldPw:String,newPw:String,confirmPw:String):ResetResponse{
+        return apiService.resetPassword(oldPw,newPw,confirmPw)
     }
 
     companion object {

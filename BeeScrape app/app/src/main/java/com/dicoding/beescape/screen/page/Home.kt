@@ -18,8 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -67,10 +65,7 @@ fun HomeScreen(navController: NavHostController) {
         viewModel(factory = ViewModelFactory.getInstance(LocalContext.current))
     val userState by mainViewModel.getSession().observeAsState(initial = null)
 
-    var refreshCount by remember {
-        mutableStateOf(true)
-    }
-    Log.d("token","${userState?.token}")
+    Log.d("token", "${userState?.token}")
 
     Scaffold(topBar = {
         TopAppBar(title = {
@@ -100,8 +95,8 @@ fun HomeScreen(navController: NavHostController) {
         ) {
             Search()
             ItemRow(
-                modifier = Modifier, navController = navController, viewModel = mainViewModel,
-            )
+                modifier = Modifier, navController = navController, viewModel = mainViewModel
+            ) { navController.navigate(Screen.SelectMarketplace.route) }
         }
     })
 }
@@ -112,6 +107,7 @@ fun ItemRow(
     modifier: Modifier,
     navController: NavHostController,
     viewModel: MainViewModel,
+    sendSelectmarket: (String) -> Unit
 ) {
     val listState = rememberLazyListState()
 
@@ -133,16 +129,21 @@ fun ItemRow(
             contentPadding = PaddingValues(horizontal = 0.dp),
             modifier = modifier.padding(top = 40.dp)
         ) {
-            val data = viewModel.data.value?.product?.flatMap { it?.items.orEmpty() }
+//            val data = viewModel.data.value?.product?.flatMap { it?.items.orEmpty() }
+            val data = viewModel.data.value?.items
 
-            items(data ?: emptyList()) { item ->
+            items(data?: emptyList()) { item ->
                 dataItem(
+                    id = item?.id.toString(),
                     img = item?.persebaranData ?: "",
                     teks = item?.category ?: "",
-                    sendSelectmarket = {
-                        navController.navigate(Screen.SelectMarketplace.route)
-                    }
+                    modifier.clickable {
+                        Log.d("home kirim id", item?.id.toString())
+                        sendSelectmarket(item?.id.toString())
+                    },
+                    navController
                 )
+                Text(text = item?.id.toString())
             }
         }
     }
@@ -151,7 +152,8 @@ fun ItemRow(
 
 @Composable
 fun dataItem(
-    img: String, teks: String, sendSelectmarket: () -> Unit
+    id: String,
+    img: String, teks: String, modifier: Modifier, navController: NavHostController
 ) {
     Card(
         modifier = Modifier
@@ -166,7 +168,8 @@ fun dataItem(
                     .fillMaxWidth()
                     .height(200.dp)
                     .clickable {
-                        sendSelectmarket()
+                        navController.navigate(Screen.SelectMarketplace.createRoute1(id))
+                        Log.d("home click", id)
                     }
             ) {
                 AsyncImage(
@@ -177,6 +180,7 @@ fun dataItem(
                     contentDescription = "photo",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
+
                 )
             }
 
@@ -195,7 +199,8 @@ fun dataItem(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Search(modifier: Modifier = Modifier) {
-    SearchBar(query = "",
+    SearchBar(
+        query = "",
         onQueryChange = {},
         onSearch = {},
         active = false,
@@ -221,17 +226,63 @@ fun Search(modifier: Modifier = Modifier) {
     ) {}
 }
 
-@Composable
-fun FullScreenAlertDialog(showDialog: Boolean, onDismiss: () -> Unit) {
-    if (showDialog) {
-        AlertDialog(onDismissRequest = {
-            onDismiss()
-        }, title = { Text("Attention") }, text = { Text("blabalblaba") }, confirmButton = {
-            Button(onClick = {
-                onDismiss()
-            }) {
-                Text(text = "Confirm")
-            }
-        })
-    }
-}
+
+//@Composable
+//fun SearchScreen(viewModel: MainViewModel) {
+//    var query by remember { mutableStateOf("") }
+//
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .padding(16.dp)
+//    ) {
+//        TextField(
+//            value = query,
+//            onValueChange = { query = it },
+//            label = { Text("Enter search query") },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(bottom = 16.dp)
+//        )
+//
+//        Button(
+//            onClick = { viewModel.search(query) },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(bottom = 16.dp)
+//        ) {
+//            Text("Search")
+//        }
+//
+//        when {
+//            viewModel.isLoading.observeAsState().value == true -> {
+//                // Display loading indicator
+//                CircularProgressIndicator()
+//            }
+//            viewModel.error.observeAsState().value != null -> {
+//                // Display the error message
+//                Text("Error: ${viewModel.error.observeAsState().value}", color = Color.Red)
+//            }
+//            else -> {
+//                // Display the search results
+//                val searchResults = viewModel.searchResults.observeAsState().value
+//                // Render the search results in your Compose UI
+//            }
+//        }
+//    }
+//}
+//
+//@Composable
+//fun FullScreenAlertDialog(showDialog: Boolean, onDismiss: () -> Unit) {
+//    if (showDialog) {
+//        AlertDialog(onDismissRequest = {
+//            onDismiss()
+//        }, title = { Text("Attention") }, text = { Text("blabalblaba") }, confirmButton = {
+//            Button(onClick = {
+//                onDismiss()
+//            }) {
+//                Text(text = "Confirm")
+//            }
+//        })
+//    }
+//}

@@ -94,4 +94,7 @@
     <string name="cencel_text">Batal</string>
     <string name="policy_text">Privacy Policy</string>
     <string name="privacy_title">Privacy Policy</string>
+
+    <string name="hargaPenjualanTerbanyak">Range price with the most sales</string>
+    <string name="hargaTermahal">The most expensive price based on range</string>
 </resources>

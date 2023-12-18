@@ -81,7 +81,7 @@
     <string name="rangeHarga">Price Range: </string>
     <string name="rangeJumlahTerjual">range of sales amounts:</string>
     <string name="tryAi">Now you can predict of the number of laptops sold based on price</string>
-    <string name="descWelcome">Now you can easily dig and collect whatever \n important information you need</string>
+    <string name="descWelcome">Now you can easily dig and collect data \n important information you need</string>
     <string name="logout_text">Log out of your account?</string>
     <string name="logout_Desc">We\'ll meet another time, okay!</string>
     <string name="big_title_home">What data do you \nwant today?</string>
@@ -94,7 +94,16 @@
     <string name="cencel_text">Batal</string>
     <string name="policy_text">Privacy Policy</string>
     <string name="privacy_title">Privacy Policy</string>
-
+    <string name="current_password_text">Current Password</string>
+    <string name="current_password_hint">Current Password</string>
+    <string name="new_password_text">New Password</string>
+    <string name="new_password_hint">New Password</string>
+    <string name="retype_password_text">Retype Password</string>
+    <string name="retype_password_hint">Retype Password</string>
+    <string name="change_password_text">Change Password</string>
+    <string name="back_desc">Kembali</string>
+    <string name="changePw_title">Change Password</string>
+    <string name="big_title_chanePw">Change Your Password</string>
     <string name="hargaPenjualanTerbanyak">Range price with the most sales</string>
     <string name="hargaTermahal">The most expensive price based on range</string>
 </resources>

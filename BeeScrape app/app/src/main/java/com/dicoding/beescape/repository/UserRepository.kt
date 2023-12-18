@@ -102,8 +102,8 @@ class UserRepository private constructor(
         return apiService.login(email, password)
     }
 
-    suspend fun resetPassword(oldPw:String,newPw:String,confirmPw:String):ResetResponse{
-        return apiService.resetPassword(oldPw,newPw,confirmPw)
+    suspend fun resetPassword(token:String, oldPw: String, newPw: String, confirmPw: String):ResetResponse{
+        return apiService.resetPassword(token,oldPw,newPw,confirmPw)
     }
 
     companion object {

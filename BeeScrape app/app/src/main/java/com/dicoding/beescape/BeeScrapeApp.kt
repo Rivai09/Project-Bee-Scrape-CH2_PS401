@@ -30,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.dicoding.beescape.before_login.ChangePasswordActivity
 import com.dicoding.beescape.before_login.WelcomeActivity
 import com.dicoding.beescape.navigation.NavigationItem
 import com.dicoding.beescape.screen.Screen
@@ -85,6 +86,11 @@ fun BeeScrapeApp(
             }
             composable(Screen.LOGOUT_ROUTE){
                 val intent = Intent(LocalContext.current, WelcomeActivity::class.java)
+                LocalContext.current.startActivity(intent)
+            }
+
+            composable(Screen.CHANGE_PW_ROUTE){
+                val intent = Intent(LocalContext.current, ChangePasswordActivity::class.java)
                 LocalContext.current.startActivity(intent)
             }
 

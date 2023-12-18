@@ -21,6 +21,7 @@ sealed class Screen(val route: String) {
 
     companion object {
         const val LOGOUT_ROUTE = "logout"
+        const val CHANGE_PW_ROUTE = "changePw"
     }
 
 

@@ -1,31 +1,29 @@
 package com.dicoding.beescape.view_model
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.dicoding.beescape.data_user.DataUser
 import com.dicoding.beescape.repository.UserRepository
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class ResetViewModel(private val repository: UserRepository) : ViewModel() {
 
-    private var successMessage: String? = null
+    var successMessage: String? = null
 
-    suspend fun reset(oldPw:String,newPw:String,confirmPw:String) {
+    suspend fun reset(token:String,oldPw:String,newPw:String,confirmPw:String) {
         try {
 
-            val response = repository.resetPassword(oldPw, newPw,confirmPw)
+            val response = repository.resetPassword(token,oldPw, newPw,confirmPw)
 
             Log.d("resetViewModel", "Permintaan login berhasil.")
 
-            successMessage = response.message
-            if (successMessage.toBoolean()){
-                logout()
-            }
-
 
         } catch (e: HttpException) {
-            Log.e("resetViewModel", "Kesalahan saat melakukan permintaan login: ${e.message()}")
+            Log.e("resetViewModel", "Kesalahan saat melakukan permintaan reset: ${e.message()}")
 
         }
     }
@@ -34,5 +32,8 @@ class ResetViewModel(private val repository: UserRepository) : ViewModel() {
         viewModelScope.launch {
             repository.logout()
         }
+    }
+    fun getSession(): LiveData<DataUser> {
+        return repository.getSession().asLiveData()
     }
 }

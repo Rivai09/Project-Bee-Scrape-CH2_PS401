@@ -107,6 +107,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0-rc02")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
+    implementation ("androidx.compose.foundation:foundation:1.5.4")
+
 
 
 

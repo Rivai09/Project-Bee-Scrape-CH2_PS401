@@ -6,13 +6,14 @@ sealed class Screen(val route: String) {
     object Notification : Screen("notification")
     object Profile : Screen("profile")
 
-    object SelectMarketplace : Screen("Home/{id}") {
-        fun createRoute1(id: String) = "Home/$id"
+    object SelectMarketplace : Screen("selectmarketplace/{id}") {
+        fun createRoute1(id: String?) = "selectmarketplace/$id"
     }
 
-    object Detail : Screen("SelectMarketplace/{id},{source}") {
-        fun createRoute2(id: String, source: String) = "SelectMarketplace/$id,$source"
+    object Detail : Screen("detail/{id}") {
+        fun createRoute2(id: String?) = "detail/$id"
     }
+
 
     object TermsCondition:Screen("terms")
 

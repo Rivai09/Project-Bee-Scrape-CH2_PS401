@@ -1,7 +1,6 @@
 package com.dicoding.beescape
 
 import android.content.Intent
-import android.text.style.BackgroundColorSpan
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -25,13 +24,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.dicoding.beescape.navigation.NavigationItem
-import com.dicoding.beescape.screen.Screen
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.dicoding.beescape.before_login.WelcomeActivity
+import com.dicoding.beescape.navigation.NavigationItem
+import com.dicoding.beescape.screen.Screen
 import com.dicoding.beescape.screen.page.AnalysisScreen
 import com.dicoding.beescape.screen.page.Detail
 import com.dicoding.beescape.screen.page.HomeScreen
@@ -61,12 +62,12 @@ fun BeeScrapeApp(
             composable(Screen.Home.route) {
                 HomeScreen(navController)
             }
-            composable(Screen.SelectMarketplace.route){
-                SelectMarketplace ({navController.navigate(Screen.Detail.route)},navController)
-            }
-            composable(Screen.Detail.route){
-                Detail()
-            }
+//            composable(Screen.SelectMarketplace.route){
+//                SelectMarketplace ("",navController)
+//            }
+//            composable(Screen.Detail.route){
+//                Detail()
+//            }
             composable(Screen.Market.route) {
                 AnalysisScreen(navController)
             }
@@ -85,6 +86,21 @@ fun BeeScrapeApp(
             composable(Screen.LOGOUT_ROUTE){
                 val intent = Intent(LocalContext.current, WelcomeActivity::class.java)
                 LocalContext.current.startActivity(intent)
+            }
+
+            composable(
+                route = Screen.SelectMarketplace.route,
+                arguments = listOf(navArgument("id") { type = NavType.StringType }),
+            ){
+                val id= it.arguments!!.getString("id")
+                SelectMarketplace(id,navController)
+            }
+            composable(
+                route = Screen.Detail.route,
+                arguments = listOf(navArgument("id") { type = NavType.StringType }),
+            ){
+                val id= it.arguments!!.getString("id")
+                Detail(id = id)
             }
         }
     }

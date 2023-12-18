@@ -1,0 +1,11 @@
+a. kategori: Handphone
+b. Source : Tokopedia
+c. Lokasi : Indonesia
+d. Jumlah Data : 131
+e. Jumlah merk handphone  : 4 (xiaomi,iphone,vivo,oppo)
+f. (Gambar Total Penjualan Handphonel)
+g. ket TotalProduct: Total Handphone yang terjual dari variasi Hanphone yang tersedia
+h. top product: Xiaomi 
+i. (Gambar Persebaran Data Hanphone)
+j. Range harga : 1jt-8jt
+k. Range Jumlah Terjual : 500 - 10000

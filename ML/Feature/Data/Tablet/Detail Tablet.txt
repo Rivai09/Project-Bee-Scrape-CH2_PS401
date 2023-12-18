@@ -1,0 +1,11 @@
+a. kategori: Tablet
+b. Source : Tokopedia
+c. Lokasi : Indonesia
+d. Jumlah Data :79
+e. Jumlah merk handphone  : 4 (apple,samsung,advan,huawei)
+f. (Gambar Data Total Tablet Yang Terjual)
+g. ket TotalProduct: Total Tablet yang terjual dari variasi Tablet yang tersedia
+h. top product: Apple
+i. (gambar persebaran data Tablet)
+j. Range harga : 2,5jt-17,5jt
+k. Range Jumlah Terjual : 100 - 3000

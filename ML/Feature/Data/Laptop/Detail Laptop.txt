@@ -1,0 +1,11 @@
+a. kategori: Laptop
+b. Source : Tokopedia
+c. Lokasi : Indonesia
+d. Jumlah Data : 276
+e. Jumlah merk handphone  : 6 (Asus,Acer,HP,Lenovo,Macbook,Advan)
+f. (Gambar Data Total Laptop Yang Terjual)
+g. ket TotalProduct: Total laptop yang terjual dari variasi laptop yang tersedia
+h. top product: Asus
+i. (gambar persebaran data Laptop)
+j. Range harga : 3jt-30jt
+k. Range Jumlah Terjual : 100 - 2000

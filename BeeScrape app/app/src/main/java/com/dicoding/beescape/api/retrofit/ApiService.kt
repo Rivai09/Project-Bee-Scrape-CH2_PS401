@@ -32,9 +32,10 @@ interface ApiService {
     @FormUrlEncoded
     @POST("password-reset")
     suspend fun resetPassword(
+        @Header("Authorization") token: String,
         @Field("passowrdLama") name: String,
         @Field("passwordBaru") email: String,
-        @Field("passwordKonfirmasi") password: String
+        @Field("passwordKonfirmasi") password: String,
     ): ResetResponse
 
 //    @GET("productList")

@@ -1,6 +1,7 @@
 package com.dicoding.beescape.screen.page
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,6 +21,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -34,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
@@ -51,6 +54,7 @@ import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
 import com.dicoding.beescape.ui.theme.gray
 import com.dicoding.beescape.ui.theme.poppinsFamily
+import com.dicoding.beescape.ui.theme.yellowl
 import com.dicoding.beescape.view_model.MainViewModel
 import com.dicoding.beescape.view_model.ViewModelFactory
 
@@ -74,7 +78,9 @@ fun ProfileScreen(navController:NavHostController) {
                         modifier = Modifier
                             .padding(top = 12.dp)
                     )
-                }
+                },
+                modifier = Modifier
+                    .shadow(1.2.dp)
             )
         },
         content = {
@@ -110,7 +116,7 @@ fun ProfileScreen(navController:NavHostController) {
                             )
                             Text(
                                 text = userState?.email ?: "no name",
-                                fontSize = 20.sp,
+                                fontSize = 18.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier
                                     .padding(start = 14.dp)
@@ -146,7 +152,7 @@ fun ProfileScreen(navController:NavHostController) {
                         )
 
                         // terms and condition
-                        Spacer(modifier = Modifier.height(14.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
@@ -315,7 +321,7 @@ fun ProfileScreen(navController:NavHostController) {
                                         .background(gray, shape = CircleShape)
                                 )
                                 Image(
-                                    painter = painterResource(id = R.drawable.baseline_contact_support_24),
+                                    painter = painterResource(id = R.drawable.baseline_help_24),
                                     contentDescription = null,
                                     colorFilter = ColorFilter.tint(Color.Gray)
                                 )
@@ -341,12 +347,14 @@ fun ProfileScreen(navController:NavHostController) {
                                 .padding(start = 16.dp, end = 16.dp)
                         )
 
-                        // notification
+                        // changepassword
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { }
+                                .clickable {
+                                    navController.navigate(Screen.CHANGE_PW_ROUTE)
+                                }
                                 .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
                         ) {
                             Box(
@@ -359,13 +367,13 @@ fun ProfileScreen(navController:NavHostController) {
                                         .background(gray, shape = CircleShape)
                                 )
                                 Image(
-                                    painter = painterResource(id = R.drawable.baseline_notifications_24),
-                                    contentDescription = "",
+                                    painter = painterResource(id = R.drawable.baseline_lock_24),
+                                    contentDescription = null,
                                     colorFilter = ColorFilter.tint(Color.Gray)
                                 )
                             }
                             Text(
-                                text = (stringResource(R.string.notif_text)),
+                                text = ("Change Password"),
                                 fontSize = 16.sp,
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Medium,
@@ -403,7 +411,7 @@ fun ProfileScreen(navController:NavHostController) {
                                         .background(gray, shape = CircleShape)
                                 )
                                 Image(
-                                    painter = painterResource(id = R.drawable.baseline_lock_24),
+                                    painter = painterResource(id = R.drawable.baseline_privacy_tip_24),
                                     contentDescription = "",
                                     colorFilter = ColorFilter.tint(Color.Gray)
                                 )
@@ -447,6 +455,8 @@ fun ProfileScreen(navController:NavHostController) {
                         onDismissRequest = {
                             dismissAlertDialog()
                         },
+
+
                         title = {
                             Text(
                                 text = stringResource(R.string.logout_text),
@@ -473,28 +483,39 @@ fun ProfileScreen(navController:NavHostController) {
                                 horizontalArrangement = Arrangement.Center
                             ) {
                                 Button(
-                                    onClick = {
-                                        // Handle logout logic
-                                        viewModel.logout()
-                                        navController.navigate(Screen.LOGOUT_ROUTE)
-                                        dismissAlertDialog()
-                                    }
+                                    onClick = { dismissAlertDialog() },
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color.Transparent,
+                                        contentColor = yellowl
+                                    ),
+                                    border = BorderStroke(1.dp, yellowl) ,
+                                    modifier = Modifier
+                                        .height(52.dp)
+                                        .width(115.dp)
+
                                 ) {
-                                    Text(stringResource(R.string.exit_text))
+                                    Text("Cencel")
                                 }
 
                                 Spacer(modifier = Modifier.width(8.dp))
 
                                 Button(
                                     onClick = {
+                                        // Handle logout logic
+                                        viewModel.logout()
+                                        navController.navigate(Screen.LOGOUT_ROUTE)
                                         dismissAlertDialog()
                                     },
+                                    modifier = Modifier
+                                        .height(52.dp)
+                                        .width(115.dp)
                                 ) {
-                                    Text(stringResource(R.string.cencel_text))
+                                    Text("Log Out")
                                 }
                             }
                         },
-                        dismissButton = {}
+                        dismissButton = {},
+                        containerColor = Color.White
                     )
                 }
                 // Alert logout
@@ -537,6 +558,20 @@ fun ProfileScreen(navController:NavHostController) {
                         contentDescription = null
                     )
                 }
+                Divider(
+                    color = gray,
+                    thickness = 1.dp,
+                    modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp)
+                )
+                Text(
+                    text = ("Version App 1.0"),
+                    fontSize = 12.sp,
+                    fontFamily = poppinsFamily,
+                    fontWeight = FontWeight.Normal,
+                    modifier = Modifier
+                        .padding(start = 16.dp,top = 16.dp, bottom = 16.dp)
+                )
             }
         })
 }

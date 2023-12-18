@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_EXPRESSION")
+
 package com.dicoding.beescape.screen.page
 
 import androidx.compose.foundation.clickable
@@ -16,9 +18,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -28,6 +35,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
+import com.dicoding.beescape.ui.theme.poppinsFamily
 import com.dicoding.component.suggestCategory
 
 @Composable
@@ -35,85 +43,107 @@ fun AnalysisScreen(navController: NavHostController) {
     AnalysisContent({navController.navigate(Screen.SelectMarketplace.route)}, navController)
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnalysisContent(sendSelectmarket: () -> Unit, navController: NavHostController) {
     val listState = rememberLazyListState()
     val suggestedProductListState = rememberLazyListState()
 
-    Box(
-        modifier = Modifier
-            .padding(top = 20.dp, start = 16.dp, end = 16.dp)
-    ) {
-        Column {
-            Text(
-                text = stringResource(R.string.trend),
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = ("Analysis"),
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 24.sp,
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                    )
+                },
+                modifier = Modifier
+                    .shadow(1.3.dp)
             )
-            LazyRow(
-                state = listState,
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                modifier = Modifier.padding(top = 30.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+        },
+        content = {paddingValues ->
+            Box(
+                modifier = Modifier
+                    .padding(top = 92.dp, start = 16.dp, end = 16.dp)
             ) {
-                items(suggestCategory) {
-                    Column(
-                        modifier = Modifier.clickable {
-                            sendSelectmarket()
-                        }
+                Column {
+                    Text(
+                        text = stringResource(R.string.trend),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                    LazyRow(
+                        state = suggestedProductListState,
+                        contentPadding = PaddingValues(horizontal = 16.dp),
+                        modifier = Modifier.padding(top = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        AsyncImage(
-                            model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZlenrvKQMmh4Z4b935QSM-7n-4MzN4mDXQ&usqp=CAU",
-                            contentDescription = "photo",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .fillMaxWidth()
-                                .height(150.dp)
-                        )
-                        Text(
-                            text = "Amount of data: 1000",
-                            modifier = Modifier.padding(8.dp)
-                        )
+                        items(suggestCategory) {
+                            Column(
+                                modifier = Modifier.clickable {
+                                    sendSelectmarket()
+                                    paddingValues
+                                }
+                            ) {
+                                AsyncImage(
+                                    model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZlenrvKQMmh4Z4b935QSM-7n-4MzN4mDXQ&usqp=CAU",
+                                    contentDescription = "photo",
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .padding(8.dp)
+                                        .fillMaxWidth()
+                                        .height(150.dp)
+                                )
+                                Text(
+                                    text = stringResource(R.string.priceRec),
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                            }
+                        }
                     }
-                }
-            }
 
-            Spacer(modifier = Modifier.height(30.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
 
-            Text(
-                text = stringResource(R.string.suggestedProduct),
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
-            )
-            LazyRow(
-                state = suggestedProductListState,
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                modifier = Modifier.padding(top = 30.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(suggestCategory) {
-                    Column(
-                        modifier = Modifier.clickable {
-                            sendSelectmarket()
-                        }
+                    Text(
+                        text = stringResource(R.string.suggestedProduct),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                    LazyRow(
+                        state = suggestedProductListState,
+                        contentPadding = PaddingValues(horizontal = 16.dp),
+                        modifier = Modifier.padding(top = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        AsyncImage(
-                            model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZlenrvKQMmh4Z4b935QSM-7n-4MzN4mDXQ&usqp=CAU",
-                            contentDescription = "photo",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .fillMaxWidth()
-                                .height(150.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.priceRec),
-                            modifier = Modifier.padding(8.dp)
-                        )
+                        items(suggestCategory) {
+                            Column(
+                                modifier = Modifier.clickable {
+                                    sendSelectmarket()
+                                }
+                            ) {
+                                AsyncImage(
+                                    model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZlenrvKQMmh4Z4b935QSM-7n-4MzN4mDXQ&usqp=CAU",
+                                    contentDescription = "photo",
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .padding(8.dp)
+                                        .fillMaxWidth()
+                                        .height(150.dp)
+                                )
+                                Text(
+                                    text = stringResource(R.string.priceRec),
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                            }
+                        }
                     }
                 }
             }
         }
-    }
+    )
 }

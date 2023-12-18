@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
@@ -65,7 +66,9 @@ fun Detail () {
                            contentDescription = "Go Back"
                        )
                    }
-               }
+               },
+               modifier = Modifier
+                   .shadow(1.3.dp)
            )
        },
    ){ paddingValues ->

@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageViewSplash"
-        android:layout_width="225dp"
-        android:layout_height="240dp"
+        android:layout_width="200dp"
+        android:layout_height="225dp"
         android:layout_marginTop="52dp"
         android:src="@drawable/bs_logo"
         app:layout_constraintBottom_toTopOf="@+id/guideline"

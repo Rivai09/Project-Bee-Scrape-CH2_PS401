@@ -88,7 +88,8 @@ fun HomeScreen(navController: NavHostController) {
                     fontSize = 14.sp,
                 )
                 Text(
-                    text = userState!!.email, fontWeight = FontWeight.SemiBold, fontSize = 16.sp
+                    text = userState!!.email, 
+                    fontWeight = FontWeight.SemiBold, fontSize = 18.sp
                 )
             }
         })
@@ -121,7 +122,7 @@ fun ItemRow(
         Log.d("isi token launch", "${userState?.token}")
     }
 
-    Box(modifier.padding(top = 10.dp, start = 0.dp, end = 0.dp)) {
+    Box(modifier.padding(top = 16.dp, start = 0.dp, end = 0.dp)) {
         Text(
             text = stringResource(R.string.popular),
             fontWeight = FontWeight.Bold,
@@ -131,7 +132,7 @@ fun ItemRow(
         LazyColumn(
             state = listState,
             contentPadding = PaddingValues(horizontal = 0.dp),
-            modifier = modifier.padding(top = 40.dp)
+            modifier = modifier.padding(top = 48.dp)
         ) {
             val data = viewModel.data.value?.product?.flatMap { it?.items.orEmpty() }
 

@@ -9,6 +9,8 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DatePickerDefaults.colors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.NavigationBar
@@ -31,6 +33,7 @@ import com.dicoding.beescape.navigation.NavigationItem
 import com.dicoding.beescape.screen.Screen
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.dicoding.beescape.before_login.ChangePasswordActivity
 import com.dicoding.beescape.before_login.WelcomeActivity
 import com.dicoding.beescape.screen.page.AnalysisScreen
 import com.dicoding.beescape.screen.page.Detail
@@ -49,9 +52,11 @@ fun BeeScrapeApp(
 ) {
     Scaffold(
         bottomBar = {
-            BottomBar(navController,selectedColor = yellowl)
+            BottomBar(
+                navController,
+                selectedColor = yellowl,
+            )
         },
-        modifier = modifier
     ) { innerPadding ->
         NavHost(
             navController = navController,
@@ -85,6 +90,11 @@ fun BeeScrapeApp(
             composable(Screen.LOGOUT_ROUTE){
                 val intent = Intent(LocalContext.current, WelcomeActivity::class.java)
                 LocalContext.current.startActivity(intent)
+            }
+            composable(Screen.CHANGE_PASSWORD_ROUTE){
+                val intent = Intent(LocalContext.current, ChangePasswordActivity::class.java)
+                LocalContext.current.startActivity(intent)
+                navController.popBackStack()
             }
         }
     }

@@ -54,6 +54,8 @@ fun Detail(id: String?) {
     val dataResponse by viewModel.getDataDetail.collectAsState(initial = null)
     LaunchedEffect(true) {
         Log.d("DetailActivity", "Before API Call: $dataResponse")
+        //pakai kode jika sudah benar id di api
+//        viewModel.detailData(userState?.token.toString(), "token")
         viewModel.detailData(userState?.token.toString(), "6580556688307629e0ea9648")
         Log.d("DetailActivity", "After API Call: $dataResponse")
 

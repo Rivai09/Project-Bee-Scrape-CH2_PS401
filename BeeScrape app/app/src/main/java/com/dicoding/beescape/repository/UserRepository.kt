@@ -35,31 +35,15 @@ class UserRepository private constructor(
 //        ).flow
 //    }
 
-    //    suspend fun getDataState(token: String) = liveData {
-//        emit(UiState.Loading)
-//
-//        try {
-//            val response = apiService.getDataPaging("Bearer $token")
-//            emit(response.items?.let { UiState.Success(it) })
-//            Log.d("user repo","berhasil get data")
-//        } catch (e: Exception) {
-//            Log.e("User repository", "Failed to load data", e)
-//            emit(UiState.Error("Failed to load data"))
-//        }
-//    }
 
-//    suspend fun fetchData(token: String): MainResponse {
-//        return apiService.getData("Bearer $token")
-//    }
 
     suspend fun fetchData(token: String): DataResponse {
         return apiService.getData("Bearer $token")
     }
 
-
-
     suspend fun getDetail(token:String, id: String): DetailResponse? {
         try {
+            //pakai kode jika sudah benar id di api
 //            return apiService.getDetail("Bearer $token",id)
             return apiService.getDetail("Bearer $token","6580556688307629e0ea9648")
         }catch (e:Exception){
@@ -89,8 +73,6 @@ class UserRepository private constructor(
 //
 //        return emptyList()
 //    }
-
-
 
     suspend fun logout() {
         userPreference.logout()

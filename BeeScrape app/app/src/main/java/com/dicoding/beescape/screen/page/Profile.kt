@@ -1,6 +1,7 @@
 package com.dicoding.beescape.screen.page
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -65,6 +66,7 @@ fun ProfileScreen(navController:NavHostController) {
 
     val viewModel:MainViewModel= viewModel(factory = ViewModelFactory.getInstance(context = LocalContext.current))
     val userState by viewModel.getSession().observeAsState(initial = null)
+    val contex= LocalContext.current
 
     Scaffold(
         topBar = {
@@ -101,7 +103,7 @@ fun ProfileScreen(navController:NavHostController) {
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { }
+                                .clickable { Toast.makeText(contex,"Upcoming feature", Toast.LENGTH_SHORT).show()}
                                 .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
                         ){
                             // username
@@ -202,7 +204,7 @@ fun ProfileScreen(navController:NavHostController) {
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { }
+                                .clickable { Toast.makeText(contex,"Upcoming feature", Toast.LENGTH_SHORT).show()}
                                 .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
                         ) {
                             Box(
@@ -247,7 +249,7 @@ fun ProfileScreen(navController:NavHostController) {
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { }
+                                .clickable { Toast.makeText(contex,"Upcoming feature", Toast.LENGTH_SHORT).show() }
                                 .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
                         ) {
                             Box(
@@ -308,7 +310,7 @@ fun ProfileScreen(navController:NavHostController) {
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { }
+                                .clickable {Toast.makeText(contex,"Upcoming feature", Toast.LENGTH_SHORT).show() }
                                 .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
                         ){
                             Box(

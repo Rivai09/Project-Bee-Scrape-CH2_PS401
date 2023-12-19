@@ -13,16 +13,22 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
+import com.dicoding.beescape.view_model.MainViewModel
+import com.dicoding.beescape.view_model.ViewModelFactory
 import com.dicoding.component.suggestCategory
 
 @Composable
@@ -34,6 +40,12 @@ fun AnalysisScreen(navController: NavHostController) {
 fun AnalysisContent(sendSelectmarket: () -> Unit, navController: NavHostController) {
     val listState = rememberLazyListState()
     val suggestedProductListState = rememberLazyListState()
+
+    val mainViewModel: MainViewModel =
+        viewModel(factory = ViewModelFactory.getInstance(LocalContext.current))
+    val userState by mainViewModel.getSession().observeAsState(initial = null)
+
+
 
     Box(
         modifier = Modifier

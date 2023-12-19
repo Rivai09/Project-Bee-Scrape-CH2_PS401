@@ -2,8 +2,8 @@ package com.dicoding.beescape.repository
 
 import android.util.Log
 import com.dicoding.beescape.api.response.DataResponse
+import com.dicoding.beescape.api.response.DetailResponse
 import com.dicoding.beescape.api.response.LoginResponse
-import com.dicoding.beescape.api.response.Product
 import com.dicoding.beescape.api.response.ResetResponse
 import com.dicoding.beescape.api.response.SignUpResponse
 import com.dicoding.beescape.api.retrofit.ApiService
@@ -58,10 +58,10 @@ class UserRepository private constructor(
 
 
 
-    suspend fun getDetail(token:String, id: String): Product? {
+    suspend fun getDetail(token:String, id: String): DetailResponse? {
         try {
 //            return apiService.getDetail("Bearer $token",id)
-            return apiService.getDetail("Bearer $token","657c20d9d44899b419a77a3f")
+            return apiService.getDetail("Bearer $token","6580556688307629e0ea9648")
         }catch (e:Exception){
             if (id.isEmpty()){
                 Log.d("repository","$id kosong")

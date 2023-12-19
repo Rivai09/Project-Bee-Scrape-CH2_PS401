@@ -115,7 +115,6 @@ fun ItemRow(
 
     val userState by viewModel.getSession().observeAsState(initial = null)
 
-
     LaunchedEffect(true) {
         viewModel.fetchData(userState?.token ?: "")
         Log.d("isi token launch", "${userState?.token}")
@@ -135,24 +134,32 @@ fun ItemRow(
             contentPadding = PaddingValues(horizontal = 0.dp),
             modifier = modifier.padding(top = 40.dp)
         ) {
-//            val dataItems = dataResponse?.product?.items.orEmpty().flatMap { it?.itemsDetail.orEmpty() }
-            val dataItems=dataResponse?.product?.flatMap { it?.items.orEmpty() }
-            items(dataItems?: emptyList()) { item ->
-                dataItem(
-                    id = item?.id.toString(),
-                    img = item?.persebaranData ?: "",
-                    teks = item?.category ?: "",
-                    modifier.clickable {
-                        Log.d("home kirim id", item?.id.toString())
-                        sendSelectmarket(item?.id.toString())
-                    },
-                    navController
-                )
-                Text(text = item?.id.toString())
+            val dataItems = dataResponse?.product ?: emptyList()
+            items(dataItems) { item ->
+                // Access the 'itemsDetail' list within each 'ItemsItem'
+                val itemDetails = item?.items.orEmpty()
+
+                // Assuming you want to display each 'itemDetail' separately
+                itemDetails.forEach { itemDetail ->
+                    dataItem(
+                        id = itemDetail?.id.toString(),
+                        img = itemDetail?.persebaranData ?: "",
+                        teks = itemDetail?.category ?: "",
+                        modifier.clickable {
+                            Log.d("home kirim id", itemDetail?.id.toString())
+                            sendSelectmarket(itemDetail?.id.toString())
+                        },
+                        navController
+                    )
+                    Text(text = itemDetail?.id.toString())
+                }
             }
         }
+
+
     }
 }
+
 
 
 

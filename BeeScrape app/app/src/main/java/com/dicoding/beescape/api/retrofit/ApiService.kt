@@ -1,8 +1,8 @@
 package com.dicoding.beescape.api.retrofit
 
 import com.dicoding.beescape.api.response.DataResponse
+import com.dicoding.beescape.api.response.DetailResponse
 import com.dicoding.beescape.api.response.LoginResponse
-import com.dicoding.beescape.api.response.Product
 import com.dicoding.beescape.api.response.ResetResponse
 import com.dicoding.beescape.api.response.SignUpResponse
 import retrofit2.http.Field
@@ -56,7 +56,7 @@ interface ApiService {
     suspend fun getDetail(
         @Header("Authorization") token: String,
         @Path("id") id: String,
-    ): Product
+    ): DetailResponse
 
 //    @GET("productList")
 //    suspend fun searchData(@Query("query") query: String): Response<List<ItemsItem>>

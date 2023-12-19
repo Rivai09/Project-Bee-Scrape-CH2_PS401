@@ -46,30 +46,40 @@ fun Detail(id: String?) {
     val viewModel: MainViewModel =
         viewModel(factory = ViewModelFactory.getInstance(LocalContext.current))
     val userState by viewModel.getSession().observeAsState(initial = null)
-    LaunchedEffect(true) {
-//        viewModel.detailData(userState?.token.toString(), id.toString())
-        viewModel.detailData(userState?.token.toString(), "657c20d9d44899b419a77a3f")
-    }
-    val dataResponse by viewModel.getDataDetail.collectAsState()
+//    LaunchedEffect(true) {
+////        viewModel.detailData(userState?.token.toString(), id.toString())
+//        viewModel.detailData(userState?.token.toString(), "657c20d9d44899b419a77a3f")
+//    }
 
-    val data = dataResponse?.items?.flatMap { it?.itemsDetail.orEmpty() }
+    val dataResponse by viewModel.getDataDetail.collectAsState(initial = null)
+    LaunchedEffect(true) {
+        Log.d("DetailActivity", "Before API Call: $dataResponse")
+        viewModel.detailData(userState?.token.toString(), "6580556688307629e0ea9648")
+        Log.d("DetailActivity", "After API Call: $dataResponse")
+
+    }
+    val data = dataResponse?.products?.items?.flatMap { it?.itemsDetail.orEmpty() }
+
     if (data != null && data.isNotEmpty()) {
         val detailItem = data.firstOrNull() ?: ItemsDetailItem()
         contentDetail(
-            id = detailItem?.id,
-            location = detailItem?.location.toString(),
-            jumlahData = detailItem?.jumlahData.toString(),
-            jumlahMerk = detailItem?.jumlahMerk.toString(),
-            ketTotalProduk = detailItem?.ketTotalProduct.toString(),
-            topProduct = detailItem?.topProduct.toString(),
-            rangeHarga = detailItem?.rangeHarga.toString(),
-            rangeJumlahTerjual = detailItem?.rangeJumlahTerjual.toString(),
-            imgPersebaranData = detailItem?.persebaranData.toString(),
-            imgPenjualan = detailItem?.productTerjual.toString()
+            id = detailItem.id,
+            location = detailItem.location.toString() ,
+            jumlahData = detailItem.jumlahData?.toString() ?: "",
+            jumlahMerk = detailItem.jumlahMerk?.toString() ?: "",
+            ketTotalProduk = detailItem.ketTotalProduct.toString() ?: "",
+            topProduct = detailItem.topProduct ?: "",
+            rangeHarga = detailItem.rangeHarga.toString() ?: "",
+            rangeJumlahTerjual = detailItem.rangeJumlahTerjual ?: "",
+            imgPersebaranData = detailItem.persebaranData ?: "",
+            imgPenjualan = detailItem.productTerjual ?: "",
+            source = detailItem.shopName.toString()
         )
-    }else{
-        Text(text = "null")
+    } else {
+        Text(text = "Data dari API tidak ditemukan")
     }
+
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -84,7 +94,8 @@ fun contentDetail(
     rangeHarga: String,
     rangeJumlahTerjual:String,
     imgPersebaranData:String,
-    imgPenjualan:String
+    imgPenjualan:String,
+    source:String
 
 ) {
         Column(
@@ -93,6 +104,12 @@ fun contentDetail(
                 .padding(start = 16.dp, end = 16.dp, top = 16.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
+            Text(
+                text = "Detail data",
+                fontSize = 30.sp,
+                fontFamily = poppinsFamily,
+                fontWeight = FontWeight.SemiBold,
+            )
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -100,13 +117,13 @@ fun contentDetail(
             ) {
                 Column {
                     Text(
-                        text = stringResource(R.string.salesDetail),
+                        text = stringResource(R.string.salesDetail) + source,
                         fontSize = 17.sp,
                         fontFamily = poppinsFamily,
                         fontWeight = FontWeight.SemiBold,
                     )
                     Text(
-                        text = stringResource(R.string.sourceDetail),
+                        text = stringResource(R.string.sourceDetail)+ source,
                         fontSize = 14.sp,
                         fontFamily = poppinsFamily,
                         fontWeight = FontWeight.Normal,
@@ -178,19 +195,6 @@ fun contentDetail(
                         fontWeight = FontWeight.Normal,
                     )
 
-                    Spacer(modifier = Modifier.padding(top = 24.dp))
-                    Text(
-                        text = stringResource(R.string.hargaPenjualanTerbanyak) + " $rangeJumlahTerjual",
-                        fontSize = 14.sp,
-                        fontFamily = poppinsFamily,
-                        fontWeight = FontWeight.Normal,
-                    )
-                    Text(
-                        text = stringResource(R.string.hargaTermahal) + " $rangeJumlahTerjual",
-                        fontSize = 14.sp,
-                        fontFamily = poppinsFamily,
-                        fontWeight = FontWeight.Normal,
-                    )
                 }
             }
         }

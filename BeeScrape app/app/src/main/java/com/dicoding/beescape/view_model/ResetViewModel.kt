@@ -17,9 +17,11 @@ class ResetViewModel(private val repository: UserRepository) : ViewModel() {
     suspend fun reset(token:String,oldPw:String,newPw:String,confirmPw:String) {
         try {
 
-            repository.resetPassword(token,oldPw, newPw,confirmPw)
+            val response=repository.resetPassword(token,oldPw, newPw,confirmPw)
+            successMessage = response.message
 
-            Log.d("resetViewModel", "Permintaan login berhasil.")
+            Log.d("resetViewModel", "Permintaan resset berhasil.")
+            Log.d("resetViewModel", "$successMessage.")
 
 
         } catch (e: HttpException) {

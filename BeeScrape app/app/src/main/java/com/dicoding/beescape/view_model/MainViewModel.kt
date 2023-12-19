@@ -50,7 +50,7 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
             try {
                 //pakai kode jika sudah benar id di api
 //                _dataDetail.value = repository.getDetail(token,"token")
-                _dataDetail.value = repository.getDetail(token,"6580556688307629e0ea9648")
+                _dataDetail.value = repository.getDetail(token,"6581bdba2235bd336a933fa4")
             } catch (e: Exception) {
                 Log.d("view model detail","$token $id")
                 Log.d("view model data","$_dataDetail")

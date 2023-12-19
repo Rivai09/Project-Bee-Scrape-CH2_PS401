@@ -47,7 +47,7 @@ data class ItemsDetailItem(
 	val price: String? = null,
 
 	@field:SerializedName("jumlahMerk")
-	val jumlahMerk: Int? = null,
+	val jumlahMerk: String? = null,
 
 	@field:SerializedName("location")
 	val location: String? = null,

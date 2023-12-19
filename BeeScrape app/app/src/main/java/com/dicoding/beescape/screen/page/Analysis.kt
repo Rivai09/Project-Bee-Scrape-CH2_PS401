@@ -53,6 +53,39 @@ fun AnalysisContent(sendSelectmarket: () -> Unit, navController: NavHostControll
     ) {
         Column {
             Text(
+                text = stringResource(R.string.tren),
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
+            LazyRow(
+                state = listState,
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                modifier = Modifier.padding(top = 30.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(suggestCategory) {
+                    Column(
+                        modifier = Modifier.clickable {
+                            sendSelectmarket()
+                        }
+                    ) {
+                        AsyncImage(
+                            model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZlenrvKQMmh4Z4b935QSM-7n-4MzN4mDXQ&usqp=CAU",
+                            contentDescription = "photo",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .fillMaxWidth()
+                                .height(150.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.priceRec),
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
+                }
+            }
+            Text(
                 text = stringResource(R.string.suggestedProduct),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp

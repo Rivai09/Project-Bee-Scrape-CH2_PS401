@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -56,7 +58,7 @@ fun Detail(id: String?) {
         Log.d("DetailActivity", "Before API Call: $dataResponse")
         //pakai kode jika sudah benar id di api
 //        viewModel.detailData(userState?.token.toString(), "token")
-        viewModel.detailData(userState?.token.toString(), "6580556688307629e0ea9648")
+        viewModel.detailData(userState?.token.toString(), "6581bdba2235bd336a933fa4")
         Log.d("DetailActivity", "After API Call: $dataResponse")
 
     }
@@ -75,7 +77,8 @@ fun Detail(id: String?) {
             rangeJumlahTerjual = detailItem.rangeJumlahTerjual ?: "",
             imgPersebaranData = detailItem.persebaranData ?: "",
             imgPenjualan = detailItem.productTerjual ?: "",
-            source = detailItem.shopName.toString()
+            source = detailItem.shopName.toString(),
+            category = detailItem.category.toString()
         )
     } else {
         Text(text = "Data dari API tidak ditemukan")
@@ -97,7 +100,8 @@ fun contentDetail(
     rangeJumlahTerjual:String,
     imgPersebaranData:String,
     imgPenjualan:String,
-    source:String
+    source:String,
+    category:String
 
 ) {
         Column(
@@ -107,7 +111,7 @@ fun contentDetail(
                 .verticalScroll(rememberScrollState()),
         ) {
             Text(
-                text = "Detail data",
+                text = "Detail data-$category",
                 fontSize = 30.sp,
                 fontFamily = poppinsFamily,
                 fontWeight = FontWeight.SemiBold,
@@ -116,16 +120,17 @@ fun contentDetail(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(5.dp)
+
             ) {
                 Column {
                     Text(
-                        text = stringResource(R.string.salesDetail) + source,
-                        fontSize = 17.sp,
+                        text = stringResource(R.string.salesDetail) +" $source",
+                        fontSize = 16.sp,
                         fontFamily = poppinsFamily,
                         fontWeight = FontWeight.SemiBold,
                     )
                     Text(
-                        text = stringResource(R.string.sourceDetail)+ source,
+                        text = stringResource(R.string.sourceDetail)+ " $source",
                         fontSize = 14.sp,
                         fontFamily = poppinsFamily,
                         fontWeight = FontWeight.Normal,
@@ -160,12 +165,14 @@ fun contentDetail(
                         modifier = Modifier.fillMaxSize()
 
                     )
-                    Spacer(modifier = Modifier.padding(top = 24.dp))
                     Text(
-                        text = stringResource(R.string.ketTotalProduct) + " $ketTotalProduk",
+                        text =" $ketTotalProduk",
                         fontFamily = poppinsFamily,
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        textAlign = TextAlign.Center
                     )
+                    Spacer(modifier = Modifier.padding(top = 24.dp))
+
                     Text(
                         text = stringResource(R.string.topProduct) + " $topProduct",
                         fontSize = 14.sp,
@@ -184,9 +191,19 @@ fun contentDetail(
                         modifier = Modifier.fillMaxSize()
 
                     )
+                    Text(
+                        text = stringResource(R.string.ketJUmlahmerk) + " $category",
+                        fontFamily = poppinsFamily,
+                        fontSize = 14.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 5.dp, end = 5.dp)
+                    )
+
                     Spacer(modifier = Modifier.padding(top = 24.dp))
                     Text(
-                        text = stringResource(R.string.rangeHarga) + " $rangeHarga}",
+                        text = stringResource(R.string.rangeHarga) + " $rangeHarga",
                         fontFamily = poppinsFamily,
                         fontSize = 14.sp
                     )

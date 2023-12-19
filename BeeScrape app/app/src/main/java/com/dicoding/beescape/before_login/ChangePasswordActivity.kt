@@ -14,25 +14,25 @@ import com.dicoding.beescape.databinding.ActivityChangePasswordBinding
 import com.dicoding.beescape.view_model.ResetViewModel
 import com.dicoding.beescape.view_model.ViewModelFactory
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class ChangePasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChangePasswordBinding
 
 
-
     private val viewModel by viewModels<ResetViewModel> { ViewModelFactory.getInstance(this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityChangePasswordBinding.inflate(layoutInflater)
+        binding = ActivityChangePasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
         reset()
     }
 
     private fun reset() {
         val tokenFlow = viewModel.getSession()
-        tokenFlow.observe(this){
-            val token=it.token
-            Log.d("reset token",token)
+        tokenFlow.observe(this) {
+            val token = it.token
+            Log.d("reset token", token)
 
             binding.pwChange.setOnClickListener {
                 val pwOld = binding.edPwcurrent.text.toString()
@@ -40,57 +40,59 @@ class ChangePasswordActivity : AppCompatActivity() {
                 val pwConfirm = binding.edRetypepw.text.toString()
                 showLoading(true)
 
-
                 lifecycleScope.launch {
-                    viewModel.reset(token,pwOld, pwNew, pwConfirm)
                     try {
-                        showLoading(false)
-                        val message = viewModel.successMessage
-                        if (message != null) {
-                            AlertDialog.Builder(this@ChangePasswordActivity).apply {
-                                setTitle("Yeah!")
-                                setMessage("Akun berahsil diubah password. silahkan login ulang")
-                                setPositiveButton("Lanjut") { _, _ ->
-                                    viewModel.logout()
-                                    val intent =
-                                        Intent(this@ChangePasswordActivity, SignInActivity::class.java)
-                                    startActivity(intent)
-                                }
-                                create()
-                                show()
-                            }
+                        showLoading(true)
+                        viewModel.reset(token, pwOld, pwNew, pwConfirm)
 
-                        } else {
-                            showLoading(false)
-                            AlertDialog.Builder(this@ChangePasswordActivity).apply {
-                                setTitle("Gagal!")
-                                setMessage("Pendaftaran gagal. Pastikan email, nama, dan password valid atau akun sudah terdaftar")
-                                setPositiveButton("OK") { _, _ ->
-                                }
-                                create()
-                                show()
-                            }
-                        }
+                        // Jika berhasil reset password
                         showLoading(false)
-                    } catch (e: Exception) {
+                        AlertDialog.Builder(this@ChangePasswordActivity).apply {
+                            setTitle("Yeah!")
+                            setMessage("Akun berhasil diubah password. Silakan login ulang.")
+                            setPositiveButton("Lanjut") { _, _ ->
+                                viewModel.logout()
+                                val intent =
+                                    Intent(this@ChangePasswordActivity, SignInActivity::class.java)
+                                startActivity(intent)
+                            }
+                            create()
+                            show()
+                        }
+                    } catch (e: HttpException) {
+                        showLoading(false)
                         AlertDialog.Builder(this@ChangePasswordActivity).apply {
                             setTitle("Gagal!")
-                            setMessage("Pendaftaran gagal. Pastikan email, nama, dan password valid atau cek koneksi anda")
+                            setMessage("Gagal mereset password. ${e.message()}")
                             setPositiveButton("OK") { _, _ ->
+
+                            }
+                            create()
+                            show()
+                        }
+                    } catch (e: Exception) {
+                        // Jika terjadi kesalahan umum
+                        showLoading(false)
+                        AlertDialog.Builder(this@ChangePasswordActivity).apply {
+                            setTitle("Gagal!")
+                            setMessage("Gagal mereset password. Cek koneksi Anda.")
+                            setPositiveButton("OK") { _, _ ->
+                                // Handle jika diperlukan
                             }
                             create()
                             show()
                         }
                     }
                 }
+
+
             }
         }
-
     }
 
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
-        startActivity(Intent(this@ChangePasswordActivity,MainActivity::class.java))
+        startActivity(Intent(this@ChangePasswordActivity, MainActivity::class.java))
     }
 
     private fun showLoading(isLoading: Boolean) {

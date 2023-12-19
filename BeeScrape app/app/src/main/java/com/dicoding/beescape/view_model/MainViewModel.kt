@@ -1,14 +1,12 @@
 package com.dicoding.beescape.view_model
 
 import android.util.Log
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dicoding.beescape.api.response.DataResponse
-import com.dicoding.beescape.api.response.ItemsDetailItem
+import com.dicoding.beescape.api.response.Product
 import com.dicoding.beescape.data_user.DataUser
 import com.dicoding.beescape.repository.UserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,40 +25,6 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
 //        }
 //    }
 
-//    private val data = MutableLiveData<List<ItemsItem?>?>()
-//    val getData: LiveData<List<ItemsItem?>?> = data
-//
-//
-//    fun getDataState(token: String) {
-//        viewModelScope.launch {
-//            repository.getDataState(token).asFlow().collect {
-//                data.postValue(it)
-//            }
-//        }
-//    }
-
-//    private val data = MutableLiveData<List<ItemsItem?>?>()
-//    val getData: LiveData<List<ItemsItem?>?> get() = data
-//
-//
-//    fun getDataState(token: String) {
-//        viewModelScope.launch {
-//            data.value=repository.getDataState(token)
-//        }
-//    }
-
-//    private val _data = mutableStateOf<MainResponse?>(null)
-//    val data: State<MainResponse?> = _data
-//
-//    fun fetchData(token : String) {
-//        viewModelScope.launch {
-//            try {
-//                _data.value = repository.fetchData(token)
-//            } catch (e: Exception) {
-//                Log.d("view model","$token")
-//            }
-//        }
-//    }
 
 
 
@@ -78,17 +42,13 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
     }
 
 
-
-
-
-
-    private val _dataDetail = mutableStateOf<ItemsDetailItem?>(null)
-    val getDataDetail: State<ItemsDetailItem?> = _dataDetail
+    private val _dataDetail = MutableStateFlow<Product?>(null)
+    val getDataDetail: MutableStateFlow<Product?>  = _dataDetail
 
     fun detailData(token : String,id:String) {
         viewModelScope.launch {
             try {
-                _dataDetail.value = repository.getDetail(token,id)
+                _dataDetail.value = repository.getDetail(token,"657c20d9d44899b419a77a3f")
             } catch (e: Exception) {
                 Log.d("view model detail","$token $id")
             }

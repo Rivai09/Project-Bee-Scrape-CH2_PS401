@@ -2,6 +2,7 @@ package com.dicoding.beescape.screen.page
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -204,17 +205,31 @@ fun dataItem(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Search(modifier: Modifier = Modifier) {
+
+    var query by remember { mutableStateOf("") }
+    val contex= LocalContext.current
+
     SearchBar(
-        query = "",
-        onQueryChange = {},
-        onSearch = {},
+        query = query,
+        onQueryChange = {
+            query = it
+        },
+        onSearch = {
+
+        },
         active = false,
-        onActiveChange = {},
+        onActiveChange = { isActive ->
+
+        },
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.clickable {
+                    Toast.makeText(contex,"Upcoming feature",Toast.LENGTH_SHORT).show()
+
+                }
             )
         },
         placeholder = {
@@ -230,6 +245,7 @@ fun Search(modifier: Modifier = Modifier) {
             .heightIn(min = 48.dp)
     ) {}
 }
+
 
 
 //@Composable

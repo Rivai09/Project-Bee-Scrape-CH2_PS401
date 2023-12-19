@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dicoding.beescape.api.response.DataResponse
-import com.dicoding.beescape.api.response.Product
+import com.dicoding.beescape.api.response.DetailResponse
 import com.dicoding.beescape.data_user.DataUser
 import com.dicoding.beescape.repository.UserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,15 +42,16 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
     }
 
 
-    private val _dataDetail = MutableStateFlow<Product?>(null)
-    val getDataDetail: MutableStateFlow<Product?>  = _dataDetail
+    private val _dataDetail = MutableStateFlow<DetailResponse?>(null)
+    val getDataDetail: MutableStateFlow<DetailResponse?>  = _dataDetail
 
     fun detailData(token : String,id:String) {
         viewModelScope.launch {
             try {
-                _dataDetail.value = repository.getDetail(token,"657c20d9d44899b419a77a3f")
+                _dataDetail.value = repository.getDetail(token,"6580556688307629e0ea9648")
             } catch (e: Exception) {
                 Log.d("view model detail","$token $id")
+                Log.d("view model data","$_dataDetail")
             }
         }
     }

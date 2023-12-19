@@ -53,6 +53,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
+import com.dicoding.beescape.screen.page.component.sendEmail
 import com.dicoding.beescape.ui.theme.gray
 import com.dicoding.beescape.ui.theme.poppinsFamily
 import com.dicoding.beescape.ui.theme.yellowl
@@ -67,6 +68,9 @@ fun ProfileScreen(navController:NavHostController) {
     val viewModel:MainViewModel= viewModel(factory = ViewModelFactory.getInstance(context = LocalContext.current))
     val userState by viewModel.getSession().observeAsState(initial = null)
     val contex= LocalContext.current
+    val toEmail = "rivaihayasi@gmail.com"
+    val subject = "Bee question😁"
+    val message = "Halo kak,"
 
     Scaffold(
         topBar = {
@@ -249,7 +253,7 @@ fun ProfileScreen(navController:NavHostController) {
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { Toast.makeText(contex,"Upcoming feature", Toast.LENGTH_SHORT).show() }
+                                .clickable {  sendEmail(contex, subject, message, toEmail)}
                                 .padding(top = 16.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
                         ) {
                             Box(

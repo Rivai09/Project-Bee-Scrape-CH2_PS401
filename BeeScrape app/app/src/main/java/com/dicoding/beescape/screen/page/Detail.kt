@@ -157,7 +157,7 @@ fun contentDetail(
                     Spacer(modifier = Modifier.padding(top = 24.dp))
                     AsyncImage(
                         model = ImageRequest.Builder(context = LocalContext.current.applicationContext)
-                            .data(imgPersebaranData)
+                            .data(imgPenjualan)
                             .crossfade(true)
                             .build(),
                         contentDescription = "photo",
@@ -183,7 +183,7 @@ fun contentDetail(
                     Spacer(modifier = Modifier.padding(top = 24.dp))
                     AsyncImage(
                         model = ImageRequest.Builder(context = LocalContext.current.applicationContext)
-                            .data(imgPenjualan)
+                            .data(imgPersebaranData)
                             .crossfade(true)
                             .build(),
                         contentDescription = "photo",

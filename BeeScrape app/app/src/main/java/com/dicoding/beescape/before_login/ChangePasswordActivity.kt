@@ -14,7 +14,6 @@ import com.dicoding.beescape.databinding.ActivityChangePasswordBinding
 import com.dicoding.beescape.view_model.ResetViewModel
 import com.dicoding.beescape.view_model.ViewModelFactory
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 
 class ChangePasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChangePasswordBinding
@@ -41,54 +40,54 @@ class ChangePasswordActivity : AppCompatActivity() {
                 showLoading(true)
 
                 lifecycleScope.launch {
+                    viewModel.reset(token,pwOld,pwNew,pwConfirm)
                     try {
-                        showLoading(true)
-                        viewModel.reset(token, pwOld, pwNew, pwConfirm)
-
-                        // Jika berhasil reset password
-                        showLoading(false)
-                        AlertDialog.Builder(this@ChangePasswordActivity).apply {
-                            setTitle("Yeah!")
-                            setMessage("Akun berhasil diubah password. Silakan login ulang.")
-                            setPositiveButton("Lanjut") { _, _ ->
-                                viewModel.logout()
-                                val intent =
-                                    Intent(this@ChangePasswordActivity, SignInActivity::class.java)
-                                startActivity(intent)
+                        val message = viewModel.successMessage
+                        if (message != null) {
+                            showLoading(false)
+                            AlertDialog.Builder(this@ChangePasswordActivity).apply {
+                                setTitle("Yeah!")
+                                setMessage("password berhasil diganti")
+                                setPositiveButton("Lanjut") { _, _ ->
+                                    val intent = Intent(
+                                        this@ChangePasswordActivity,
+                                        SignInActivity::class.java
+                                    )
+                                    startActivity(intent)
+                                }
+                                create()
+                                show()
                             }
-                            create()
-                            show()
-                        }
-                    } catch (e: HttpException) {
-                        showLoading(false)
-                        AlertDialog.Builder(this@ChangePasswordActivity).apply {
-                            setTitle("Gagal!")
-                            setMessage("Gagal mereset password. ${e.message()}")
-                            setPositiveButton("OK") { _, _ ->
 
+                        } else {
+                            showLoading(false)
+                            AlertDialog.Builder(this@ChangePasswordActivity).apply {
+                                setTitle("Gagal!")
+                                setMessage("cek lagi")
+                                setPositiveButton("OK") { _, _ ->
+                                }
+                                create()
+                                show()
                             }
-                            create()
-                            show()
                         }
                     } catch (e: Exception) {
-                        // Jika terjadi kesalahan umum
                         showLoading(false)
                         AlertDialog.Builder(this@ChangePasswordActivity).apply {
                             setTitle("Gagal!")
-                            setMessage("Gagal mereset password. Cek koneksi Anda.")
+                            setMessage("Pendaftaran gagal. $e")
                             setPositiveButton("OK") { _, _ ->
-                                // Handle jika diperlukan
                             }
                             create()
                             show()
                         }
                     }
                 }
-
-
             }
+
+
         }
     }
+
 
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {

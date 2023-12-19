@@ -141,7 +141,7 @@ fun ItemRow(
                 itemDetails.forEach { itemDetail ->
                     dataItem(
                         id = itemDetail?.id.toString(),
-                        img = itemDetail?.persebaranData ?: "",
+                        img = itemDetail?.productTerjual ?: "",
                         teks = itemDetail?.category ?: "",
                         modifier.clickable {
                             Log.d("home kirim id", itemDetail?.id.toString())

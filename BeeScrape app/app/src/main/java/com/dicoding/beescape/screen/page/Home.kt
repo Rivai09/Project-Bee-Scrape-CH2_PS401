@@ -136,10 +136,8 @@ fun ItemRow(
         ) {
             val dataItems = dataResponse?.product ?: emptyList()
             items(dataItems) { item ->
-                // Access the 'itemsDetail' list within each 'ItemsItem'
                 val itemDetails = item?.items.orEmpty()
 
-                // Assuming you want to display each 'itemDetail' separately
                 itemDetails.forEach { itemDetail ->
                     dataItem(
                         id = itemDetail?.id.toString(),
@@ -151,7 +149,6 @@ fun ItemRow(
                         },
                         navController
                     )
-                    Text(text = itemDetail?.id.toString())
                 }
             }
         }

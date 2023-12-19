@@ -66,7 +66,6 @@ fun SelectMarketplace(id:String?, navController: NavHostController) {
                     }
                 }
             }
-            Text(text = id.toString())
         }
     }
 }

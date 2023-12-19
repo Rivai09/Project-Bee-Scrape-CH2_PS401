@@ -45,7 +45,7 @@ class UserRepository private constructor(
         try {
             //pakai kode jika sudah benar id di api
 //            return apiService.getDetail("Bearer $token",id)
-            return apiService.getDetail("Bearer $token","6580556688307629e0ea9648")
+            return apiService.getDetail("Bearer $token","6581bdba2235bd336a933fa4")
         }catch (e:Exception){
             if (id.isEmpty()){
                 Log.d("repository","$id kosong")

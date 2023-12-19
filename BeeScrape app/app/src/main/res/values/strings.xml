@@ -105,5 +105,8 @@
     <string name="changePw_title">Change Password</string>
     <string name="big_title_chanePw">Change Your Password</string>
     <string name="hargaPenjualanTerbanyak">Range price with the most sales</string>
-    <string name="hargaTermahal">The most expensive price based on range</string>
+    <string name="hargaTermahal">The most expensive price based on range</string>\
+    <string name="ketJUmlahmerk">Amount sales of merk</string>
+
+    <string name="tren">Trending Product</string>
 </resources>

@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -50,14 +51,16 @@ fun PrivacyPolicyScreen() {
                             contentDescription = "Go Back"
                         )
                     }
-                }
+                },
+                modifier = Modifier
+                    .shadow(1.3.dp)
             )
         },
     ){
         Column(modifier = Modifier
             .verticalScroll(rememberScrollState())
             .fillMaxSize()
-            .padding(start = 16.dp, end = 16.dp, top = 72.dp, bottom = 24.dp))
+            .padding(start = 16.dp, end = 16.dp, top = 84.dp, bottom = 24.dp))
         {
             Text(
                 text = (stringResource(R.string.privacy_title)),

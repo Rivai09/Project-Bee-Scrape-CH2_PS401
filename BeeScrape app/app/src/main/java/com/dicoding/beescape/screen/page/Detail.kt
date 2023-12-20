@@ -60,7 +60,6 @@ fun Detail(id: String?) {
 //        viewModel.detailData(userState?.token.toString(), "token")
         viewModel.detailData(userState?.token.toString(), "6581bdba2235bd336a933fa4")
         Log.d("DetailActivity", "After API Call: $dataResponse")
-
     }
     val data = dataResponse?.products?.items?.flatMap { it?.itemsDetail.orEmpty() }
 
@@ -107,19 +106,19 @@ fun contentDetail(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 24.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
             Text(
                 text = "Detail data-$category",
-                fontSize = 30.sp,
+                fontSize = 20.sp,
                 fontFamily = poppinsFamily,
                 fontWeight = FontWeight.SemiBold,
             )
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(5.dp)
+                    .padding(0.dp)
 
             ) {
                 Column {

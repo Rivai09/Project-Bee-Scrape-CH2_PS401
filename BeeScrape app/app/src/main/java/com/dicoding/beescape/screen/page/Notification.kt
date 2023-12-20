@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -48,7 +49,10 @@ fun NotificationScreen(){
                         modifier = Modifier
                             .padding(top = 16.dp)
                     )
-                }
+                },
+                modifier = Modifier
+                    .height(70.dp)
+                    .shadow(1.3.dp)
             )
         },
         content = { paddingValues ->

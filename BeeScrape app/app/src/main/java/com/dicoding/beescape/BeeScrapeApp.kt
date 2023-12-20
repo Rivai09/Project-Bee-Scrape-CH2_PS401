@@ -63,12 +63,6 @@ fun BeeScrapeApp(
             composable(Screen.Home.route) {
                 HomeScreen(navController)
             }
-//            composable(Screen.SelectMarketplace.route){
-//                SelectMarketplace ("",navController)
-//            }
-//            composable(Screen.Detail.route){
-//                Detail()
-//            }
             composable(Screen.Market.route) {
                 AnalysisScreen(navController)
             }

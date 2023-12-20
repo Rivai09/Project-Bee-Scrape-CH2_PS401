@@ -2,6 +2,9 @@
 <resources>
 
     <style name="Theme.BeeScape" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="colorPrimary">@color/Yellow1</item>
+        <item name="colorSecondary">@color/Secondary</item>
+        <item name="colorTertiary">@color/black</item>
     </style>
 
 </resources>

@@ -82,11 +82,12 @@ fun ProfileScreen(navController:NavHostController) {
                         fontWeight = FontWeight.Medium,
                         fontSize = 24.sp,
                         modifier = Modifier
-                            .padding(top = 12.dp)
+                            .padding(top = 16.dp)
                     )
                 },
                 modifier = Modifier
-                    .shadow(1.2.dp)
+                    .height(70.dp)
+                    .shadow(1.3.dp)
             )
         },
         content = {
@@ -461,7 +462,6 @@ fun ProfileScreen(navController:NavHostController) {
                         onDismissRequest = {
                             dismissAlertDialog()
                         },
-
 
                         title = {
                             Text(

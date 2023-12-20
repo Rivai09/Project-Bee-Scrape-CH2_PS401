@@ -1,13 +1,12 @@
 package com.dicoding.beescape.before_login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.dicoding.beescape.R
 import com.dicoding.beescape.databinding.ActivitySignUpBinding
 import com.dicoding.beescape.view_model.RegisterViewModel
 import com.dicoding.beescape.view_model.ViewModelFactory
@@ -31,13 +30,15 @@ class SignUpActivity : AppCompatActivity() {
             val name = binding.edUsername.text.toString()
             val pw = binding.edPw.text.toString()
             showLoading(true)
+            val emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
 
             lifecycleScope.launch {
-                registerViewModel.registerUser(name, email, pw)
-                try {
+
+                if (pw.length>=8 && email.matches(emailPattern.toRegex())){
+                    registerViewModel.registerUser(name, email, pw)
                     showLoading(false)
                     val message = registerViewModel.successMessage
-                    if (message != null) {
+                    if (message != null ) {
                         AlertDialog.Builder(this@SignUpActivity).apply {
                             setTitle("Yeah!")
                             setMessage("Akun dengan $email berhasil dibuat. Yuk, login.")
@@ -50,17 +51,21 @@ class SignUpActivity : AppCompatActivity() {
                             show()
                         }
 
-                    } else {
-                        showLoading(false)
-                        AlertDialog.Builder(this@SignUpActivity).apply {
-                            setTitle("Gagal!")
-                            setMessage("Pendaftaran gagal. Pastikan email, nama, dan password valid atau akun sudah terdaftar")
-                            setPositiveButton("OK") { _, _ ->
-                            }
-                            create()
-                            show()
-                        }
                     }
+
+                }else {
+                    showLoading(false)
+                    AlertDialog.Builder(this@SignUpActivity).apply {
+                        setTitle("Gagal!")
+                        setMessage("Pendaftaran gagal. Pastikan email, nama, dan password valid (password minimal 8 character dan format email yang sesuai atau akun sudah terdaftar")
+                        setPositiveButton("OK") { _, _ ->
+                        }
+                        create()
+                        show()
+                    }
+                }
+                try {
+
                     showLoading(false)
                 } catch (e: Exception) {
                     AlertDialog.Builder(this@SignUpActivity).apply {

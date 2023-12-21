@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bee Scape</string>
+    <string name="app_name">Bee Scrape</string>
     <string name="signUpText">Sign up</string>
     <string name="loginText">Login</string>
     <string name="signUpFb">Sign up with Facebook</string>

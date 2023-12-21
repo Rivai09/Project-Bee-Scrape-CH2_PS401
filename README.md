@@ -19,12 +19,13 @@ https://drive.google.com/file/d/1_kWeCPrbI1z6Wot5Y4fvL3ukgq5IMZDF/view?usp=drive
 
 
 ## Main Features
-- Dashboard 
+- Dashboard for Data Analysis
 
 
 ## Additional Features
 - Authentication
 - Login and Register
+- Upcoming Feature
 
 
 ## Contributing

@@ -197,7 +197,7 @@ fun dataItem(
             Text(
                 text = teks,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
+                fontWeight = FontWeight.Bold,
                 fontFamily = poppinsFamily,
                 modifier = Modifier.padding(vertical = 20.dp, horizontal = 15.dp)
             )

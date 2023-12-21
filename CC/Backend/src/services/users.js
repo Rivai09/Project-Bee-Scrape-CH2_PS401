@@ -8,7 +8,8 @@ const crypto = require("crypto")
 
 const User = require('../models/users')
 const Token = require('../models/token')
-const Product = require('../models/product')
+const Product = require('../models/product');
+const token = require("../models/token");
 
 const { JWT_SECRET } = process.env;
 // const usersFilePath = path.join(__dirname, '../databases/db.json');
@@ -84,13 +85,13 @@ const find = async ({ id, email }) => {
 const requestPasswordreset = async ({user,passowrdLama, passwordBaru,passwordKonfirmasi}) => {
   // console.log(user, "testsssssss")
   if( passwordBaru !== passwordKonfirmasi ){
-    throw new Error('Konfirmasi Password tidak sama') //400
+    throw { statusCode: 401, message: 'Konfirmasi Password tidak sama' }; //400
   }
 
   const isPasswordValid = await bcrypt.compare(passowrdLama, user.password);
 
   if(!isPasswordValid){
-    throw new Error('Passowrd lama tidak sama') //400
+    throw { statusCode: 401, message: 'Passowrd lama tidak sama' }; //400
   }
 
   const hashedNewPassword = await bcrypt.hash(passwordBaru, 10);
@@ -101,59 +102,58 @@ const requestPasswordreset = async ({user,passowrdLama, passwordBaru,passwordKon
 }
 
 
-const createProduct = async ( {productName, price, rating, sell, location, shopName, category}) => {
+const createProduct = async (productData) => {
   try {
-    const product = new Product({
-      productName,
-      price,
-      rating,
-      sell,
-      location,
-      shopName,
-      category,
-    })
-
-    await product.save();
-
-    return {product}
+      const product = new Product(productData);
+      await product.save();
+      return product;
   } catch (error) {
-    throw new Error('Product Gagal Dibuat')
+      throw new Error('Product Gagal Dibuat');
   }
-}
+};
 
+const getProducts = async () => {
+  try {
+      const products = await Product.find();
+      return products;
+  } catch (error) {
+      throw new Error('Gagal mendapatkan produk');
+  }
+};
 
-const requestForgetPasswordReset = async ( {email}) => {
-  const user = await User.findOne({email})
+const searchProductsBySource = async (source) => {
+  try {
+    const products = await Product.find({ 'product.source': source });
+    return products;
+  } catch (error) {
+    console.error('Error searching products:', error);
+    throw new Error('Error searching products');
+  }
+};
 
+const requestForgotPassword = async (email) => {
+  const user = await User.findOne({ email })
+  console.log("Email User : ",user)
   if(!user) {
-    throw new Error('User does not Exist')
+    throw { statusCode: 401, message: 'User Does not Exist' };
   }
 
-  let token = await Token.findOne({userId : user._id})
-  if(token) await token.deleteOne();
-  let resetToken = crypto.randomBytes(32).toString('hex');
-  const hashedNewPassword = await bcrypt.hash(resetToken, 10);
+  let token = await Token.findOne({userId: user._id})
+  if(token) {
+    await token.deleteOne();
+  }
 
+  const hashedPassword = await bcrypt.hash(password, 10);
   await new Token({
-    userId : user._id,
-    token: hashedNewPassword,
+    userId: user._id,
+    token: hashedPassword,
     createdAt: Date.now(),
   }).save();
 
   const link = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
-  sendEmail(
-    user.email,
-    "Password Reset Request",
-    {
-      name: user.name,
-      link: link,
-    },
-    "./template/requestResetPassword.handlebars"
-  );
-
-  return { link };
+  sendEmail(user.email,"Password Reset Request",{name: user.name,link: link,},"./template/requestResetPassword.handlebars");
+  return link;
 }
-
 
 module.exports = {
   authenticate,
@@ -161,4 +161,7 @@ module.exports = {
   find,
   requestPasswordreset,
   createProduct,
+  getProducts,
+  searchProductsBySource,
+  requestForgotPassword,
 };

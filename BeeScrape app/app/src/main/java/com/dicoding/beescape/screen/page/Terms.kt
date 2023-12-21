@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -39,8 +40,7 @@ fun TermsScreen() {
                         text = (stringResource(R.string.terms)),
                         fontFamily = poppinsFamily,
                         fontWeight = FontWeight.Medium,
-                        fontSize = 18.sp
-                    )
+                        fontSize = 18.sp                    )
                 },
                 navigationIcon = {
                     IconButton(onClick = {  /*navController.popBackStack()*/ }) {
@@ -49,7 +49,8 @@ fun TermsScreen() {
                             contentDescription = "Go Back"
                         )
                     }
-                }
+                },                modifier = Modifier
+                    .shadow(1.3.dp)
             )
         },
     ){

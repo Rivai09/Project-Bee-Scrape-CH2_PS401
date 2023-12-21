@@ -1,0 +1,55 @@
+//SignUp API
+curl -X POST "https://ch2-ps401.et.r.appspot.com/api/v1/users/signup" -H "Content-Type: application/json" -d '{"name": "dadang","email": "dadang@gmail.com", "password": "dadang"}'
+
+
+
+//Login Rest API
+curl -X POST "https://ch2-ps401.et.r.appspot.com/api/v1/users/login" -H "Content-Type: application/json" -d '{"email": "hariz@gmail.com", "password": "12345"}'
+{
+"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTc3MWIxMzJkOThjMGZiNjkwNDY2ZDQiLCJpYXQiOjE3MDIzMDQ3MTQsImV4cCI6MTcwMjM5MTExNH0.yzbf4pgkPdaIetglCNBFYeKGmbGet5XsN9VSD218vj0"
+}
+
+//Reset Password
+curl -X POST 'https://ch2-ps401.et.r.appspot.com/api/v1/users/password-reset' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTc3MWIxMzJkOThjMGZiNjkwNDY2ZDQiLCJpYXQiOjE3MDIzMDQ3MTQsImV4cCI6MTcwMjM5MTExNH0.yzbf4pgkPdaIetglCNBFYeKGmbGet5XsN9VSD218vj0' -H 'Content-Type: application/json' -d '{"passowrdLama" : "dadang","passwordBaru" : "1234567", "passwordKonfirmasi" : "1234567"
+}'
+
+//POST PRODUCT
+curl -X POST 'https://ch2-ps401.et.r.appspot.com/api/v1/users/product'-H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTdmY2EwMzBkOTMwY2EwNWM3OTZkMTIiLCJpYXQiOjE3MDMwMDEwNTcsImV4cCI6MTcwMzA4NzQ1N30.KEfov4KXZJFUfi4qFhHC4M4I83EENlXtNMI_fKmLv0s' \
+-D '{
+  "source": "Tokopedia",
+  "items": [
+    { 
+      "category": "Laptop",
+      "persebaranData": "https://storage.googleapis.com/staging.ch2-ps401.appspot.com/result_machinelearning_png/Gambar%20persebaran%20data%20Laptop.png",
+      "productTerjual" : "https://storage.googleapis.com/staging.ch2-ps401.appspot.com/result_machinelearning_png/Gambar%20Total%20Penjualan%20%20Laptop.png",
+      "itemsDetail": [
+        {
+          "productName": "Asus",
+          "price": "Rp 12.000.000",
+          "rating": "4.9",
+          "sell": "3000",
+          "location": "Indonesia",
+          "shopName": "Tokopedia",
+          "jumlahData": 276,
+          "jumlahMerk": "6 (Asus,Acer,HP,Lenovo,Macbook,Advan)",
+          "productTerjual": "https://storage.googleapis.com/staging.ch2-ps401.appspot.com/result_machinelearning_png/Gambar%20Total%20Penjualan%20%20Laptop.png",
+          "ketTotalProduct": "Total laptop yang terjual dari variasi laptop yang tersedia",
+          "rangeHarga": "3jt-30jt",
+          "rangeJumlahTerjual": "100 - 2000",
+          "topProduct": "Asus",
+          "category": "Laptop",
+          "persebaranData": "https://storage.googleapis.com/staging.ch2-ps401.appspot.com/result_machinelearning_png/Gambar%20persebaran%20data%20Laptop.png"
+        }
+      ]
+    }
+  ]
+}
+'
+
+
+//Show Product List 
+curl -X GET 'https://ch2-ps401.et.r.appspot.com/api/v1/users/productList' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTcwNWQ0ODhhMzEwYWE3YmI5ZjQwNzIiLCJpYXQiOjE3MDIyNjU0NjksImV4cCI6MTcwMjM1MTg2OX0.U7AAgDfN3IWTtTqSTWtbjkw_WCTZ7gfbdkdzLG6p5jQ'
+
+//Show Product List By Id
+curl -X GET 'https://ch2-ps401.et.r.appspot.com/api/v1/users/productList/6581bdba2235bd336a933fa4' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTdmY2EwMzBkOTMwY2EwNWM3OTZkMTIiLCJpYXQiOjE3MDI5ODc5NTgsImV4cCI6MTcwMzA3NDM1OH0.O4deHA8MvB9mUuyInxKq5sqx-iIzI5AfdDXkkdh7IA0'
+

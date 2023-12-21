@@ -120,7 +120,7 @@ fun ItemRow(
         Log.d("isi token launch", "${userState?.token}")
     }
 
-    Box(modifier.padding(top = 10.dp, start = 0.dp, end = 0.dp)) {
+    Box(modifier.padding(top = 16.dp)) {
         Text(
             text = stringResource(R.string.popular),
             fontWeight = FontWeight.Bold,
@@ -131,8 +131,7 @@ fun ItemRow(
 
         LazyColumn(
             state = listState,
-            contentPadding = PaddingValues(horizontal = 0.dp),
-            modifier = modifier.padding(top = 40.dp)
+            modifier = modifier.padding(top = 44.dp)
         ) {
             val dataItems = dataResponse?.product ?: emptyList()
             items(dataItems) { item ->
@@ -190,7 +189,6 @@ fun dataItem(
                     contentDescription = "photo",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
-
                 )
             }
 
@@ -237,7 +235,9 @@ fun Search(modifier: Modifier = Modifier) {
             )
         },
         placeholder = {
-            Text(stringResource(R.string.search))
+            Text(
+                stringResource(R.string.search)
+            )
         },
         shape = MaterialTheme.shapes.large,
         colors = SearchBarDefaults.colors(

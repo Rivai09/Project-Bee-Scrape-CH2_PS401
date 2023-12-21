@@ -62,7 +62,10 @@ fun SelectMarketplace(id:String?, navController: NavHostController) {
                         colors = ButtonDefaults.buttonColors(),
                         onClick = { navController.navigate(Screen.Detail.createRoute2(id)) }
                     ) {
-                        Text(text = stringResource(R.string.tokopedia))
+                        Text(
+                            text = stringResource(R.string.tokopedia)
+                        )
+
                     }
                 }
             }

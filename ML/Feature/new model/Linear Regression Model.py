@@ -2,19 +2,19 @@ import numpy as np
 import csv
 import matplotlib.pyplot as plt
 
-filename = 'Dataset.csv'
+filename = 'Train_Tablet.csv'
 reader = csv.reader(open(filename, "rt"), delimiter=",")
 header = next(reader)
 sold = []
 price = []
 for row in reader:
-    price.append(row[1])
-    sold.append(row[2])
+    price.append(row[2])
+    sold.append(row[3])
 
 price = np.array(price, dtype=float)
 sold = np.array(sold, dtype=float)
-PRICE = price / 10000000
-SOLD = sold / 1000
+PRICE = price / 1000000
+SOLD = sold / 100
 mean_X = np.mean(PRICE)
 mean_Y = np.mean(SOLD)
 
@@ -35,6 +35,7 @@ min_X = np.min(sold) - 100
 X = np.linspace(min_X, max_X, 500)
 Y = c + m * X
 
+plt.plot(X,Y)
 plt.scatter(price, sold, color="#00FF00", label="data")
 plt.title('Persebaran Data')
 plt.xlabel("Harga")

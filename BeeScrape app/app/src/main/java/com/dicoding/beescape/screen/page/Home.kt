@@ -1,27 +1,27 @@
 package com.dicoding.beescape.screen.page
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -31,73 +31,171 @@ import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.dicoding.beescape.R
 import com.dicoding.beescape.screen.Screen
+import com.dicoding.beescape.ui.theme.lgray
 import com.dicoding.beescape.ui.theme.poppinsFamily
-import com.dicoding.component.suggestCategory
+import com.dicoding.beescape.view_model.MainViewModel
+import com.dicoding.beescape.view_model.ViewModelFactory
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .verticalScroll(rememberScrollState())
-                    ) {
-                        Text(
-                            text = stringResource(R.string.welcome),
-                            fontFamily = poppinsFamily,
-                            fontWeight = FontWeight.Normal,
-                            fontSize = 12.sp,
-                        )
-                        Text(
-                            text = stringResource(R.string.username),
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 16.sp
-                        )
-                    }
-                }
-            )
-        },
-        content = {
+    var showDialog by remember { mutableStateOf(true) }
+    val mainViewModel: MainViewModel =
+        viewModel(factory = ViewModelFactory.getInstance(LocalContext.current))
+    val userState by mainViewModel.getSession().observeAsState(initial = null)
+
+    var refreshCount by remember {
+        mutableStateOf(true)
+    }
+    Log.d("token","${userState?.token}")
+
+    Scaffold(topBar = {
+        TopAppBar(title = {
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 30.dp, start = 10.dp, end = 10.dp)
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
+                    .padding(top = 40.dp, bottom = 27.dp)
             ) {
-                Search()
-//                CategoryRow(navController = navController)
-                ItemRow(
-                    modifier = Modifier,
-                    { navController.navigate(Screen.SelectMarketplace.route) },
-                    navController = navController
+                Text(
+                    text = stringResource(R.string.welcome),
+                    fontFamily = poppinsFamily,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Gray,
+                    fontSize = 14.sp,
+                )
+                Text(
+                    text = userState!!.email, fontWeight = FontWeight.SemiBold, fontSize = 16.sp
+                )
+            }
+        })
+    }, content = {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 72.dp, start = 18.dp, end = 18.dp)
+        ) {
+            Search()
+            ItemRow(
+                modifier = Modifier, navController = navController, viewModel = mainViewModel,
+            )
+        }
+    })
+}
+
+
+@Composable
+fun ItemRow(
+    modifier: Modifier,
+    navController: NavHostController,
+    viewModel: MainViewModel,
+) {
+    val listState = rememberLazyListState()
+
+    val userState by viewModel.getSession().observeAsState(initial = null)
+    LaunchedEffect(true) {
+        viewModel.fetchData(userState?.token ?: "")
+        Log.d("isi token launch", "${userState?.token}")
+    }
+
+    Box(modifier.padding(top = 10.dp, start = 0.dp, end = 0.dp)) {
+        Text(
+            text = stringResource(R.string.popular),
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+        )
+
+        LazyColumn(
+            state = listState,
+            contentPadding = PaddingValues(horizontal = 0.dp),
+            modifier = modifier.padding(top = 40.dp)
+        ) {
+            val data = viewModel.data.value?.product?.flatMap { it?.items.orEmpty() }
+
+            items(data ?: emptyList()) { item ->
+                dataItem(
+                    img = item?.persebaranData ?: "",
+                    teks = item?.category ?: "",
+                    sendSelectmarket = {
+                        navController.navigate(Screen.SelectMarketplace.route)
+                    }
                 )
             }
         }
-    )
+    }
 }
+
+
+@Composable
+fun dataItem(
+    img: String, teks: String, sendSelectmarket: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .padding(bottom = 20.dp)
+            .shadow(3.dp),
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+    ) {
+        Column {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .clickable {
+                        sendSelectmarket()
+                    }
+            ) {
+                AsyncImage(
+                    model = ImageRequest.Builder(context = LocalContext.current.applicationContext)
+                        .data(img)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = "photo",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            Text(
+                text = teks,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                fontFamily = poppinsFamily,
+                modifier = Modifier.padding(vertical = 20.dp, horizontal = 15.dp)
+            )
+        }
+    }
+}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Search(modifier: Modifier = Modifier) {
-    SearchBar(
-        query = "",
+    SearchBar(query = "",
         onQueryChange = {},
         onSearch = {},
         active = false,
@@ -114,69 +212,26 @@ fun Search(modifier: Modifier = Modifier) {
         },
         shape = MaterialTheme.shapes.large,
         colors = SearchBarDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.background
+            containerColor = lgray
         ),
         modifier = modifier
-            .padding(top = 30.dp, start = 0.dp, end = 0.dp)
+            .padding(top = 4.dp, start = 0.dp, end = 0.dp)
             .fillMaxWidth()
             .heightIn(min = 48.dp)
-    ) {
-    }
+    ) {}
 }
 
 @Composable
-fun CategoryItem(
-    category: String,
-    modifier: Modifier = Modifier,
-    navController: NavHostController
-) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        Button(onClick = { navController.navigate(Screen.SelectMarketplace.route) }) {
-            Text(text = stringResource(category.toInt()))
-        }
-    }
-}
-
-@Composable
-fun ItemRow(modifier: Modifier, sendSelectmarket: () -> Unit, navController: NavHostController) {
-    Column(modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp)) {
-
-        val listState = rememberLazyListState()
-
-        Box(modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)) {
-            Text(
-                text = stringResource(R.string.popular),
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
-            )
-            LazyColumn(
-                state = listState,
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                modifier = modifier.padding(top = 30.dp)
-            ) {
-//            ganti parameter item dari data api
-//            misal model=it.photo
-                items(suggestCategory) {
-                    AsyncImage(
-                        model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZlenrvKQMmh4Z4b935QSM-7n-4MzN4mDXQ&usqp=CAU",
-                        contentDescription = "photo",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth()
-                            .height(150.dp)
-                            .clickable {
-                                sendSelectmarket()
-                            }
-                    )
-                    Text(text = "Amount of data: 1000")
-                }
+fun FullScreenAlertDialog(showDialog: Boolean, onDismiss: () -> Unit) {
+    if (showDialog) {
+        AlertDialog(onDismissRequest = {
+            onDismiss()
+        }, title = { Text("Attention") }, text = { Text("blabalblaba") }, confirmButton = {
+            Button(onClick = {
+                onDismiss()
+            }) {
+                Text(text = "Confirm")
             }
-        }
-
+        })
     }
 }

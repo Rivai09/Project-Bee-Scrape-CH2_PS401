@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">Bee Scape</string>
-    <string name="signUpEmail">Sign up with email</string>
-    <string name="signUpGoogle">Sign up with google</string>
+    <string name="signUpText">Sign up</string>
+    <string name="loginText">Login</string>
     <string name="signUpFb">Sign up with Facebook</string>
     <string name="or_use_social_media">Or use</string>
     <string name="login">Sign in with email</string>
     <string name="boldTitleWelcome">Get the Information You Need in a Snap</string>
-    <string name="descWelcome">Now you can easily dig and collect whatever important information you need</string>
     <string name="TvSignUpEmail">Create Your Account</string>
     <string name="tvDescSignUpEmail">Create your account to start find information</string>
     <string name="username">Username</string>
@@ -19,7 +18,7 @@
     <string name="help">help</string>
     <string name="loginPage">Login</string>
     <string name="loginTitle">Welcome Back</string>
-    <string name="loginDesc">Login to start looking for the information you want</string>
+    <string name="loginDesc">Login to start looking for the information</string>
     <string name="splashWord">"By: CH2-PS401 "</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
@@ -28,7 +27,8 @@
     <string name="title_profile">Profile</string>
     <string name="privacy_policy"><![CDATA[By signing up you agree to BeeScrape Terms & Conditions and Privacy Policy]]></string>
     <string name="search">Search anything you want\'s</string>
-<!--    kategory-->
+
+    <!--    kategory-->
     <string name="category">Category</string>
     <string name="categoryHp">Hp</string>
     <string name="categoryTablet">Tablet</string>
@@ -38,11 +38,11 @@
     <string name="categoryJacket">Jacket</string>
     <string name="popular">Popular for you</string>
 
-<!--    marketselect-->
+    <!--    marketselect-->
     <string name="marketTittle">Where will the data be taken from?</string>
     <string name="marketSubtitle">You can choose the data source you want</string>
 
-<!--    setting-->
+    <!--    setting-->
     <string name="profile_title">Your Profile</string>
     <string name="terms">Terms and condition</string>
     <string name="cs">Contact support</string>
@@ -51,7 +51,7 @@
     <string name="accountSettings">Account settings</string>
     <string name="logOut">Logout</string>
 
-    <string name="welcome">Hi, Welcome back</string>
+    <string name="welcome">Hello, Welcome Back</string>
     <string name="tokopedia">Tokopedia</string>
     <string name="blibli">Blibli siplah</string>
     <string name="notification_title">Notification</string>
@@ -60,13 +60,38 @@
     <string name="account_setting_profile">Account Setting</string>
 
     <string name="termJudul">BeeScrape Term and Condition use</string>
-    <string name="termsParagraft1">PLEASE CAREFULLY READ THESE TERMS AND CONDITIONS, INCLUDING OUR PRIVACY POLICY, BEFORE USING THIS WEBSITE (the “Site”). BY ACCESSING OR USING THE SITE, YOU (“USER”) AGREE TO BE LEGALLY BOUND BY THESE TERMS AND CONDITIONS. IF YOU DISAGREE WITH ANY OF THE FOLLOWING TERMS OR CONDITIONS, PLEASE DO NOT USE THIS SITE.
-</string>
-    <string name="termsParagraf2">DAMY HEALTH OWNS AND OPERATES THE SITE. DAMY HEALTH RESERVES THE RIGHT TO CHANGE ANY TERMS OR CONDITIONS WITHOUT NOTICE, EFFECTIVE UPON THEIR POSTING. DAMY HEALTH OR ITS SERVICE PROVIDERS, PARENTS, AFFILIATES AND BUSINESS ASSOCIATES MAY IMPOSE LIMITS ON CERTAIN FEATURES AND SERVICES OR RESTRICT YOUR ACCESS TO PARTS OR ALL OF THE SITE WITHOUT NOTICE OR LIABILITY; DAMY HEALTH MAY ALSO TERMINATE YOUR USE OF THE SITE AT ANY TIME IN ITS SOLE DISCRETION.
-</string>
+    <string name="termsParagraft1">Please carefully read these terms and conditions, including our privacy policy, before using this website (the "Site"). By accessing or using the site, you ("User") agree to be legally bound by these terms and conditions. If you disagree with any of the following terms or conditions, please do not use this site.</string>
+    <string name="termsParagraf2">Bee Scrape owns and operates the site. Damy Health reserves the right to change any terms or conditions without notice, effective upon their posting. Damy Health or its service providers, parents, affiliates, and business associates may impose limits on certain features and services or restrict your access to parts or all of the site without notice or liability. Damy Health may also terminate your use of the site at any time in its sole discretion.</string>
     <string name="termsPart2">Additional User Conduct Guidelines</string>
     <string name="termsPart2text">BeeCrape requests that the User not impede or inhibit any other User from using and enjoying the Site. Therefore, in using this Site, you agree not to: disrupt or interfere with the security of, or otherwise abuse, the Site or any services, system resources, accounts, servers or networks connected to or accessible through the Site or affiliate linked sites; upload, post, or otherwise transmit through or on this Site any viruses or other harmful, disruptive or destructive files; use or attempt to use another’s account, service or system, or link to another site, without authorization from DAMY HEALTH, or create or use a false identity on the Site; or transmit through or on the Site spam, chain letters, junk mail or other types of unsolicited mass e-mail to people or entities who have not agreed to be part of such mailings. Further, any unauthorized or prohibited use may additionally subject the offender to civil liability and criminal prosecution under applicable federal and state laws.</string>
-    <string name="trend">Top product</string>
+    <string name="trend">Top Product</string>
     <string name="suggestedProduct">Product suggestions for sale</string>
     <string name="priceRec">Price Recomendation:</string>
+
+    <string name="predictSalesHint">Enter the price, the price automatically converts to Rp</string>
+    <string name="salesDetail">Sales information from</string>
+    <string name="enterNumber">Entered price:</string>
+    <string name="predictSales">Predict sales result:</string>
+    <string name="sourceDetail">Source:</string>
+    <string name="locationDetail">Location:</string>
+    <string name="totalSearch">Total data:</string>
+    <string name="merk">Total merk:</string>
+    <string name="ketTotalProduct">Total product description:</string>
+    <string name="topProduct">Top product: </string>
+    <string name="rangeHarga">Price Range: </string>
+    <string name="rangeJumlahTerjual">range of sales amounts:</string>
+    <string name="tryAi">Now you can predict of the number of laptops sold based on price</string>
+    <string name="descWelcome">Now you can easily dig and collect whatever \n important information you need</string>
+    <string name="logout_text">Log out of your account?</string>
+    <string name="logout_Desc">We\'ll meet another time, okay!</string>
+    <string name="big_title_home">What data do you \nwant today?</string>
+    <string name="help_setting">Help</string>
+    <string name="privacy_policy_text">Privacy Policy</string>
+    <string name="notif_text">Notifications</string>
+    <string name="help_text">Help</string>
+    <string name="exit_text">Keluar</string>
+    <string name="desc_profile">photoProfil</string>
+    <string name="cencel_text">Batal</string>
+    <string name="policy_text">Privacy Policy</string>
+    <string name="privacy_title">Privacy Policy</string>
 </resources>

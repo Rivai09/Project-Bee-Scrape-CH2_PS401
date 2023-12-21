@@ -5,14 +5,22 @@ sealed class Screen(val route: String) {
     object Market : Screen("market")
     object Notification : Screen("notification")
     object Profile : Screen("profile")
-    object SelectMarketplace : Screen("selectMarketplace")
-    object Detail : Screen("home/{id}") {
-        fun createRoute(id: Long) = "home/$id"
 
+    object SelectMarketplace : Screen("Home/{id}") {
+        fun createRoute1(id: String) = "Home/$id"
     }
+
+    object Detail : Screen("SelectMarketplace/{id},{source}") {
+        fun createRoute2(id: String, source: String) = "SelectMarketplace/$id,$source"
+    }
+
     object TermsCondition:Screen("terms")
+
+    object PrivacyPolicy:Screen("privacy")
 
     companion object {
         const val LOGOUT_ROUTE = "logout"
     }
+
+
 }

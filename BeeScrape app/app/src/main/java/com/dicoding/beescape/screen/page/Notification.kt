@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -45,7 +46,7 @@ fun NotificationScreen(){
                         fontWeight = FontWeight.Medium,
                         fontSize = 24.sp,
                         modifier = Modifier
-                            .padding(top = 12.dp)
+                            .padding(top = 16.dp)
                     )
                 }
             )
@@ -86,6 +87,7 @@ fun NotificationScreen(){
                         text = stringResource(R.string.description_ampy_notif),
                         fontFamily = poppinsFamily,
                         fontWeight = FontWeight.Normal,
+                        color = Color.Gray,
                         fontSize = 14.sp,
                         textAlign = TextAlign.Center
                     )

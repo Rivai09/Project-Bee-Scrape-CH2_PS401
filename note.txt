@@ -1,15 +1,15 @@
-a. Head title : Informasi Penjualan Laptop
-b. Source : Tokopedia
-c. Lokasi : Indonesia
-d. Jumlah Data : 346
-e. Jumlah merk laptop  : 6(asus,acer,lenovo,hp,macbook,advan)
-f. (Image Data Total Laptop Yang Terjual)
-    - ket : Total laptop yang terjual dari variasi laptop yang tersedia
-g. (Image persebaran data)
-     - ket : Range harga : 1jt-15jt
-     - ket:  Range Jumlah Terjual : 10 - 500
-h. Prediksi Jumlah Laptop yang terjual based on Harga
+Detail page
 
-
-
-
+x. Head title : Informasi Penjualan $kategori(statik dari md)
+a. kategori: Laptop
+b. Source : Tokopedia(buat field cc)
+c. Lokasi : Indonesia(buat field cc)
+d. Jumlah Data : 346 (buat field cc)
+e. Jumlah merk laptop  : 6(asus,acer,lenovo,hp,macbook,advan) (buat field cc)
+f. (Image Data Total Laptop Yang Terjual)(buat field cc)
+g. ketTotalProduct: Total laptop yang terjual dari variasi laptop yang tersedia(buat field cc)
+h. top product: Macbook (buat field)
+i. (Image persebaran data) (buat field cc)
+j. Range harga : 1jt-15jt (buat field cc)
+k. Range Jumlah Terjual : 10 - 500 (buat field cc)
+l.. Prediksi Jumlah Laptop yang terjual based on Harga (MD)

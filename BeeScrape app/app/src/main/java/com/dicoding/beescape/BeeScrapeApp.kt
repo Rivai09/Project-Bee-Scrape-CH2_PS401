@@ -1,6 +1,8 @@
 package com.dicoding.beescape
 
 import android.content.Intent
+import android.text.style.BackgroundColorSpan
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -8,6 +10,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -15,8 +18,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -30,9 +36,11 @@ import com.dicoding.beescape.screen.page.AnalysisScreen
 import com.dicoding.beescape.screen.page.Detail
 import com.dicoding.beescape.screen.page.HomeScreen
 import com.dicoding.beescape.screen.page.NotificationScreen
+import com.dicoding.beescape.screen.page.PrivacyPolicyScreen
 import com.dicoding.beescape.screen.page.ProfileScreen
 import com.dicoding.beescape.screen.page.SelectMarketplace
 import com.dicoding.beescape.screen.page.TermsScreen
+import com.dicoding.beescape.ui.theme.yellowl
 
 @Composable
 fun BeeScrapeApp(
@@ -41,7 +49,7 @@ fun BeeScrapeApp(
 ) {
     Scaffold(
         bottomBar = {
-            BottomBar(navController)
+            BottomBar(navController,selectedColor = yellowl)
         },
         modifier = modifier
     ) { innerPadding ->
@@ -71,6 +79,9 @@ fun BeeScrapeApp(
             composable(Screen.TermsCondition.route){
                 TermsScreen()
             }
+            composable(Screen.PrivacyPolicy.route){
+                PrivacyPolicyScreen()
+            }
             composable(Screen.LOGOUT_ROUTE){
                 val intent = Intent(LocalContext.current, WelcomeActivity::class.java)
                 LocalContext.current.startActivity(intent)
@@ -82,7 +93,8 @@ fun BeeScrapeApp(
 @Composable
 private fun BottomBar(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    selectedColor: Color = yellowl,
+    modifier: Modifier = Modifier,
 ) {
     NavigationBar(
         modifier = modifier,
@@ -97,7 +109,7 @@ private fun BottomBar(
             ),
             NavigationItem(
                 title = stringResource(R.string.analisis_market),
-                icon =Icons.Default.ShoppingCart,
+                icon = Icons.Default.ShoppingCart,
                 screen = Screen.Market
             ),
             NavigationItem(
@@ -111,15 +123,21 @@ private fun BottomBar(
                 Screen.Profile
             )
         )
-        navigationItems.map { item ->
+        navigationItems.forEach { item ->
             NavigationBarItem(
                 icon = {
                     Icon(
                         imageVector = item.icon,
-                        contentDescription = item.title
+                        contentDescription = item.title,
+                        tint = if (currentRoute == item.screen.route) selectedColor else LocalContentColor.current
                     )
                 },
-                label = { Text(item.title) },
+                label = {
+                    Text(
+                        text = item.title,
+                        color = if (currentRoute == item.screen.route) selectedColor else LocalContentColor.current
+                    )
+                },
                 selected = currentRoute == item.screen.route,
                 onClick = {
                     navController.navigate(item.screen.route) {
@@ -128,7 +146,18 @@ private fun BottomBar(
                         }
                         launchSingleTop = true
                     }
-                }
+                },
+
+                modifier = Modifier
+                    .background(Color.Transparent)
+                    .drawBehind {
+                        if (item.selected) {
+                            drawRect(
+                                color = selectedColor,
+                                size = size.copy(height = 4.dp.toPx())
+                            )
+                        }
+                    }
             )
         }
     }

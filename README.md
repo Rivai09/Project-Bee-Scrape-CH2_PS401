@@ -25,6 +25,7 @@ https://drive.google.com/file/d/1_kWeCPrbI1z6Wot5Y4fvL3ukgq5IMZDF/view?usp=drive
 ## Additional Features
 - Authentication
 - Login and Register
+- Show data home and detail
 - Upcoming Feature:
   - Search
   - Product sales recommendation
